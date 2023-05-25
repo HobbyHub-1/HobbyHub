@@ -1,8 +1,9 @@
 # HobbyHub
+
 [X]권준혁\
 [x]김신혜\
 [x]최충현\
-[ ]추연선\
+[X]추연선\
 [X]임지혜
 
 ## local 개발 환경 setting
