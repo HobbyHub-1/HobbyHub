@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as django_login
 from . import forms
 
 
@@ -15,11 +15,9 @@ def login(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                # 메인화면으로 리다이렉트
-                return redirect('post:index')
+                django_login(request, user)  # Use Django's login function with the imported name
+                return redirect('posts:index')
             else:
-                # 님 아이디나 비번 틀림
                 form.add_error(None, '아이디와 비밀번호를 확인해 주세요')
     else:
         form = forms.CustomAuthenticationForm(request)

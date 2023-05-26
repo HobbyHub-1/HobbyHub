@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+  <h1>Signup</h1>
+
+  {% if registered %}
+      <p></p>
+  {% else %}
+      <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">등록</button>
+      </form>
+  {% endif %}
+  {% endblock %}
