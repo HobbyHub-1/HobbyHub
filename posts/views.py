@@ -2,8 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
-from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
+# from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
+from .models import Post, PostImage, PostComment
+# from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
+from .forms import PostForm, PostImageFrom, PostCommentForm
 
 # Create your views here.
 # 1 index
@@ -18,7 +20,7 @@ def index(request):
 def post_detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     post_images = PostImage.objects.filter(post=post)
-    post_comments = post.post_comment_set.all()
+    post_comments = post.postcomment_set.all()
     post_comment_form = PostCommentForm()
 
     tags = post.tags.all()
@@ -58,7 +60,7 @@ def post_create(request):
             for file in files:
                 PostImage.objects.create(post=post, image=file)
 
-            return redirect('posts:detail', post.pk)
+            return redirect('posts:post_detail', post.pk)
     else:
         post_form = PostForm()
         post_image_form = PostImageFrom()

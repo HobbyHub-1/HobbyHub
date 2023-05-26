@@ -1,5 +1,6 @@
 from django import forms
-from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
+# from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
+from .models import Post, PostImage, PostComment
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -8,11 +9,19 @@ class PostForm(forms.ModelForm):
 
 
 class PostImageFrom(forms.ModelForm):
-    image = forms.ImageField(label='취미 소개 이미지 업로드', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
+    image = forms.ImageField(
+        label='취미 소개 이미지 업로드', 
+        widget=forms.ClearableFileInput(
+            attrs={
+                'class': 'form-control', 
+                'multiple': True,
+                },
+            ), required=False,
+    )
 
     class Meta:
         model = PostImage
-        fields = ('image')
+        fields = ('image',)
 
 
 class PostCommentForm(forms.ModelForm):
@@ -21,21 +30,21 @@ class PostCommentForm(forms.ModelForm):
         fields = ( 'content',)
 
 
-class GroupForm(forms.ModelForm):
-    class Meta:
-        model = Group
-        fields = ('title', 'content', 'address', 'category', 'tags',)
+# class GroupForm(forms.ModelForm):
+#     class Meta:
+#         model = Group
+#         fields = ('title', 'content', 'address', 'category', 'tags',)
 
 
-class GroupImageFrom(forms.ModelForm):
-    image = forms.ImageField(label='모임 소개 이미지 업로드', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
+# class GroupImageFrom(forms.ModelForm):
+#     image = forms.ImageField(label='모임 소개 이미지 업로드', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
 
-    class Meta:
-        model = PostImage
-        fields = ('image')        
+#     class Meta:
+#         model = GroupImage
+#         fields = ('image',)        
 
 
-class GroupCommentForm(forms.ModelForm):
-    class Meta:
-        model = GroupComment
-        fields = ( 'content',)
+# class GroupCommentForm(forms.ModelForm):
+#     class Meta:
+#         model = GroupComment
+#         fields = ( 'content',)
