@@ -2,8 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import Post, Post_Comment
-from .forms import PostForm, Post_CommentForm
+from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
+from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
 
 # Create your views here.
 # 1 index
@@ -17,12 +17,24 @@ def index(request):
 # 2 post_detail 내용 조회
 def post_detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
-    post_comment_form = Post_CommentForm()
+    post_images = PostImage.objects.filter(post=post)
     post_comments = post.post_comment_set.all()
+    post_comment_form = PostCommentForm()
+
+    tags = post.tags.all()
+
+    session_key = 'post_{}_hits'.format(post_pk)
+    if not request.session.get(session_key):
+        post.hits += 1
+        post.save()
+        request.session[session_key] = True
+
     context ={
         'post': post,
-        'post_comment_form': post_comment_form,
+        'post_images': post_images,
         'post_comments': post_comments,
+        'post_comment_form': post_comment_form,
+        'tags' : tags,
     }
     return render(request,'posts/post_detail.html', context)
 
@@ -30,16 +42,29 @@ def post_detail(request, post_pk):
 @login_required
 def post_create(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
+        post_form = PostForm(request.POST)
+        post_image_form = PostImageFrom(request.POST, request.FILES)
+        files = request.FILES.getlist('image')
+        tags = request.POST.get('tags', '').split(',')
+
+        if post_form.is_valid() and post_image_form.is_valid():
+            post = post_form.save(commit=False)
             post.user = request.user
             post.save()
+
+            for tag in tags:
+                post.tags.add(tag.strip())
+
+            for file in files:
+                PostImage.objects.create(post=post, image=file)
+
             return redirect('posts:detail', post.pk)
     else:
-        form = PostForm()
+        post_form = PostForm()
+        post_image_form = PostImageFrom()
     context = {
-        'form': form,
+        'post_form': post_form,
+        'post_image_form': post_image_form, 
     }
     return render(request,'posts/post_create.html', context)
 
@@ -74,7 +99,7 @@ def post_update(request, post_pk):
 
 def post_comments_create(request, post_pk):
     post = Post.objects.get(pk=post_pk)
-    post_comment_form = Post_CommentForm(request.POST)
+    post_comment_form = PostCommentForm(request.POST)
     if post_comment_form.is_valid():
         post_comment = post_comment_form.save(commit=False)
         post_comment.post = post
@@ -89,7 +114,7 @@ def post_comments_create(request, post_pk):
 
 
 def post_comments_delete(request, post_pk, comment_pk):
-    post_comment = Post_Comment.objects.get(pk=comment_pk)
+    post_comment = PostComment.objects.get(pk=comment_pk)
     if request.user == post_comment.user:
         post_comment.delete()
     return redirect('posts:detail', post_pk)

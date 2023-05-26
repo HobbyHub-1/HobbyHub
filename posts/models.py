@@ -20,20 +20,23 @@ class Post(models.Model):
     hits = models.PositiveIntegerField(default=0)
     category = models.CharField(max_length=20)
     tags = TaggableManager(blank=True)
-
-    thumbnail = ProcessedImageField(upload_to='hobby', 
-                                    blank=True, processors=[ResizeToFill(400,400)],
-                                    format='JPEG',
-                                    options={'quality': 100})
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+    
+
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image = ProcessedImageField(upload_to='hobby', blank=True,
+                                processors=[ResizeToFill(400,400)],
+                                format='JPEG',
+                                options={'quality': 100})
 
 
-class Post_Comment(models.Model):
+class PostComment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
 
@@ -81,7 +84,15 @@ class Group(models.Model):
         return self.title
     
 
-class Group_Comment(models.Model):
+class GroupImage(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    image = ProcessedImageField(upload_to='group', blank=True,
+                                processors=[ResizeToFill(400,400)],
+                                format='JPEG',
+                                options={'quality': 100})
+    
+
+class GroupComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
 
