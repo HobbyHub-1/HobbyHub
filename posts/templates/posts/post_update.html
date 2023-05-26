@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}post_update{% endblock title %}
+{% block content %}
+  <h1>post_update</h1>
+
+  <form action="{% url 'posts:post_update' post.pk %}" methode="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="update">
+  </form>
+
+  <a href="{% url 'posts:index' %}">Home</a>
+
+{% endblock content %}

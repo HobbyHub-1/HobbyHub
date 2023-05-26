@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'accounts',
     'django_extensions',
     'imagekit',
+    'taggit.apps.TaggitAppConfig',
+    'taggit_templatetags2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+TAGGIT_CASE_INSENSITIVE = True
+TAGGIT_LIMIT = 50
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

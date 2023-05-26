@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}post_create{% endblock title %}
+{% block content %}
+  <h1>post_create</h1>
+  <form action="{% url 'posts:post_create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ post_form.as_p }}
+    {{ post_image_form.as_p }}
+    <input type="submit" value="create">
+  </form>
+  <a href="{% url 'posts:index' %}">Home</a>
+{% endblock content %}
