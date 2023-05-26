@@ -3,7 +3,8 @@
 {% block content %}
   {% if request.user.is_authenticated %}
     <h3>안녕하세요,{{ user }}님!</h3>
-    {% comment %} <!-- accounts 완성 후 주석 해제해 주세요 -->
+<!-- accounts 완성 후 주석 해제해 주세요 -->
+{% comment %} 
     <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
     <form action="{% url 'accounts:logout' %}" method="POST">
       {% csrf_token %}
@@ -16,10 +17,69 @@
     <a href="{% url 'accounts:update' %}">회원정보수정</a>
   {% else %}
     <a href="{% url 'accounts:login' %}">Login</a>
-    <a href="{% url 'accounts:signup' %}">Signup</a> {% endcomment %}
+    <a href="{% url 'accounts:signup' %}">Signup</a> 
+{% endcomment %}
   {% endif %}
 
   <h1>index</h1>
   <a href="{% url 'posts:post_create' %}">[CREATE]</a>
+  {% for post in posts %}
+  <p>작성자:
+    {{ post.user }}</p>
+  <p>제목:
+    <a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a>
+  </p>
+  <p>내용:
+    {{ post.content }}</p>
+    <form class="like-forms" data-post-id="{{ post.pk }}">
+  {% csrf_token %}
+  {% if request.user in post.like_users.all %}
+    <input type="submit" value="좋아요 취소" id="like-{{ post.pk }}">
+  {% else %}
+    <input type="submit" value="좋아요" id="like-{{ post.pk }}">
+  {% endif %}
+</form>
+<hr>
+{% endfor %}
 
 {% endblock content %}
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const forms = document.querySelectorAll('.like-forms')
+  const csrftoken = document
+    .querySelector('[name=csrfmiddlewaretoken]')
+    .value
+
+    forms
+    .forEach((form) => {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        const postId = event
+          .target
+          .dataset
+          .postId
+          axios({
+            method: 'post',
+            url: `http://127.0.0.1:8000/posts/${postId}/post_likes/`,
+            headers: {
+              'X-CSRFToken': csrftoken
+            }
+          })
+          .then((response) => {
+            const isLiked = response.data.is_liked
+            const likeBtn = document.querySelector(`#like-${postId}`)
+            if (isLiked === true) {
+              likeBtn.value = '좋아요 취소'
+            } else {
+              likeBtn.value = '좋아요'
+            }
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+        })
+    })
+</script>
+{% endblock script %}
+
