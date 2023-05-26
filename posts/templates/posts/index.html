@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 {% block title %}Hobby Hub{% endblock title %}
 {% block content %}
+  {% if request.user.is_authenticated %}
+    <h3>안녕하세요,{{ user }}님!</h3>
+    {% comment %} <!-- accounts 완성 후 주석 해제해 주세요 -->
+    <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
+    <form action="{% url 'accounts:logout' %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Logout">
+    </form>
+    <form action="{% url 'accounts:delete' %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="회원탈퇴">
+    </form>
+    <a href="{% url 'accounts:update' %}">회원정보수정</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">Login</a>
+    <a href="{% url 'accounts:signup' %}">Signup</a> {% endcomment %}
+  {% endif %}
+
   <h1>index</h1>
+  <a href="{% url 'posts:post_create' %}">[CREATE]</a>
+
 {% endblock content %}
