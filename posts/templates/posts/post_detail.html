@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}post_detail{% endblock title %}
+{% block content %}
+  <h1>post_detail</h1>
+  <p>{{ post.title }}</p>
+  <p>{{ post.content }}</p>
+  <p>{{ post.hits }}</p>
+  <p>{{ post.category }}</p>
+  <p>{{ post.thumbnail }}</p>
+  {% if request.user == article.user %}
+    <form action="{% url 'posts:post_delete' post.pk  %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
+    <a href="{% url 'posts:post_update' post.pk %}">수정하기</a>
+  {% endif %}
+
+  <a href="{% url 'posts:index' %}">Home</a>
+
+  <h4>댓글 목록</h4>
+    {% for comment in post_comments %}
+      <p>{{ comment.created_at }}</p>
+      <p>{{ comment.content }}</p>
+      <!-- posts/models.py -->
+      <!-- 댓글에 user기록이 없어 댓글을 기록한 사용자 정보를 확인할 수 없습니다. -->
+      {% comment %} {% if request.user == comment.user %}
+        <form action="{% url 'posts:post_comments_delete' post.pk comment.pk %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="삭제">
+        </form>
+      {% endif %} {% endcomment %}
+    {% endfor %}
+  <hr>
+  <form action="{% url 'posts:post_comments_create' post.pk %}" method="POST">
+    {% csrf_token %}
+    {{ post_comment_form }}
+    <input type="submit">
+  </form>
+
+{% endblock content %}
