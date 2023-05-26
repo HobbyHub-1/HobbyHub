@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}post_detail{% endblock title %}
 {% block content %}
   <h1>post_detail</h1>
@@ -6,7 +7,16 @@
   <p>{{ post.content }}</p>
   <p>{{ post.hits }}</p>
   <p>{{ post.category }}</p>
-  <p>{{ post.thumbnail }}</p>
+  
+  <!-- 이미지 출력 오류  -->
+  {% for image in post_images %}
+    <img src="{{ image.url }}" alt="">
+  {% endfor %}
+  
+  {% comment %} {% if post_images.image %}
+    <img src="{{ post_images.image.url }}" alt="">
+  {% endif %} {% endcomment %}
+
   {% if request.user == article.user %}
     <form action="{% url 'posts:post_delete' post.pk  %}" method="POST">
       {% csrf_token %}
