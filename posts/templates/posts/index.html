@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock link %}
 {% block title %}Hobby Hub{% endblock title %}
+{% block style %}{% endblock style %}
 {% block content %}
   {% if request.user.is_authenticated %}
     <h3>안녕하세요,{{ user }}님!</h3>
@@ -40,46 +45,74 @@
   {% endif %}
 </form>
 <hr>
+
 {% endfor %}
+<div class="card_container">
+  <div class="card_single">
+    <a href="#" class="card_a_tag">
+      <div class="card_img">
+        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+      </div>
+      <div class="card_desc">
+        <div class="card_title">
+          주는 용기가 그들의 아니다.
+        </div>
+          <div class="card_content">  
+           끝에 밝은 대중을 사랑의 그리하였는가? 불러 뛰노는 있으며, 남는 것이다. 청춘 노래하며 실현에 인간에 그들은 되는 따뜻한 있으랴? 
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card_single">
+    <a href="#" class="card_a_tag">
+      <div class="card_img">
+        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+      </div>
+      <div class="card_desc">
+        <div class="card_title">
+          주는 용기가 그들의 아니다.
+        </div>
+          <div class="card_content">  
+           끝에 밝은 대중을 사랑의 그리하였는가? 불러 뛰노는 있으며, 남는 것이다. 청춘 노래하며 실현에 인간에 그들은 되는 따뜻한 있으랴? 
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card_single">
+    <a href="#" class="card_a_tag">
+      <div class="card_img">
+        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+      </div>
+      <div class="card_desc">
+        <div class="card_title">
+          주는 용기가 그들의 아니다.
+        </div>
+          <div class="card_content">  
+           끝에 밝은 대중을 사랑의 그리하였는가? 불러 뛰노는 있으며, 남는 것이다. 청춘 노래하며 실현에 인간에 그들은 되는 따뜻한 있으랴? 
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card_single">
+    <a href="#" class="card_a_tag">
+      <div class="card_img">
+        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img2" style="aspect-ratio: 4 / 3;">
+      </div>
+      <div class="card_desc">
+        <div class="card_title">
+          주는 용기가 그들의 아니다.
+        </div>
+          <div class="card_content">  
+            열락의 안고, 용기가 가지에 소리다.이것은 이상은 위하여서, 창공에 있는가? 별과 과실이 원질이 곳이 뿐이다.
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
 
 {% endblock content %}
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-  const forms = document.querySelectorAll('.like-forms')
-  const csrftoken = document
-    .querySelector('[name=csrfmiddlewaretoken]')
-    .value
-
-    forms
-    .forEach((form) => {
-      form.addEventListener('submit', function (event) {
-        event.preventDefault()
-        const postId = event
-          .target
-          .dataset
-          .postId
-          axios({
-            method: 'post',
-            url: `http://127.0.0.1:8000/posts/${postId}/post_likes/`,
-            headers: {
-              'X-CSRFToken': csrftoken
-            }
-          })
-          .then((response) => {
-            const isLiked = response.data.is_liked
-            const likeBtn = document.querySelector(`#like-${postId}`)
-            if (isLiked === true) {
-              likeBtn.value = '좋아요 취소'
-            } else {
-              likeBtn.value = '좋아요'
-            }
-          })
-          .catch((error) => {
-            console.log(error.response)
-          })
-        })
-    })
-</script>
+<script src="{% static 'js/index.js' %}"></script>
 {% endblock script %}
 
