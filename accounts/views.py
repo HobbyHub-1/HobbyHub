@@ -22,7 +22,7 @@ def login(request):
     else:
         form = forms.CustomAuthenticationForm(request)
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'accounts/login.html', {'form': form})
 
 
 def signup(request):
@@ -34,7 +34,7 @@ def signup(request):
     else:
         form = forms.CustomUserCreationForm()
     
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'accounts/signup.html', {'form': form})
 
 def logout(request):
     if request.user.is_authenticated:
