@@ -24,6 +24,7 @@ def login(request):
 
     return render(request, 'login.html', {'form': form})
 
+
 def signup(request):
     if request.method == 'POST':
         form = forms.CustomUserCreationForm(request.POST)
@@ -39,3 +40,11 @@ def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)
     return redirect('posts:index')
+
+def profile(request):
+#     User = get_user_model()
+#     person = User.objects.get(username=username)
+#     context = {
+#         'person': person,
+#     }
+    return render(request, 'accounts/test.html')
