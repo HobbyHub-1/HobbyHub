@@ -10,14 +10,14 @@
   
   <!-- 이미지 출력 오류  -->
   {% for image in post_images %}
-    <img src="{{ image.image.url }}" alt="">
+    <img src="{{ image.url }}" alt="">
   {% endfor %}
   
   {% comment %} {% if post_images.image %}
     <img src="{{ post_images.image.url }}" alt="">
   {% endif %} {% endcomment %}
 
-  {% if request.user == article.user %}
+  {% if request.user == post.user %}
     <form action="{% url 'posts:post_delete' post.pk  %}" method="POST">
       {% csrf_token %}
       <input type="submit" value="삭제">

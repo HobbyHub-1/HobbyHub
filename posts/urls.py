@@ -16,11 +16,11 @@ urlpatterns = [
     path('posts/<int:post_pk>/post_likes/', views.post_likes, name='post_likes'),
 
     # group
-    # path('posts/group/', views.group_list, name='group_list'),
-    # path('posts/group/<int:group_pk>/', views.group_detail, name='group_detail'),
-    # path('posts/group/create/', views.group_create, name='group_create'),
-    # path('posts/group/<int:group_pk>/update/', views.group_update, name='group_update'),
-    # path('posts/group/<int:group_pk>/delete/', views.group_delete, name='group_delete'),
+    path('posts/group/', views.group_list, name='group_list'),
+    path('posts/group/<int:group_pk>/', views.group_detail, name='group_detail'),
+    path('posts/group/create/', views.group_create, name='group_create'),
+    path('posts/group/<int:group_pk>/update/', views.group_update, name='group_update'),
+    path('posts/group/<int:group_pk>/delete/', views.group_delete, name='group_delete'),
     # path('posts/group/<int:group_pk>/comments/', views.group_comments_create, name='group_comments_create'),
     # path('posts/group/<int:group_pk>/comments/<int:comment_pk>/delete', views.group_comments_delete, name='group_comments_delete'),
     # path('posts/group/<int:group_pk>/comments/<int:comment_pk>/update/', views.group_comments_update, name='group_comments_update'),

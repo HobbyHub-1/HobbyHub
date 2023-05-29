@@ -1,6 +1,6 @@
 from django import forms
 # from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
-from .models import Post, PostImage, PostComment
+from .models import Post, PostImage, PostComment, Group, GroupImage
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -30,18 +30,18 @@ class PostCommentForm(forms.ModelForm):
         fields = ( 'content',)
 
 
-# class GroupForm(forms.ModelForm):
-#     class Meta:
-#         model = Group
-#         fields = ('title', 'content', 'address', 'category', 'tags',)
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ('title', 'content', 'address', 'category', 'tags',)
 
 
-# class GroupImageFrom(forms.ModelForm):
-#     image = forms.ImageField(label='모임 소개 이미지 업로드', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
+class GroupImageFrom(forms.ModelForm):
+    image = forms.ImageField(label='모임 소개 이미지 업로드', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
 
-#     class Meta:
-#         model = GroupImage
-#         fields = ('image',)        
+    class Meta:
+        model = GroupImage
+        fields = ('image',)        
 
 
 # class GroupCommentForm(forms.ModelForm):

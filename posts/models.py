@@ -62,34 +62,29 @@ class PostComment(models.Model):
             return False
 
 
-# class Group(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_posts')
-#     title = models.CharField(max_length=50)
-#     address = models.CharField(max_length=200)
-#     content = models.CharField(max_length=300)
-#     hits = models.PositiveIntegerField(default=0)
-#     category = models.CharField(max_length=20)
-#     tags = TaggableManager(blank=True)
+class Group(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_group')
+    title = models.CharField(max_length=50)
+    address = models.CharField(max_length=200)
+    content = models.CharField(max_length=300)
+    hits = models.PositiveIntegerField(default=0)
+    category = models.CharField(max_length=20)
+    tags = TaggableManager(blank=True)
 
-#     thumbnail = ProcessedImageField(upload_to='hobby', 
-#                                     blank=True, processors=[ResizeToFill(400,400)],
-#                                     format='JPEG',
-#                                     options={'quality': 100})
-
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
    
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title
     
 
-# class GroupImage(models.Model):
-#     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-#     image = ProcessedImageField(upload_to='group', blank=True,
-#                                 processors=[ResizeToFill(400,400)],
-#                                 format='JPEG',
-#                                 options={'quality': 100})
+class GroupImage(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    image = ProcessedImageField(upload_to='group', blank=True,
+                                processors=[ResizeToFill(400,400)],
+                                format='JPEG',
+                                options={'quality': 100})
     
 
 # class GroupComment(models.Model):
