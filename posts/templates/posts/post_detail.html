@@ -10,7 +10,7 @@
   
   <!-- 이미지 출력 오류  -->
   {% for image in post_images %}
-    <img src="{{ image.url }}" alt="">
+    <img src="{{ image.image.url }}" alt="">
   {% endfor %}
   
   {% comment %} {% if post_images.image %}
