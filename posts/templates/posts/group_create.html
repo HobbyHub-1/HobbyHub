@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Group create{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<h1>group_create</h1>
+  <form action="{% url 'posts:group_create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ group_form.as_p }}
+    {{ group_image_form.as_p }}
+    <input type="submit" value="create">
+  </form>
+  <a href="{% url 'posts:group_list' %}">뒤로가기</a>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

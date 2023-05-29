@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Group{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<h2>{{ group.title }}</h2>
+  <p>{{ group.content }}</p>
+  <!-- 추가적인 그룹 정보 표시 -->
+  <p>주소: {{ group.address }}</p>
+  <p>분류: {{ group.category }}</p>
+  <p>태그: {% for tag in group.tags.all %}# {{ tag }} {% endfor %}</p>
+  <p>조회수: {{ group.hits }}</p>
+  <!-- 그룹 이미지 표시 -->
+  {% for group_image in group_images %}
+    <img src="{{ group_image.image.url }}" alt="Group Image">
+  {% empty %}
+    <p>이미지가 없습니다.</p>
+  {% endfor %}
+
+  {% if request.user == group.user %}
+    <form action="{% url 'posts:group_delete' group.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
+    <a href="{% url 'posts:group_update' group.pk %}">수정하기</a>
+  {% endif %}
+  <a href="{% url 'posts:group_list' %}">뒤로가기</a>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}
