@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Categoy{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<h1>카테고리: {{ category_subject }}</h1>
+
+<h2>Posts</h2>
+<ul>
+  {% for post in posts %}
+    <li>{{ post.title }}</li>
+  {% empty %}
+    <li>No posts found.</li>
+  {% endfor %}
+</ul>
+
+<h2>Groups</h2>
+<ul>
+  {% for group in groups %}
+    <li>{{ group.title }}</li>
+  {% empty %}
+    <li>No groups found.</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

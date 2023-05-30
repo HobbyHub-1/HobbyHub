@@ -1,6 +1,5 @@
 from django import forms
-# from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
-from .models import Post, PostImage, PostComment, Group, GroupImage
+from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -44,7 +43,7 @@ class GroupImageFrom(forms.ModelForm):
         fields = ('image',)        
 
 
-# class GroupCommentForm(forms.ModelForm):
-#     class Meta:
-#         model = GroupComment
-#         fields = ( 'content',)
+class GroupCommentForm(forms.ModelForm):
+    class Meta:
+        model = GroupComment
+        fields = ( 'content',)
