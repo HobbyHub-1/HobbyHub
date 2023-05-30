@@ -61,3 +61,17 @@ def update(request):
         'form': form,
     }
     return render(request, 'accounts/update.html', context)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile')
+    else:
+        form = CustomPasswordChangeForm(user=request.user)
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/password.html', context)
