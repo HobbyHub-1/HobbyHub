@@ -1,7 +1,7 @@
 # account/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, get_user_model
 from .forms import CustomAuthenticationForm, CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
 
 
@@ -75,3 +75,12 @@ def change_password(request):
         'form': form,
     }
     return render(request, 'accounts/password.html', context)
+
+@login_required
+def delete(request, username):
+    person = get_user_model().objects.get(username=username)
+    if request.user == person:
+        person.delete()
+        auth_logout(request)
+        
+    return redirect('posts:index')
