@@ -1,3 +1,5 @@
+<!-- accounts/templates/accounts/prorile.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -8,7 +10,11 @@
     <div class="user_box text-center">
       <!-- 이미지 -->
       <div class="profile_img mt-4 mb-4">
-        <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" alt="" width="170px">
+        {% if user.profile_image %}
+            <img src="{{ user.profile_image.url }}" alt="Profile Image">
+        {% else %}
+            <img src="https://i.postimg.cc/kXwSg0M2/image.jpg" alt="Default Profile Image">
+        {% endif %}
       </div>
       <!-- 프로필 -->
       <div class="user_info">
@@ -60,6 +66,17 @@
         <div class="change_password">
           <a href="{% url 'accounts:password' %}">
             <button class="btn btn-outline-dark mt-2" style="width: 144px;">비밀번호 변경</button>
+          </a>
+        </div>
+        <div class='small'>
+          <br>
+          <br>
+          <br>
+          <br>
+          <a class='text-body-tertiary link-underline link-underline-opacity-0' href={% url 'accounts:delete' username=user.username %}>
+            <p>              
+              회원탈퇴
+            </p>
           </a>
         </div>
       </div>
