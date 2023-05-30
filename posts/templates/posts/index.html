@@ -27,6 +27,7 @@
   {% endif %}
 
   <h1>index</h1>
+  <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
   <a href="{% url 'posts:post_create' %}">[CREATE]</a>
   {% for post in posts %}
   <p>작성자:
