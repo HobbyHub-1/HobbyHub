@@ -59,15 +59,6 @@ class CustomUserCreationForm(UserCreationForm):
 # 회원정보 변경
 class CustomUserChangeForm(UserChangeForm):
     password = None
-    email = forms.EmailField(
-        label='이메일',
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': '이메일',
-            }
-        )
-    )
     name = forms.CharField(
         label='이름',
         widget=forms.TextInput(
@@ -77,6 +68,17 @@ class CustomUserChangeForm(UserChangeForm):
             }
         )
     )
+    
+    email = forms.EmailField(
+        label='이메일',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '이메일',
+            }
+        )
+    )
+
     profile_image = forms.ImageField(
         required=False,
         label='프로필 이미지',
