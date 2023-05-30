@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <form action="{% url 'accounts:update' %}" method="POST">
+    {% csrf_token %}
+    <div class='my-3'>{{ form.as_p }}</div>
+    <input class='btn btn-primary w-100' type="submit" value="회원정보 수정">
+  </form>
+{% endblock content %}
