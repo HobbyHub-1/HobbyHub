@@ -10,14 +10,14 @@
   
   <!-- 이미지 출력 오류  -->
   {% for image in post_images %}
-    <img src="{{ image.url }}" alt="">
+    <img src="{{ image.image.url }}" alt="">
   {% endfor %}
   
   {% comment %} {% if post_images.image %}
     <img src="{{ post_images.image.url }}" alt="">
   {% endif %} {% endcomment %}
 
-  {% if request.user == article.user %}
+  {% if request.user == post.user %}
     <form action="{% url 'posts:post_delete' post.pk  %}" method="POST">
       {% csrf_token %}
       <input type="submit" value="삭제">
@@ -29,16 +29,15 @@
 
   <h4>댓글 목록</h4>
     {% for comment in post_comments %}
-      <p>{{ comment.created_at }}</p>
-      <p>{{ comment.content }}</p>
-      <!-- posts/models.py -->
-      <!-- 댓글에 user기록이 없어 댓글을 기록한 사용자 정보를 확인할 수 없습니다. -->
-      {% comment %} {% if request.user == comment.user %}
+      <p><strong>{{ comment.user }}</strong>
+        <br>{{ comment.content }} {{ comment.created_string }}
+      </p>
+      {% if request.user == comment.user %}
         <form action="{% url 'posts:post_comments_delete' post.pk comment.pk %}" method="POST">
           {% csrf_token %}
           <input type="submit" value="삭제">
         </form>
-      {% endif %} {% endcomment %}
+      {% endif %}
     {% endfor %}
   <hr>
   <form action="{% url 'posts:post_comments_create' post.pk %}" method="POST">

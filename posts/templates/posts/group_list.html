@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Group list{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+{% for group in groups %}
+  <p>작성자:
+    {{ group.user }}</p>
+  <p>제목:
+    <a href="{% url 'posts:group_detail' group.pk %}">{{ group.title }}</a>
+  </p>  
+  <p>내용:
+    {{ group.content }}</p>
+  <!-- 추가적인 그룹 정보 표시 -->
+  <p>태그: 
+    {% for tag in group.tags.all %}
+      # {{ tag }}
+    {% endfor %}</p>
+  <p>조회수: {{ group.hits }}</p>
+{% empty %}
+  <p>등록된 그룹이 없습니다.</p>
+{% endfor %}
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

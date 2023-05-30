@@ -1,0 +1,52 @@
+/* navbar 스타일을 설정합니다. */
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu li {
+  margin-left: 20px;
+}
+
+.menu li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 미디어 쿼리를 사용하여 반응형 디자인을 적용합니다. */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .menu {
+    margin-top: 20px;
+  }
+
+  .menu li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}

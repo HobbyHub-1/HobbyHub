@@ -27,6 +27,7 @@
   {% endif %}
 
   <h1>index</h1>
+  <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
   <a href="{% url 'posts:post_create' %}">[CREATE]</a>
   {% for post in posts %}
   <p>작성자:
@@ -37,13 +38,13 @@
   <p>내용:
     {{ post.content }}</p>
     <form class="like-forms" data-post-id="{{ post.pk }}">
-  {% csrf_token %}
-  {% if request.user in post.like_users.all %}
-    <input type="submit" value="좋아요 취소" id="like-{{ post.pk }}">
-  {% else %}
-    <input type="submit" value="좋아요" id="like-{{ post.pk }}">
-  {% endif %}
-</form>
+      {% csrf_token %}
+      {% if request.user in post.like_users.all %}
+        <input type="submit" value="좋아요 취소" id="like-{{ post.pk }}">
+      {% else %}
+        <input type="submit" value="좋아요" id="like-{{ post.pk }}">
+      {% endif %}
+    </form>
 <hr>
 
 {% endfor %}

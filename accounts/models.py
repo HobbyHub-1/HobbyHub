@@ -10,7 +10,6 @@ from posts.models import Post
 # Create your models here.
 class User(AbstractUser):
     followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
-    user_id = models.CharField(max_length=30, unique=True)
     password = models.CharField(max_length=30)
 
     profile_image = ProcessedImageField(blank=True,

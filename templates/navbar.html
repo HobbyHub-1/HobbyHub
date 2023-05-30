@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+{% endblock link %} {% block title %}Hobby Hub{% endblock title %} {% block
+style %}{% endblock style %} {% block content %}
+
+<nav>
+  <div class="container">
+    <a href="#" class="logo">Logo</a>
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">group</a></li>
+      <li><a href="#">button</a></li>
+      <li><a href="#">button</a></li>
+      <li><a href="#">button</a></li>
+    </ul>
+  </div>
+  <div>로그인</div>
+</nav>
+
+{% endblock content %} {% block script %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock script %}
