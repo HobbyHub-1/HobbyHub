@@ -162,6 +162,12 @@ def post_likes(request, post_pk):
     return JsonResponse(context)
 
 
+# 카카오 지도 api
+@login_required
+def where(request) :
+    return render(request, 'posts/where.html')
+
+
 # group_list
 def group_list(request):
     groups = Group.objects.all()

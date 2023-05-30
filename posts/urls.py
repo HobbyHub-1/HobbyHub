@@ -14,6 +14,7 @@ urlpatterns = [
     path('posts/<int:post_pk>/comments/<int:comment_pk>/delete', views.post_comments_delete, name='post_comments_delete'),
     # path('posts/<int:post_pk>/comments/<int:comment_pk>/update', views.post_comments_update, name='post_comments_update'),
     path('posts/<int:post_pk>/post_likes/', views.post_likes, name='post_likes'),
+    path('posts/where', views.where, name='where'),
 
     # group
     path('posts/group/', views.group_list, name='group_list'),
