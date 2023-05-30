@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-between">
+  <!-- 왼쪽영역 -->
+  <div class="left_field col-4">
+    <!-- 유저정보 영역 -->
+    <div class="user_box text-center">
+      <!-- 이미지 -->
+      <div class="profile_img mt-4 mb-4">
+        <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" alt="" width="170px">
+      </div>
+      <!-- 프로필 -->
+      <div class="user_info">
+        <h2 class="user-name fw-bold">{{ user.username }}</h2>
+        <div class="social_icon d-flex justify-content-center">
+          {% if user.email %}
+          <a class='text-dark' href="javascript:void(0)" onclick="copyToClipboard('{{ user.email }}')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+            </svg>
+          </a>
+          <script>
+            function copyToClipboard(text) {
+              const textarea = document.createElement('textarea');
+              textarea.value = text;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textarea);
+              
+              const notification = document.createElement('div');
+              notification.innerText = '이메일 주소가 복사되었습니다.';
+              notification.style.position = 'fixed';
+              notification.style.bottom = '10px';
+              notification.style.left = '50%';
+              notification.style.transform = 'translateX(-50%)';
+              notification.style.background = '#f2f2f2';
+              notification.style.padding = '10px';
+              notification.style.borderRadius = '5px';
+              notification.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+              
+              document.body.appendChild(notification);
+              setTimeout(function() {
+                document.body.removeChild(notification);
+              }, 3000);
+            }
+          </script>
+        {% endif %}
+        </div>
+      </div>
+      <!-- 로그인+본인 프로필이어야 노출되는 부분 -->
+      <div class="Enable Login my-3">
+        {% if user == person %}
+        <div class="profile_update">
+          <a href="{% url 'accounts:update' %}">
+            <button class="btn btn-outline-dark">프로필 업데이트</button>
+          </a>
+        </div>
+        <div class="change_password">
+          <a href="{% url 'accounts:password' %}">
+            <button class="btn btn-outline-dark mt-2" style="width: 144px;">비밀번호 변경</button>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- 오른쪽 영역
+      <div class="right_field col-8 mt-4">
+        <div class="bookmark">
+          <p class="fw-bold">북마크한 취미</p>
+          <div class="bookmark_list">
+            <p>아직 북마크한 내용이 없어요.</p>
+            <a href="">
+              <button>취미 찾으러 가기</button>
+            </a>
+          </div>
+        </div>
+        <div class="join_group my-4">
+          <p class="fw-bold">참여하는 모임</p>
+          <div class="bookmark_list">
+            <p>아직 가입한 모임이 없어요.</p>
+            <a href="">
+              <button>내 주변 모임 찾아보기</button>
+            </a>          
+          </div>
+        </div>
+      </div>
+      -->
+{% endblock content %}

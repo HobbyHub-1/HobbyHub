@@ -39,14 +39,14 @@ def logout(request):
         auth_logout(request)
     return redirect('posts:index')
 
-def profile(request):
-# def profile(request, username):
-#     User = get_user_model()
-#     person = User.objects.get(username=username)
-#     context = {
-#         'person': person,
-#     }
-    return render(request, 'accounts/test.html')
+
+def profile(request, username):
+    User = get_user_model()
+    person = User.objects.get(username=username)
+    context = {
+        'person': person,
+    }
+    return render(request, 'accounts/profile.html', context)
 
 @login_required
 def update(request):
