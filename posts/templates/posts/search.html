@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+  <h1>검색 결과입니다</h1>
+
+  {% if post_search_list or group_search_list %}
+    {% if post_search_list %}
+      <h2>Post에 대한 검색결과 입니다.</h2>
+      <ul>
+        {% for post in post_search_list %}
+          <li><a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if group_search_list %}
+      <h2>Group에 대한 검색결과 입니다.</h2>
+      <ul>
+        {% for group in group_search_list %}
+          <li><a href="{% url 'posts:group_detail' group.pk %}">{{ group.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% else %}
+    <p>검색된 결과가 없습니다 😅</p>
+  {% endif %}
+{% endblock %}
+
+{% block script %}
+{% endblock script %}

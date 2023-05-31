@@ -14,6 +14,7 @@ urlpatterns = [
     path('posts/<int:post_pk>/comments/<int:comment_pk>/delete', views.post_comments_delete, name='post_comments_delete'),
     # path('posts/<int:post_pk>/comments/<int:comment_pk>/update', views.post_comments_update, name='post_comments_update'),
     path('posts/<int:post_pk>/post_likes/', views.post_likes, name='post_likes'),
+    path('posts/where', views.where, name='where'),
 
     # group
     path('posts/group/', views.group_list, name='group_list'),
@@ -21,13 +22,13 @@ urlpatterns = [
     path('posts/group/create/', views.group_create, name='group_create'),
     path('posts/group/<int:group_pk>/update/', views.group_update, name='group_update'),
     path('posts/group/<int:group_pk>/delete/', views.group_delete, name='group_delete'),
-    # path('posts/group/<int:group_pk>/comments/', views.group_comments_create, name='group_comments_create'),
-    # path('posts/group/<int:group_pk>/comments/<int:comment_pk>/delete', views.group_comments_delete, name='group_comments_delete'),
+    path('posts/group/<int:group_pk>/comments/', views.group_comments_create, name='group_comments_create'),
+    path('posts/group/<int:group_pk>/comments/<int:comment_pk>/delete', views.group_comments_delete, name='group_comments_delete'),
     # path('posts/group/<int:group_pk>/comments/<int:comment_pk>/update/', views.group_comments_update, name='group_comments_update'),
-    # path('posts/group/<int:group_pk>/group_likes/', views.group_likes, name='group_likes'),
+    path('posts/group/<int:group_pk>/group_likes/', views.group_likes, name='group_likes'),
 
     # 기타
-    # path('posts/search/', views.search, name='search'),
-    # path('posts/category/<str:subject>/', views.category, name='category'),
+    path('posts/search/', views.search, name='search'),
+    path('posts/category/<str:subject>/', views.category, name='category'),
     # path('posts/guide/', views.guide, name='guide'),
 ]   

@@ -38,8 +38,8 @@ class PostImage(models.Model):
 
 class PostComment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -87,27 +87,28 @@ class GroupImage(models.Model):
                                 options={'quality': 100})
     
 
-# class GroupComment(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     content = models.CharField(max_length=300)
+class GroupComment(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.CharField(max_length=300)
 
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-#     def created_string(self):
-#         if self.created_at is None:
-#             return False
+    def created_string(self):
+        if self.created_at is None:
+            return False
 
-#         time = datetime.now(tz=timezone.utc) - self.created_at
+        time = datetime.now(tz=timezone.utc) - self.created_at
 
-#         if time < timedelta(minutes=1):
-#             return '방금 전'
-#         elif time < timedelta(hours=1):
-#             return str(int(time.seconds / 60)) + '분 전'
-#         elif time < timedelta(days=1):
-#             return str(int(time.seconds / 3600)) + '시간 전'
-#         elif time < timedelta(days=7):
-#             time = datetime.now(tz=timezone.utc).date() - self.created_at.date()
-#             return str(time.days) + '일 전'
-#         else:
-#             return False
+        if time < timedelta(minutes=1):
+            return '방금 전'
+        elif time < timedelta(hours=1):
+            return str(int(time.seconds / 60)) + '분 전'
+        elif time < timedelta(days=1):
+            return str(int(time.seconds / 3600)) + '시간 전'
+        elif time < timedelta(days=7):
+            time = datetime.now(tz=timezone.utc).date() - self.created_at.date()
+            return str(time.days) + '일 전'
+        else:
+            return False
