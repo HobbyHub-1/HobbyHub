@@ -1,7 +1,9 @@
 from django import forms
 from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
+from taggit.forms import TagField
 
 class PostForm(forms.ModelForm):
+    tags = TagField()
     class Meta:
         model = Post
         fields = ( 'title', 'content', 'category', 'tags',)
