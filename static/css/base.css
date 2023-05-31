@@ -1,0 +1,8 @@
+@media (max-width: 991px) {
+  .order-lg-1 {
+    order: 2;
+  }
+  .order-lg-2 {
+    order: 1;
+  }
+}
