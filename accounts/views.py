@@ -1,7 +1,8 @@
 # account/views.py
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, get_user_model
+from django.http import JsonResponse
 from .forms import CustomAuthenticationForm, CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
 
 
@@ -49,6 +50,28 @@ def profile(request, username):
     return render(request, 'accounts/profile.html', context)
 
 @login_required
+def follow(request, user_pk):
+    User = get_user_model()
+    person = User.objects.get(pk=user_pk)
+
+    if person != request.user:
+        if request.user in person.followers.all():
+            person.followers.remove(request.user)
+            is_followed = False
+        else:
+            person.followers.add(request.user)
+            is_followed = True
+
+        context = {
+            'is_followed': is_followed,
+            'following_count': person.followings.count(),
+            'follower_count': person.followers.count(),
+        }
+        return JsonResponse(context)
+            
+    return redirect('accounts:profile', person.get_username)
+
+@login_required
 def update(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -65,16 +88,17 @@ def update(request):
 @login_required
 def change_password(request):
     if request.method == 'POST':
-        form = CustomPasswordChangeForm(request.POST, user=request.user)
+        form = CustomPasswordChangeForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(user=request.user)
             return redirect('accounts:profile')
     else:
-        form = CustomPasswordChangeForm(user=request.user)
+        form = CustomPasswordChangeForm()
     context = {
         'form': form,
     }
     return render(request, 'accounts/password.html', context)
+
 
 @login_required
 def delete(request, username):
