@@ -30,9 +30,14 @@ class PostCommentForm(forms.ModelForm):
 
 
 class GroupForm(forms.ModelForm):
+    day = forms.ChoiceField(label='Day', choices=Group.day_choices, widget=forms.Select(attrs={'class': 'form-select'}),)
+    region = forms.ChoiceField(label='Region', choices=Group.region_choices, widget=forms.Select(attrs={'class': 'form-select'}),)
+    gender = forms.ChoiceField(label='Gender', choices=Group.gender_choices, widget=forms.Select(attrs={'class': 'form-select'}),)
+    Propensity = forms.ChoiceField(label='Propensity', choices=Group.Propensity_choices, widget=forms.Select(attrs={'class': 'form-select'}),)
+    category = forms.ChoiceField(label='Category', choices=Group.category_choices, widget=forms.Select(attrs={'class': 'form-select'}),)
     class Meta:
         model = Group
-        fields = ('title', 'content', 'address', 'category', 'tags',)
+        fields = ('title', 'content', 'tags', 'category',)
 
 
 class GroupImageFrom(forms.ModelForm):
