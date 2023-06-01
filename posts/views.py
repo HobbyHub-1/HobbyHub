@@ -23,7 +23,7 @@ def index(request):
             tag_list.append(tag.slug)
         posts = posts.filter(tags__slug__in=tag_list).distinct()
     else:
-        tags = Tag.objects.all()
+        tags = Tag.objects.filter(post__in=posts).distinct()
 
     selected_slugs = request.GET.get('tags')
 
@@ -37,7 +37,7 @@ def index(request):
         'category_list': category_list,
         'selected_category': selected_category,
     }
-    return render(request,'posts/index.html', context)
+    return render(request, 'posts/index.html', context)
 
 # 2 post_detail 내용 조회
 def post_detail(request, post_pk):
@@ -98,7 +98,10 @@ def post_create(request):
 def post_delete(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     if request.user == post.user:
+        # 게시물에 연결된 태그 삭제
+        post.tags.clear()
         post.delete()
+    # 태그 버튼이 있는 페이지로 리디렉션
     return redirect('posts:index')
 
 # 5 post_update 수정
@@ -122,7 +125,7 @@ def post_update(request, post_pk):
                     post.tags.add(tag.strip())
 
                  # 기존 이미지 삭제
-                post_images = PostImageFrom.objects.filter(post=post)
+                post_images = PostImage.objects.filter(post=post)
                 for img in post_images:
                     img.delete()
 
