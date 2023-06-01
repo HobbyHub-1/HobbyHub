@@ -1,113 +1,172 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block link %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/index_carousel.css' %}">
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock link %}
 {% block title %}Hobby Hub{% endblock title %}
 {% block style %}{% endblock style %}
 {% block content %}
-  {% if request.user.is_authenticated %}
-    <h3>안녕하세요,{{ user }}님!</h3>
-<!-- accounts 완성 후 주석 해제해 주세요 -->
-{% comment %} 
-    <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
-    <form action="{% url 'accounts:logout' %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" value="Logout">
-    </form>
-    <form action="{% url 'accounts:delete' %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" value="회원탈퇴">
-    </form>
-    <a href="{% url 'accounts:update' %}">회원정보수정</a>
-  {% else %}
-    <a href="{% url 'accounts:login' %}">Login</a>
-    <a href="{% url 'accounts:signup' %}">Signup</a> 
-{% endcomment %}
-  {% endif %}
+<div>
+  <!-- 임시로 만든 navbar -->
+  <div class="navbar_box">
+    <h1>index</h1>
+    <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
+    <a href="{% url 'posts:post_create' %}">[CREATE]</a>
+    {% if request.user.is_authenticated %}
+      <h3>안녕하세요,{{ user }}님!</h3>
+      <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
+      <form action="{% url 'accounts:logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+      </form>
+    {% else %}
+      <a href="{% url 'accounts:login' %}">Login</a>
+      <a href="{% url 'accounts:signup' %}">Signup</a> 
+    {% endif %}
+  </div>
 
-  <h1>index</h1>
-  <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
-  <a href="{% url 'posts:post_create' %}">[CREATE]</a>
-  {% for post in posts %}
-  <p>작성자:
-    {{ post.user }}</p>
-  <p>제목:
-    <a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a>
-  </p>
-  <p>내용:
-    {{ post.content }}</p>
-    <form class="like-forms" data-post-id="{{ post.pk }}">
-      {% csrf_token %}
-      {% if request.user in post.like_users.all %}
-        <input type="submit" value="좋아요 취소" id="like-{{ post.pk }}">
-      {% else %}
-        <input type="submit" value="좋아요" id="like-{{ post.pk }}">
-      {% endif %}
-    </form>
+  <!-- 케로젤 -->
+  <div class="carousel_container">
+    <div class="carousel">
+      <div class="slides">
+        <img class="slide" src="https://picsum.photos/seed/1/1920/1080" alt="Slide 1">
+        <img class="slide" src="https://picsum.photos/seed/2/1920/1080" alt="Slide 2">
+        <img class="slide" src="https://picsum.photos/seed/3/1920/1080" alt="Slide 3">
+      </div>
+      <button class="prev-button">&lt;</button>
+      <button class="next-button">&gt;</button>
+      <div class="dots">
+        <button class="dot"></button>
+        <button class="dot"></button>
+        <button class="dot"></button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+  {% for tag in tags %}
+  {% if request.GET.tags == tag.slug %}
+  <button class="hobby-tags-btn hobby-tags-btn-active" data-slug="{{ tag.slug }}">{{ tag }}</button>
+  {% else %}
+  <button class="hobby-tags-btn" data-slug="{{ tag.slug }}">{{ tag }}</button>
+  {% endif %}
+  {% endfor %}
+</div>
+<hr>
+  
+<div class="container">
+  <!-- card 목록 -->
+  <h2 class="title_topic">전체 목록입니다.</h2>
+  <div class="card_container row justify-content-md-center">
+    {% for post in posts %}
+      <!-- category별로 묶어서 불러옵니다. -->
+      {% comment %} {% if post.category == '카테고리' %} {% endcomment %}
+      <a class="col" href="{% url 'posts:post_detail' post.pk %}">
+        <div class="card_single" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+          <div class="card_img">
+            <form class="like-form" data-post-id="{{ post.pk }}">
+              {% if request.user.is_authenticated %}
+                {% csrf_token %}
+                {% if request.user in post.like_users.all %}
+                  <button class="likebtn" type="submit"><i class="bi bi-heart-fill" id="post-heart"></i>
+                  </button>
+                {% else %}
+                  <button class="likebtn" type="submit"><i class="bi bi-heart" id="post-heart"></i>
+                  </button>
+                {% endif %}
+              {% else %}
+                <button class="likebtn" type="submit">
+                  <i class="bi bi-heart" id="post-heart"></i>
+                </button>
+              {% endif %}
+            </form>
+            {% for image in post.postimage_set.all %}
+              {% if image.image.url %}
+                <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              {% else %}
+                <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="card_desc">
+            <div class="info">
+              by {{ post.user }}
+            </div>
+            <div class="card_title">
+              {{ post.title }}
+            </div>
+            <div class="card_tags">
+            태그: {% for tag in post.tags.all %}{{ tag.name }} {% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+            <div class="card_content">
+              {{ post.content }}
+            </div>
+          </div>
+        </div>
+      </a>
+      {% comment %} {% endif %} {% endcomment %}
+    {% endfor %}
+  </div>
+</div>
+
 <hr>
 
-{% endfor %}
-<div class="card_container">
-  <div class="card_single">
-    <a href="#" class="card_a_tag">
-      <div class="card_img">
-        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
-      </div>
-      <div class="card_desc">
-        <div class="card_title">
-          주는 용기가 그들의 아니다.
-        </div>
-          <div class="card_content">  
-           끝에 밝은 대중을 사랑의 그리하였는가? 불러 뛰노는 있으며, 남는 것이다. 청춘 노래하며 실현에 인간에 그들은 되는 따뜻한 있으랴? 
-        </div>
-      </div>
-    </a>
-  </div>
-  <div class="card_single">
-    <a href="#" class="card_a_tag">
-      <div class="card_img">
-        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
-      </div>
-      <div class="card_desc">
-        <div class="card_title">
-          주는 용기가 그들의 아니다.
-        </div>
-          <div class="card_content">  
-           끝에 밝은 대중을 사랑의 그리하였는가? 불러 뛰노는 있으며, 남는 것이다. 청춘 노래하며 실현에 인간에 그들은 되는 따뜻한 있으랴? 
-        </div>
-      </div>
-    </a>
-  </div>
-  <div class="card_single">
-    <a href="#" class="card_a_tag">
-      <div class="card_img">
-        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
-      </div>
-      <div class="card_desc">
-        <div class="card_title">
-          주는 용기가 그들의 아니다.
-        </div>
-          <div class="card_content">  
-           끝에 밝은 대중을 사랑의 그리하였는가? 불러 뛰노는 있으며, 남는 것이다. 청춘 노래하며 실현에 인간에 그들은 되는 따뜻한 있으랴? 
-        </div>
-      </div>
-    </a>
-  </div>
-  <div class="card_single">
-    <a href="#" class="card_a_tag">
-      <div class="card_img">
-        <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img2" style="aspect-ratio: 4 / 3;">
-      </div>
-      <div class="card_desc">
-        <div class="card_title">
-          주는 용기가 그들의 아니다.
-        </div>
-          <div class="card_content">  
-            열락의 안고, 용기가 가지에 소리다.이것은 이상은 위하여서, 창공에 있는가? 별과 과실이 원질이 곳이 뿐이다.
-        </div>
-      </div>
-    </a>
+<div class="container">
+  <!-- card 목록 -->
+  <h2 class="title_topic">'운동' 카테고리 3개만 노출됩니다.</h2>
+  <div class="card_container row">
+    {% for post in posts|slice:":3" %}
+      {% if post.category == '운동' %}
+      <!-- category별로 묶어서 불러옵니다. -->
+        <a class="col" href="{% url 'posts:post_detail' post.pk %}">
+          <div class="card_single" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+            <div class="card_img">
+              <form class="like-form" data-post-id="{{ post.pk }}">
+                {% if request.user.is_authenticated %}
+                  {% csrf_token %}
+                  {% if request.user in post.like_users.all %}
+                    <button class="likebtn" type="submit"><i class="bi bi-heart-fill" id="post-heart"></i>
+                    </button>
+                  {% else %}
+                    <button class="likebtn" type="submit"><i class="bi bi-heart" id="post-heart"></i>
+                    </button>
+                  {% endif %}
+                {% else %}
+                  <button class="likebtn" type="submit">
+                    <i class="bi bi-heart" id="post-heart"></i>
+                  </button>
+                {% endif %}
+              </form>
+              {% for image in post.postimage_set.all %}
+                {% if image.image.url %}
+                  <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                {% else %}
+                  <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="card_desc">
+              <div class="info">
+                by {{ post.user }}
+              </div>
+              <div class="card_title">
+                {{ post.title }}
+              </div>
+              <div class="card_tags">
+              태그: {% for tag in post.tags.all %}{{ tag.name }} {% if not forloop.last %}, {% endif %}{% endfor %}
+              </div>
+              <div class="card_content">
+                {{ post.content }}
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
   </div>
 </div>
 
@@ -115,5 +174,6 @@
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/carousel.js' %}"></script>
 {% endblock script %}
 

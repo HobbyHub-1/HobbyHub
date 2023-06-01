@@ -5,15 +5,39 @@ from django.http import JsonResponse
 from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
 from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
 from django.db.models import Q
+from taggit.models import Tag
 
 # Create your views here.
 # 1 index
 def index(request):
     posts = Post.objects.all()
+
+    categories = posts.values_list('category', flat=True).distinct()
+    category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
+    selected_category = request.GET.get("category")
+
+    tag_list = []
+    if selected_category:
+        tags = Tag.objects.filter(posts__category=selected_category).distinct()
+        for tag in tags:
+            tag_list.append(tag.slug)
+        posts = posts.filter(tags__slug__in=tag_list).distinct()
+    else:
+        tags = Tag.objects.filter(post__in=posts).distinct()
+
+    selected_slugs = request.GET.get('tags')
+
+    if selected_slugs:
+        selected_tags = selected_slugs.split(',')
+        posts = posts.filter(tags__slug__in=selected_tags).distinct()
+
     context ={
         'posts': posts,
+        'tags': tags,
+        'category_list': category_list,
+        'selected_category': selected_category,
     }
-    return render(request,'posts/index.html', context)
+    return render(request, 'posts/index.html', context)
 
 # 2 post_detail 내용 조회
 def post_detail(request, post_pk):
@@ -74,7 +98,10 @@ def post_create(request):
 def post_delete(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     if request.user == post.user:
+        # 게시물에 연결된 태그 삭제
+        post.tags.clear()
         post.delete()
+    # 태그 버튼이 있는 페이지로 리디렉션
     return redirect('posts:index')
 
 # 5 post_update 수정
@@ -98,7 +125,7 @@ def post_update(request, post_pk):
                     post.tags.add(tag.strip())
 
                  # 기존 이미지 삭제
-                post_images = PostImageFrom.objects.filter(post=post)
+                post_images = PostImage.objects.filter(post=post)
                 for img in post_images:
                     img.delete()
 
