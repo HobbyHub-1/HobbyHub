@@ -44,7 +44,7 @@ function filterPostsByTag(tag) {
   posts.forEach(post => {
     const postTags = post.dataset.tags.split(',');
     if (postTags.includes(tag) || tag === 'all') {
-      post.style.display = 'grid'; // 선택된 태그와 일치하는 게시물은 보이도록 설정
+      post.style.display = 'flex'; // 선택된 태그와 일치하는 게시물은 보이도록 설정
     } else {
       post.style.display = 'none'; // 선택된 태그와 일치하지 않는 게시물은 숨김 처리
     }

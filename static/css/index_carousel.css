@@ -17,7 +17,7 @@
 
 .slides {
   display: flex;
-  transition: transform 1s ease-in-out;
+  transition: 1s ease-in-out;
 }
 
 .slide {
@@ -29,29 +29,33 @@
   background-color: #ccc;
 }
 
+/* 화살표 버튼 */
 .prev-button,
 .next-button {
   position: absolute;
+  font-size: 30px;
+  font-weight: 10px;
+  color: white;
+  opacity: 0.5;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
   background: none;
-  opacity: 0.5;
-  color: gray;
   text-align: center;
   cursor: pointer;
   border: none;
 }
-
+.prev-button:hover,
+.next-button:hover {
+  color: gray;
+}
 .prev-button {
   left: 10px;
 }
-
 .next-button {
   right: 10px;
 }
 
+/* 인덱스 점 */
 .dots {
   position: absolute;
   bottom: 10px;
@@ -61,15 +65,18 @@
 
 .dot {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   margin: 5px;
-  background-color: gray;
+  background-color: white;
   opacity: 0.5;
   border-radius: 50%;
   cursor: pointer;
+  border: none;
 }
 
+.dot:hover,
 .dot:hover {
-  color: black
+  color: gray;
+  background: gray;
 }

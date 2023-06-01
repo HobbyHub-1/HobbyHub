@@ -9,6 +9,7 @@
   box-sizing: border-box;
 }
 a {
+  width: 292px;
   color: inherit;
   text-decoration: none;
 }
@@ -19,37 +20,33 @@ a {
 }
 .container {
   margin: 0px 10px;
+  width: 100%;
 }
 
 /* card 목록 */
-h2 {
-  display: flex;
+.title_topic {
+  display: block;
+  margin: 0px 20px;
 }
 
-.card_container {
-  margin: 10px 0px ; 
-}
 .card_single {
-  display: grid;
+  position: relative;
   width: 292px;
-  height: 100%;
+  height: 400px;
+  padding:0%;
   background-color: rgb(255, 242, 225);
   border: 2px solid rgb(23, 23, 23);
-  z-index: -2;
 }
 
 
 /* card 이미지 */
 .card_img {
-  position: relative;
-  width: 290px;
+  position: static;
+  display: flex;
+  width: 289px;
   height: 220px;
   overflow: auto;
   border-bottom: 2px solid rgb(23, 23, 23);
-}
-.card_img_tag {
-  object-fit: cover;
-  object-position: 50% 50%;
 }
 .like-form {
   position: absolute;
