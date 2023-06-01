@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.conf import settings
-from posts.models import Post
+from posts.models import Group
 
 # Create your models here.
 class User(AbstractUser):
@@ -17,6 +17,8 @@ class User(AbstractUser):
                                         processors=[ResizeToFill(200, 200)],
                                         format='JPEG',
                                         options={'quality': 70})
+    def liked_groups(self):
+        return Group.objects.filter(like_users=self)
     
 
 
