@@ -1,21 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block link %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/index_carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock link %}
 {% block title %}post_detail{% endblock title %}
 {% block content %}
-  <h1>post_detail</h1>
-  <p>{{ post.title }}</p>
-  <p>{{ post.content }}</p>
-  <p>{{ post.hits }}</p>
-  <p>{{ post.category }}</p>
-  
-  <!-- 이미지 출력 오류  -->
+
+  <!-- 임시로 만든 navbar -->
+  <div class="navbar_box">
+    <h1>post_detail</h1>
+    <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
+    <a href="{% url 'posts:post_create' %}">[CREATE]</a>
+    {% if request.user.is_authenticated %}
+      <h3>안녕하세요,{{ user }}님!</h3>
+      <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
+      <form action="{% url 'accounts:logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+      </form>
+    {% else %}
+      <a href="{% url 'accounts:login' %}">Login</a>
+      <a href="{% url 'accounts:signup' %}">Signup</a>
+    {% endif %}
+  </div>
+
+  <!-- 케로젤 -->
+  <div class="carousel_container">
+    <div class="carousel">
+      <div class="slides">
+        {% for image in post_images %}
+          <img class="slide" src="{{ image.image.url }}" alt="Slide 1">
+          <img class="slide" src="{{ image.image.url }}" alt="Slide 2">
+          <img class="slide" src="{{ image.image.url }}" alt="Slide 3">
+        {% endfor %}
+      </div>
+      <button class="prev-button">&lt;</button>
+      <button class="next-button">&gt;</button>
+      <div class="dots">
+        <button class="dot"></button>
+        <button class="dot"></button>
+        <button class="dot"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이미지 출력 오류 -->
   {% for image in post_images %}
     <img src="{{ image.image.url }}" alt="">
   {% endfor %}
-  
-  {% comment %} {% if post_images.image %}
-    <img src="{{ post_images.image.url }}" alt="">
-  {% endif %} {% endcomment %}
 
   {% if request.user == post.user %}
     <form action="{% url 'posts:post_delete' post.pk  %}" method="POST">
@@ -28,17 +62,19 @@
   <a href="{% url 'posts:index' %}">Home</a>
 
   <h4>댓글 목록</h4>
-    {% for comment in post_comments %}
-      <p><strong>{{ comment.user }}</strong>
-        <br>{{ comment.content }} {{ comment.created_string }}
-      </p>
-      {% if request.user == comment.user %}
-        <form action="{% url 'posts:post_comments_delete' post.pk comment.pk %}" method="POST">
-          {% csrf_token %}
-          <input type="submit" value="삭제">
-        </form>
-      {% endif %}
-    {% endfor %}
+  {% for comment in post_comments %}
+    <p>
+      <strong>{{ comment.user }}</strong>
+      <br>{{ comment.content }}
+      {{ comment.created_string }}
+    </p>
+    {% if request.user == comment.user %}
+      <form action="{% url 'posts:post_comments_delete' post.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+      </form>
+    {% endif %}
+  {% endfor %}
   <hr>
   <form action="{% url 'posts:post_comments_create' post.pk %}" method="POST">
     {% csrf_token %}
@@ -47,3 +83,8 @@
   </form>
 
 {% endblock content %}
+{% block script %}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock script %}
