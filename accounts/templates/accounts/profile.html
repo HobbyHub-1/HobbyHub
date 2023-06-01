@@ -1,23 +1,10 @@
 <!-- accounts/templates/accounts/prorile.html -->
-
 {% extends 'base.html' %}
-
-{% block link %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-{% endblock link %}
-
-{% block style %}
-<style>
-  body {
-    font-family: 'Nanum Gothic', sans-serif;
-  }
-</style>
-{% endblock style %}
+{% load static %}
 
 {% block content %}
 <div class="container d-flex justify-content-between">
+
   <!-- 왼쪽영역 -->
     <div class="left_field col-4">
       <!-- 유저정보 영역 -->
@@ -40,35 +27,18 @@
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
               </svg>
             </a>
-            <script>
-              function copyToClipboard(text) {
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                
-                const notification = document.createElement('div');
-                notification.innerText = '이메일 주소가 복사되었습니다.';
-                notification.style.position = 'fixed';
-                notification.style.bottom = '10px';
-                notification.style.left = '50%';
-                notification.style.transform = 'translateX(-50%)';
-                notification.style.background = '#f2f2f2';
-                notification.style.padding = '10px';
-                notification.style.borderRadius = '5px';
-                notification.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-                
-                document.body.appendChild(notification);
-                setTimeout(function() {
-                  document.body.removeChild(notification);
-                }, 3000);
-              }
-            </script>
           {% endif %}
           </div>
+          <div class="follow_box">
+            <div class="d-flex justify-content-center align-items-center">
+              <p class="user-follow-text m-0">팔로잉</p>
+              <button type="button" id="following-count" class="btn" data-bs-toggle="modal" data-bs-target="#followingModal">{{ person.followings.all|length }}</button>
+              <p class="user-follow-text m-0">팔로워</p>
+              <button type="button" id="follower-count" class="btn" data-bs-toggle="modal" data-bs-target="#followerModal">{{ person.followers.count }}</button>
+            </div>
+          </div>          
         </div>
+        
         <!-- 로그인+본인 프로필이어야 노출되는 부분 -->
         <div class="Enable Login my-3">
           {% if user == person %}
@@ -106,63 +76,55 @@
           {% endif %}
         </div>
       </div>
+    </div>    
+  </div>
+  <!-- 오른쪽영역 -->
+  <div class="right_field col-8">
+    <div>
+      <div>
+        <h3>{{ person.username }} 님이 좋아하는 취미</h3>
+        <ul class="list-group list-group-flus my-2">
+          {% for post in liked_posts %}
+          <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'posts:post_detail' post_pk=post.pk %}">
+            <li class="list-group-item">{{ post.title }}</li>
+          {% empty %}
+            <li>좋아하는 취미가 없습니다.</li>
+          {% endfor %}
+        </ul>
+        <a href="{% url 'posts:index' %}">
+          <button class="btn btn-outline-dark">취미 찾으러 가기</button>
+        </a>
+      </div>
+      <div>
+        <h3>{{ person.username }} 님이 좋아하는 그룹</h3>
+        <ul>
+          {% for group in liked_groups %}
+          <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'posts:group_detail' group_pk=group.pk %}">
+            <li>{{ group.title }}</li>
+          </a>
+          {% empty %}
+            <li>좋아하는 그룹이 없습니다.</li>
+
+          {% endfor %}
+        </ul>
+        <br>
+        <br>
+        <a href=" {% url 'posts:where' %} ">
+          <button>내 주변 모임 찾아보기</button>
+        </a>  
+      </div>
+      
     </div>
   </div>
 </div>
 
-<script>
-  // JavaScript 코드
-document.addEventListener('DOMContentLoaded', function() {
-  const followForms = document.getElementsByClassName('follow-form');
-
-  // 각 팔로우 폼에 대한 이벤트 리스너 등록
-  Array.from(followForms).forEach(function(form) {
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // 폼 제출 기본 동작 방지
-
-      const csrfToken = form.getElementsByTagName('input')[0].value; // CSRF 토큰 값 가져오기
-      const isFollowed = form.getElementsByClassName('btn')[0].value === '언팔로우'; // 현재 팔로우 상태
-      const userPk = form.getAttribute('data-user-id'); // 사용자 고유 식별자
-
-      // Ajax 요청 설정
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/accounts/' + userPk + '/follow/');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.setRequestHeader('X-CSRFToken', csrfToken);
-
-      // 요청 완료 후 처리
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          const response = JSON.parse(xhr.responseText);
-
-          // 팔로우 상태에 따른 버튼 및 팔로워 수 업데이트
-          const followButton = form.getElementsByClassName('btn')[0];
-          const followerCount = document.getElementById('follower-count-' + userPk);
-
-          if (isFollowed) {
-            followButton.value = '팔로우';
-            followButton.classList.remove('btn-dark');
-            followButton.classList.add('btn-outline-dark');
-            followerCount.textContent = response.follower_count;
-          } else {
-            followButton.value = '언팔로우';
-            followButton.classList.remove('btn-outline-dark');
-            followButton.classList.add('btn-dark');
-            followerCount.textContent = response.follower_count;
-          }
-        } else {
-          console.error('팔로우 요청 실패');
-        }
-      };
-
-      // 요청 전송
-      xhr.send();
-    });
-  });
-});
-
-</script>
 {% endblock content %}
+{% block script %}
+<script src="{% static 'profile.js' %}"></script>
+{% endblock script %}
+
+
+
 {% comment %} 
 <!-- 
   <div class="right_field col-8 mt-4">
