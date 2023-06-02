@@ -1,0 +1,24 @@
+
+{% load static %} 
+
+{% block title %}Hobby Hub{% endblock title %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/subdivision.css' %}" />
+{% endblock head %}
+{% block content %}
+<div class="menu">
+  <ul class="menu-list">
+    <li class="menu-item">운동·스포츠</li>
+    <li class="menu-item">DIY 공예</li>
+    <li class="menu-item">독서·공부</li>
+    <li class="menu-item">미술·음악·영화</li>
+    <li class="menu-item">문화활동</li>
+    <li class="menu-item">요리</li>
+    <li class="menu-item">힐링</li>
+
+    {% endblock content %} 
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock script %}
