@@ -57,25 +57,26 @@ def profile(request, username):
 @login_required
 def follow(request, user_pk):
     User = get_user_model()
-    person = User.objects.get(pk=user_pk)
+    you = User.objects.get(pk=user_pk)
+    me = request.user
 
-    if person != request.user:
-        if request.user in person.followers.all():
-            person.followers.remove(request.user)
+    if you != me:
+        if me in you.followers.all():
+            you.followers.remove(me)
             is_followed = False
         else:
-            person.followers.add(request.user)
+            you.followers.add(me)
             is_followed = True
 
         context = {
             'is_followed': is_followed,
-            'following_count': person.followings.count(),
-            'follower_count': person.followers.count(),
+            'followings_count': you.followings.count(),
+            'followers_count': you.followers.count(),
         }
 
         return JsonResponse(context)
 
-    return redirect('accounts:profile', person.get_username)
+    return redirect('accounts:profile', you.username)
 
 @login_required
 def update(request):
