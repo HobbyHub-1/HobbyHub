@@ -10,7 +10,7 @@
 {% block content %}
 <div>
   <!-- 임시로 만든 navbar -->
-  <div class="navbar_box">
+{% comment %} <div class="navbar_box">
     <h1>index</h1>
     <!-- 관리자 및 스텝 계정만 post 작성 가능 -->
       {% if user.is_authenticated %}
@@ -30,6 +30,11 @@
       <a href="{% url 'accounts:login' %}">Login</a>
       <a href="{% url 'accounts:signup' %}">Signup</a> 
     {% endif %}
+  </div>  {% endcomment %}
+
+  
+  <div>
+    {% include "subdivision.html" %}
   </div>
 
   <!-- 케로젤 -->
