@@ -4,8 +4,6 @@
      font-weight: normal;
      font-style: normal;
 }
-
-
 * {
   box-sizing: border-box;
 }
@@ -17,56 +15,68 @@ a {
   display: flex;
   justify-content: space-between;
 }
-
-
-/* card 목록 */
-.card_container {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
+.container {
+  margin: 0px 10px;
+  width: 100%;
 }
+
+/* 케로젤 */
+.carousel_container {
+  overflow: clip;
+  background: #f8f7fa;
+  height: 400px;
+  width: 100%;
+  margin-bottom: 16px;
+  border-bottom: 2px solid rgb(23, 23, 23);
+}
+
+
+/* card 목록 제목 */
 .card_single {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 292px;
-  grid-template-columns: 292px;
-  row-gap: 20px;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 10px 16px;
-}
-.card_single a {
-  display: flex;
-  flex-wrap: wrap;
+  position: relative;
+  width: 292px;
+  height: 400px;
+  padding:0%;
   background-color: rgb(255, 242, 225);
   border: 2px solid rgb(23, 23, 23);
-  max-width: 600px;
-  height: 100%;
 }
 
 
 /* card 이미지 */
 .card_img {
-  position: relative;
-  height: 215px;
+  position: static;
+  display: flex;
   width: 289px;
-  overflow: hidden;
+  height: 220px;
+  overflow: auto;
   border-bottom: 2px solid rgb(23, 23, 23);
 }
-.card_img_tag {
-  object-fit: cover;
-  object-position: center center;
+.like-form {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.likebtn {
+  background: none;
+  border: none;
+}
+i {
+  color: white;
+  background: none;
+  font: 1.5em bold ;
 }
 
 
 /* card 내용 정보 */
 .card_desc {
+    display: flex;
+    flex-flow: column nowrap;
     font-family: 'S-CoreDream';
     font-weight: 500;
     padding: 16px 20px;
 } 
 .card_title {
-   color: rgb(23, 23, 23);
+    color: rgb(23, 23, 23);
     font-size: 1.125rem;
     word-break: keep-all;
 }
@@ -76,3 +86,4 @@ a {
     font-weight: 500;
     word-break: keep-all;
 }
+
