@@ -9,7 +9,7 @@
 {% block content %}
 <div>
   <!-- 임시로 만든 navbar -->
-  <div class="navbar_box">
+{% comment %} <div class="navbar_box">
     <h1>index</h1>
     <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
     <a href="{% url 'posts:post_create' %}">[CREATE]</a>
@@ -25,6 +25,11 @@
       <a href="{% url 'accounts:login' %}">Login</a>
       <a href="{% url 'accounts:signup' %}">Signup</a> 
     {% endif %}
+  </div>  {% endcomment %}
+
+  
+  <div>
+    {% include "subdivision.html" %}
   </div>
 
   <!-- 케로젤 -->

@@ -1,19 +1,36 @@
-{% extends 'base.html' %} {% load static %} {% block link %}
+ {% load static %} {% block link %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
-{% endblock link %} {% block title %}Hobby Hub{% endblock title %} {% block
-style %}{% endblock style %} {% block content %}
+{% endblock link %} {% block title %}Hobby Hub{% endblock title %} 
+{% block style %}{% endblock style %} {% block content %}
+
 <header>
   <div class="logo">Logo</div>
   <nav>
     <ul class="nav-links">
-      <li><a href="#">홈</a></li>
+      <li><a href="{% url 'posts:index' %}">Home</a></li>
+      <li><a href="{% url 'posts:group_list' %}">Group</a></li>
+      <li><a href="{% url 'posts:where' %}">Services</a></li>
       <li><a href="#">Services</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">마이페이지</a></li>
+      {% if request.user.is_authenticated %}
+        <h3>안녕하세요, {{ user }}님!</h3>
+        <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
+        <form action="{% url 'accounts:logout' %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="Logout">
+        </form>
+        <a href="{% url 'accounts:update' %}">회원정보수정</a>
+      {% else %}
+        <li><a href="{% url 'accounts:login' %}">Login</a></li>
+        <li>
+          <form action="{% url 'accounts:signup' %}" method="GET">
+            <button type="submit">Sign up</button>
+          </form>
+        </li> 
+      {% endif %}
     </ul>
   </nav>
 </header>
+
 
 {% endblock content %} {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
