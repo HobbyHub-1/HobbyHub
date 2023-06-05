@@ -1,0 +1,11 @@
+#label-bold {
+  font-weight: bold;
+}
+
+.filter-btn {
+  margin-right: 10px;
+}
+
+.filter-options label.btn {
+  margin-bottom: 5px;
+}
