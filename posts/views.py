@@ -192,7 +192,30 @@ def post_likes(request, post_pk):
 # 카카오 지도 api
 @login_required
 def where(request) :
-    return render(request, 'posts/where.html')
+    group_data = get_group_data()
+    context = {
+        'group_data' : group_data
+    }
+    return render(request, 'posts/where.html', context)
+
+def get_group_data():
+    group_data = []
+    groups = Group.objects.all()
+    
+    for group in groups:
+        data = {
+            'title': group.title,
+            'content': group.content,
+            'category': group.category,
+            'day': group.day,
+            'region': group.region,
+            'gender': group.gender,
+            'Propensity': group.Propensity,
+            'address': group.address,
+        }
+        group_data.append(data)
+    
+    return group_data
 
 
 # group_list
@@ -296,6 +319,7 @@ def group_create(request):
         tags = request.POST.get('tags', '').split(',')
 
         if group_form.is_valid() and group_image_form.is_valid():
+            category = request.POST.get('category')
             group = group_form.save(commit=False)
             group.user = request.user
             group.save()

@@ -39,7 +39,8 @@ class GroupForm(forms.ModelForm):
     category = forms.ChoiceField(label='Category', choices=Group.category_choices, widget=forms.Select(attrs={'class': 'form-select'}),)
     class Meta:
         model = Group
-        fields = ('title', 'content', 'tags', 'day', 'region', 'gender', 'propensity', 'category',)
+        fields = ('title', 'content', 'tags', 'category', 'day', 'region', 'gender', 'propensity', 'address',)
+
 
 
 class GroupImageFrom(forms.ModelForm):

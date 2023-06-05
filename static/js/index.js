@@ -1,4 +1,5 @@
-let likeforms = document.querySelectorAll(`.like-form`);
+// card 게시물 상단 좋아요 비동기(하트 아이콘)
+let likeforms = document.querySelectorAll( `.like-form` );
 const csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
 
 likeforms.forEach((form) => {
@@ -44,7 +45,7 @@ function filterPostsByTag(tag) {
   posts.forEach(post => {
     const postTags = post.dataset.tags.split(',');
     if (postTags.includes(tag) || tag === 'all') {
-      post.style.display = 'grid'; // 선택된 태그와 일치하는 게시물은 보이도록 설정
+      post.style.display = 'inline'; // 선택된 태그와 일치하는 게시물은 보이도록 설정
     } else {
       post.style.display = 'none'; // 선택된 태그와 일치하지 않는 게시물은 숨김 처리
     }
