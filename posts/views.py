@@ -220,11 +220,68 @@ def get_group_data():
 
 # group_list
 def group_list(request):
-    groups = Group.objects.all()
+
+    days = request.GET.getlist('day')
+    regions = request.GET.getlist('region')  
+    genders = request.GET.getlist('gender')  
+    propensities = request.GET.getlist('propensity')
+    categories = request.GET.getlist('category')
+
+    filter_args = Q()  # AND 조건으로 초기화
+
+    # 각 필터 조건을 AND 조건으로 결합
+    if days:
+        days_q = Q()
+        for day in days:
+            if day:
+                days_q |= Q(day=day)
+        filter_args &= days_q
+
+    if regions:
+        regions_q = Q()
+        for region in regions:
+            if region:
+                regions_q |= Q(region=region)
+        filter_args &= regions_q
+
+    if genders:
+        genders_q = Q()
+        for gender in genders:
+            if gender:
+                genders_q |= Q(gender=gender)
+        filter_args &= genders_q
+
+    if propensities:
+        propensities_q = Q()
+        for propensity in propensities:
+            if propensity:
+                propensities_q |= Q(propensity=propensity)
+        filter_args &= propensities_q
+
+    if categories:
+        categories_q = Q()
+        for category in categories:
+            if category:
+                categories_q |= Q(category=category)
+        filter_args &= categories_q
+
+    filtered_groups = Group.objects.filter(filter_args).distinct()
+    filtered_groups_count = filtered_groups.count()
+    print("필터링된 그룹 개수:", filtered_groups_count)
+
+    group_images = []
+    for group in filtered_groups: 
+        images = GroupImage.objects.filter(group=group)
+        if images:
+            group_images.append((group, images[0]))
+        else:
+            group_images.append((group, ''))
+
     context ={
-        'groups': groups,
+        'filtered_groups': filtered_groups,
+        'group_images': group_images,
     }
-    return render(request,'posts/group_list.html', context)
+    return render(request, 'posts/group_list.html', context)
 
 
 # group_detail 내용 조회
