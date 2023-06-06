@@ -8,6 +8,7 @@
 {% block title %}Hobby Hub{% endblock title %}
 {% block style %}{% endblock style %}
 {% block content %}
+
 <div>
   <!-- 임시로 만든 navbar -->
 {% comment %} <div class="navbar_box">
@@ -31,9 +32,8 @@
       <a href="{% url 'accounts:signup' %}">Signup</a> 
     {% endif %}
   </div>  {% endcomment %}
-
-  
   <div>
+    
     {% include "subdivision.html" %}
   </div>
 
