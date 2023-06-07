@@ -5,34 +5,10 @@
 <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock link %}
-{% block title %}Hobby Hub{% endblock title %}
+{% block title %}{% endblock title %} 
 {% block style %}{% endblock style %}
 {% block content %}
-<div>
-  <!-- 임시로 만든 navbar -->
-{% comment %} <div class="navbar_box">
-    <h1>index</h1>
-    <!-- 관리자 및 스텝 계정만 post 작성 가능 -->
-      {% if user.is_authenticated %}
-        {% if user.is_superuser or user.is_staff %}
-          <a class="btn btn-dark btn-sm" href="{% url 'posts:post_create' %}" role="button"><i class="bi bi-pencil-square"></i> New Post</a>
-        {% endif %}
-      {% endif %}
-      <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
-    {% if request.user.is_authenticated %}
-      <h3>안녕하세요,{{ user }}님!</h3>
-      <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
-      <form action="{% url 'accounts:logout' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Logout">
-      </form>
-    {% else %}
-      <a href="{% url 'accounts:login' %}">Login</a>
-      <a href="{% url 'accounts:signup' %}">Signup</a> 
-    {% endif %}
-  </div>  {% endcomment %}
 
-  
   <div>
     {% include "subdivision.html" %}
   </div>
@@ -55,7 +31,6 @@
     </div>
   </div>
 
-</div>
 <div class="container-md">
   <!-- 태그 필터링 버튼 -->
   <div class="container p-2">
@@ -76,6 +51,8 @@
     {% for post in posts %}
       <!-- category별로 묶어서 불러옵니다. -->
       {% comment %} {% if post.category == '카테고리' %} {% endcomment %}
+
+      
       <a class="card_single mx-2" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
         <div class="card_img">  
           <form class="like-form" data-post-id="{{ post.pk }}">

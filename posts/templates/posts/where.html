@@ -1,120 +1,147 @@
-<html>
-<head>
-	<meta charset="utf-8"/>
-	<title>MAP</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Group create{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
   <a href="{% url 'posts:index' %}">[MAIN PAGE]</a>
-	<div id="map" style="width:500px;height:500px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cb746573691fe924faae69321b18243c&libraries=services"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/async/3.2.0/async.min.js"></script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			function getLocation() {
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(showMap, showError, { enableHighAccuracy: true });
-				} else {
-					alert("브라우저에서 위치 정보를 지원하지 않습니다.");
-				}
-			}
-
-			function showMap(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        var altitude = position.coords.altitude;
-    
-        var container = document.getElementById('map');
-        var options = {
-          center: new kakao.maps.LatLng(latitude, longitude),
-          level: 4
-        };
-    
-        // 고도 정보를 이용하여 지도의 높이를 조정
-        if (altitude) {
-          options.height = altitude;
-        }
-    
-        var map = new kakao.maps.Map(container, options);
-    
-        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
-        var imageSize = new kakao.maps.Size(30, 40);
-        var imageOption = { offset: new kakao.maps.Point(27, 69) };
-    
-        // 현재 위치에 마커 추가
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-        var markerPosition = new kakao.maps.LatLng(latitude, longitude);
-    
-        var marker = new kakao.maps.Marker({
-          position: markerPosition,
-          image: markerImage
-        });
-    
-        marker.setMap(map);
-    
-        var gatheringData = [
-          {% for data in group_data %}
-          {
-            title: "{{ data.title }}",
-            address: "{{ data.address }}",
-            description: "{{ data.content }}",
-            contact: "{{ data.contact }}",
-            latlng: null
-          },
-          {% endfor %}
-        ];
-    
-        // 주소를 좌표값으로 변환하여 gatheringData에 저장
-        var geocoder = new kakao.maps.services.Geocoder();
-        var geocodeRequests = [];
-    
-        gatheringData.forEach(function(data) {
-          geocodeRequests.push(function(callback) {
-            geocoder.addressSearch(data.address, function(result, status) {
-              if (status === kakao.maps.services.Status.OK) {
-                var latlng = new kakao.maps.LatLng(result[0].y, result[0].x);
-                data.latlng = latlng;
-              }
-              callback();
-            });
-          });
-        });
-    
-        // 모든 주소에 대한 좌표값 변환 완료 후 지도에 마커 표시
-        async.parallel(geocodeRequests, function() {
-          gatheringData.forEach(function(data) {
-            var marker = new kakao.maps.Marker({
-              map: map,
-              position: data.latlng,
-              title: data.title,
-            });
-          });
-        });
-      }
-    
-      function showError(error) {
-        switch(error.code) {
-          case error.PERMISSION_DENIED:
-            alert("위치 정보 제공이 거부되었습니다.");
-            break;
-          case error.POSITION_UNAVAILABLE:
-            alert("위치 정보를 사용할 수 없습니다.");
-            break;
-          case error.TIMEOUT:
-            alert("위치 정보를 가져오는 데 시간이 초과되었습니다.");
-            break;
-          case error.UNKNOWN_ERROR:
-            alert("알 수 없는 오류가 발생했습니다.");
-            break;
-        }
-      }
-    
-      // 페이지 로드 시 바로 모달 창 표시 및 위치 정보 요청
-      getLocation();
-    });
-
-	</script>
+  <div id="map" style="width:500px;height:500px;"></div>
+  
+  {% comment %}
   {% for data in group_data %}
-    <p>{{ data.title }}, {{ data.content }}, {{ data.address }}, {{ data.gender }}, {{ data.category }}, {{ data.region }}</p>
+    <p>{{ data.pk }}, {{ data.title }}, {{ data.content }}, {{ data.address }}, {{ data.gender }}, {{ data.category }}, {{ data.region }}</p>
   {% endfor %}
-</body>
-</html>
+  {% endcomment %}
+
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cb746573691fe924faae69321b18243c&libraries=services"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/async/3.2.0/async.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showMap, showError, { enableHighAccuracy: true });
+      } else {
+        alert("브라우저에서 위치 정보를 지원하지 않습니다.");
+      }
+    }
+
+    function showMap(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      var altitude = position.coords.altitude;
+
+      var container = document.getElementById('map');
+      var options = {
+        center: new kakao.maps.LatLng(latitude, longitude),
+        level: 4
+      };
+
+      // 고도 정보를 이용하여 지도의 높이를 조정
+      if (altitude) {
+        options.height = altitude;
+      }
+
+      var map = new kakao.maps.Map(container, options);
+
+      var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+      var imageSize = new kakao.maps.Size(30, 40);
+      var imageOption = { offset: new kakao.maps.Point(27, 69) };
+
+      // 현재 위치에 마커 추가
+      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+      var markerPosition = new kakao.maps.LatLng(latitude, longitude);
+
+      var marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage
+      });
+
+      marker.setMap(map);
+
+      var gatheringData = [
+        {% for data in group_data %}
+        {
+          title: "{{ data.title }}",
+          address: "{{ data.address }}",
+          description: "{{ data.content }}",
+          pk: "{{ data.pk }}",
+          latlng: null
+        },
+        {% endfor %}
+      ];
+
+      // 주소를 좌표값으로 변환하여 gatheringData에 저장
+      var geocoder = new kakao.maps.services.Geocoder();
+      var geocodeRequests = [];
+
+      gatheringData.forEach(function(data) {
+        geocodeRequests.push(function(callback) {
+          geocoder.addressSearch(data.address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+              var latlng = new kakao.maps.LatLng(result[0].y, result[0].x);
+              data.latlng = latlng;
+            }
+            callback();
+          });
+        });
+      });
+
+      // 모든 주소에 대한 좌표값 변환 완료 후 지도에 마커 표시
+      async.parallel(geocodeRequests, function() {
+        gatheringData.forEach(function(data) {
+          var marker = new kakao.maps.Marker({
+            map: map,
+            position: data.latlng,
+            title: data.title,
+            pk: data.pk,
+          });
+
+          // 마커 클릭 이벤트 핸들러 등록
+          kakao.maps.event.addListener(marker, 'click', function() {
+            // 그룹 상세 페이지 URL을 생성
+            var url = "{% url 'posts:group_detail' 0 %}".replace('0', data.pk);
+
+            // 인포윈도우 생성
+            var infowindow = new kakao.maps.InfoWindow({
+              content: '<div style="padding:5px; width:200px">' + data.title + ' 모임입니다.' + '</div><a href="' + url + '" onclick="function1();">그룹 자세히 보기</a>',
+              removable: true
+            });
+
+            // 인포윈도우 열기
+            infowindow.open(map, marker);
+          });
+        });
+      });
+      }
+
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          alert("위치 정보 제공이 거부되었습니다.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("위치 정보를 사용할 수 없습니다.");
+          break;
+        case error.TIMEOUT:
+          alert("위치 정보를 가져오는 데 시간이 초과되었습니다.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("알 수 없는 오류가 발생했습니다.");
+          break;
+      }
+    }
+
+    // 페이지 로드 시 바로 모달 창 표시 및 위치 정보 요청
+    getLocation();
+  });
+</script>
+{% endblock script %}
