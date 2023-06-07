@@ -1,6 +1,6 @@
 {% load static %} {% block link %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
-{% endblock link %} {% block title %}Hobby Hub{% endblock title %} 
+{% endblock link %} {% block title %}{% endblock title %} 
 {% block style %}{% endblock style %} {% block content %}
 
  <header>
@@ -11,23 +11,23 @@
           <div class="d-flex align-items-center gap-3">  
           <!-- 메뉴바 -->
             <nav>
-            <ul class="left-nav-links">
-              <li><a href="{% url 'posts:index' %}">Home</a></li>
-              <li><a href="{% url 'posts:group_list' %}">Group</a></li>
-              <li><a href="{% url 'posts:where' %}">Location</a></li>
-              <li>
+            <div class="left-nav-links">
+              <div><a href="{% url 'posts:index' %}">Home</a></div>
+              <div><a href="{% url 'posts:group_list' %}">Group</a></div>
+              <div><a href="{% url 'posts:where' %}">Location</a></div>
+              <div>
               {% if request.user.is_authenticated %}
               <a href="{% url 'accounts:profile' user.username %}">MyPage</a>
               {% else %}
               <a type="button" href="{% url 'accounts:login' %}" class="text-decoration-none text-secondary login-Btn"></a>
               <a type="button" href="{% url 'accounts:signup' %}" class="text-decoration-none text-secondary login-Btn"></a>
               {% endif %}
-              </li>
-            </ul>
+              </div>
+            </div>
             </nav>        
           <!-- 로그인 및 회원가입 -->
               {% if request.user.is_authenticated %}
-              <span>안녕하세요, {{ user }}님!</span>
+              {% comment %} <span>안녕하세요, {{ user }}님!</span> {% endcomment %}
               <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
               <a href="{% url 'accounts:update' %}">회원정보수정</a>
               <form action="{% url 'accounts:logout' %}" method="POST">
@@ -43,11 +43,18 @@
   </nav>
 </header>  
 
-
-
-
-
 {% endblock content %}{% block script %}
+window.addEventListener('scroll', function() {
+  var header = document.querySelector('header');
+  var scrollPos = window.scrollY;
+
+  if (scrollPos > 0) {
+    header.style.top = '0';
+  } else {
+    header.style.top = '-50px'; 
+  }
+});
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'js/index.js' %}"></script>
 {% endblock script %} 
