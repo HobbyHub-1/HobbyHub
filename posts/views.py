@@ -204,13 +204,14 @@ def get_group_data():
     
     for group in groups:
         data = {
+            'pk': group.pk,
             'title': group.title,
             'content': group.content,
             'category': group.category,
             'day': group.day,
             'region': group.region,
             'gender': group.gender,
-            'Propensity': group.Propensity,
+            'propensity': group.propensity,
             'address': group.address,
         }
         group_data.append(data)
