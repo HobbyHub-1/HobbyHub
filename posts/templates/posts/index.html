@@ -76,13 +76,14 @@
             <div class="card_title d-flex align-content-center my-1">
               {{ post.title }}
             </div>
-            <div class="info text-muted">
-              {{ post.hits }}
-              {{ post.category }}
-              {% for tag in post.tags.all %}{{ tag.name }}
-                {% if not forloop.last %},
-                {% endif %}
-              {% endfor %}
+            <div class="card_tags text-muted">
+              <div class="info">
+                조회수: {{ post.hits }}<br>
+                카테고리: {{ post.category }}<br>
+                {% for tag in post.tags.all %}
+                  태그: #{{ tag.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </div>
             </div>
             <div class="card_content">
               {{ post.content|truncatechars:'20' | safe }}
