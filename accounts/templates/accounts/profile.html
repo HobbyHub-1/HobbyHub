@@ -63,6 +63,7 @@
             <button type="button" id="followers-count" class="btn" data-bs-toggle="modal" data-bs-target="#followerModal">{{ person.followers.count }}</button>
           </div>
         </div>
+        <!-- 팔로잉 모달 -->
         <div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="followingModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -87,7 +88,7 @@
             </div>
           </div>
         </div>
-        <!-- 모달 -->
+        <!-- 팔로워 모달 -->
         <div class="modal fade" id="followerModal" tabindex="-1" aria-labelledby="followerModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -167,7 +168,7 @@
               <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'posts:post_detail' post_pk=post.pk %}">
                 <li class="list-group-item">{{ post.title }}</li>
               </a>
-              <hr class='text-start mt-1' style='width: 40%;'>     
+              <hr class='text-start mt-1' style='width: 200px;'>     
             </div>                
             {% empty %}
             <li><div class='text-center'>아직 좋아요 한 취미가 없습니다</div></li>
@@ -196,7 +197,7 @@
               <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'posts:group_detail' group_pk=group.pk %}">
                 <li>{{ group.title }}</li>
               </a>
-              <hr class='text-start mt-1' style='width: 40%;'>                
+              <hr class='text-start mt-1' style='width: 200px;'>                
             </div>            
             {% empty %}
             <li><div class='text-center'>아직 좋아요 한 그룹이  없습니다.</div></li>
