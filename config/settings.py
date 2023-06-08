@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'django_extensions',
     'imagekit',
+    'crispy_forms',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
     'django.contrib.admin',
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates',],
+        'DIRS': [ BASE_DIR / 'templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,6 +134,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+STATIC_ROOT = '/staticfiles'
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_URL = '/media/'
@@ -143,3 +146,35 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# Summernote 필수 설정
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+INSTALLED_APPS += ['django_summernote']
+
+SUMMERNOTE_THEME = 'bs4'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SUMMERNOTE_CONFIG = {
+    'attachment_filesize_limit': 1024 * 1024 * 10,
+    # Summernote settings
+    'summernote': {
+        'width': 720,
+        'height': 480,
+        'lang': 'ko-KR',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough','clear']],
+            ['fontname', ['fontname ']], 
+            ['fontsize', ['fontsize']], 
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']], 
+            ['help', ['help']],
+        ],
+    }
+}
