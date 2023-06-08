@@ -70,20 +70,20 @@ class Group(models.Model):
     content = models.CharField(max_length=300)
     hits = models.PositiveIntegerField(default=0)
 
-    day_choices = (('Mon', '월'), ('TUES', '화'), ('WED', '수'), ('THU', '목'), ('FRI', '금'), ('SAT', '토'), ('SUN', '일'))
+    day_choices = (('monday', '월'), ('tuesday', '화'), ('wednesday', '수'), ('thursday', '목'), ('friday', '금'), ('saturday', '토'), ('sunday', '일'))
     day = models.CharField(max_length=10, choices=day_choices)
     
-    region_choices = (('Seoul', '서울'), ('Incheon', '인천'), ('gyeonggi-do', '경기도'), ('Gangwon-do', '강원도'), 
-                      ('Gyeong-nam', '경남'), ('Gyeong-buk', '경북'), ('Jeon-nam', '전남'), ('Jeon-buk', '전북'), ('Chung-nam', '충남'), ('Chung-buk', '충북'))
+    region_choices = (('seoul', '서울'), ('incheon', '인천'), ('gyeonggi-do', '경기도'), ('gangwon-do', '강원도'), 
+                      ('gyeong-nam', '경남'), ('gyeong-buk', '경북'), ('jeon-nam', '전남'), ('jeon-buk', '전북'), ('chung-nam', '충남'), ('chung-buk', '충북'))
     region = models.CharField(max_length=20, choices=region_choices)
 
     gender_choices = (('unisex', '남/여'), ('male', '남'), ('female', '여'))
     gender = models.CharField(max_length=10, choices=gender_choices)
     
-    Propensity_choices = (('act', '활동적'), ('inact', '비활동적'))
-    Propensity = models.CharField(max_length=10, choices=Propensity_choices)
+    propensity_choices = (('active', '활동적'), ('inactive', '비활동적'))
+    propensity = models.CharField(max_length=10, choices=propensity_choices, null=True)
     
-    category_choices = (('sports', '운동 스포츠'), ('DIY', 'DIY 공예'), ('reading study', '독서 공부'), ('art music movie','미술 음악 영화'), ('Healing', '힐링'), ('cook', '요리'), ('Cultural activities', '문화 활동'))
+    category_choices = (('sports', '운동 스포츠'), ('diy', 'DIY 공예'), ('reading study', '독서 공부'), ('art music movie','미술 음악 영화'), ('healing', '힐링'), ('cook', '요리'), ('cultural activities', '문화 활동'))
     category = models.CharField(max_length=20, choices=category_choices)
     
     tags = TaggableManager(blank=True)
