@@ -63,6 +63,11 @@
         </div>
         <button class='btn btn-outline-success' type="submit">로그인</button>        
     </form>
+
+    {% load socialaccount %}
+<a href="{% provider_login_url 'naver'%}"> NAVER Social Login </a> 
+<a href="{% provider_login_url 'google' %}"> Google Social Login </a> 
+
   </div>
   <br>
   <p class='my-1'>아직 계정이 없으신가요?</p>

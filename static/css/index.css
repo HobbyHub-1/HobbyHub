@@ -11,10 +11,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.navbar_box {
-  display: flex;
-  justify-content: space-between;
-}
 .container {
   margin: 0px 10px;
   width: 100%;
@@ -44,11 +40,12 @@ a {
 
 /* card 이미지 */
 .card_img {
-  position: static;
   display: flex;
-  width: 289px;
+  justify-content: center;
+  align-items: center;
+  width: 290px;
   height: 220px;
-  overflow: auto;
+  overflow: clip;
   border-bottom: 2px solid rgb(23, 23, 23);
 }
 .like-form {
@@ -75,15 +72,16 @@ i {
     font-weight: 500;
     padding: 16px 20px;
 } 
-.card_title {
+.card_desc > .card_title {
     color: rgb(23, 23, 23);
     font-size: 1.125rem;
     word-break: keep-all;
 }
-.card-content {
+.card_desc > .card-content {
     color: rgb(55, 55, 55);
     font-size: 0.875rem;
     font-weight: 500;
     word-break: keep-all;
+    overflow: hidden;
 }
 

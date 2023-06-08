@@ -9,27 +9,8 @@
 {% block content %}
   <div class="container-md">
 
-    <!-- 임시로 만든 navbar -->
-    <div class="navbar_box">
-      <h1>post_detail</h1>
-      <a href="{% url 'posts:index' %}">Home</a>
-      <a href="{% url 'posts:where' %}">[내 근처 모임 찾기]</a>
-      <a href="{% url 'posts:post_create' %}">[CREATE]</a>
-      {% if request.user.is_authenticated %}
-        <h3>안녕하세요,{{ user }}님!</h3>
-        <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
-        <form action="{% url 'accounts:logout' %}" method="POST">
-          {% csrf_token %}
-          <input type="submit" value="Logout">
-        </form>
-      {% else %}
-        <a href="{% url 'accounts:login' %}">Login</a>
-        <a href="{% url 'accounts:signup' %}">Signup</a>
-      {% endif %}
-    </div>
-
     <!-- ## 화면 상단 케로젤+정보 ## -->
-    <div class="row">
+    <div class="row mt-5">
       <!-- 케로젤 -->
       <div class="post_detail_carousel_container col-md-8 my-3" style="height: 600px">
         <div class="carousel">
@@ -49,11 +30,11 @@
       </div>
       <!-- 정보 -->
       <div class="post_info col p-4">
-        <h1 class="title">{{ post.title }}</h1>
-        <p class="title">{{ post.content }}</p>
-        <p class="title">{{ post.hits }}</p>
-        <p class="title">{{ post.category }}</p>
-        <p class="title">{{ post.tags }}</p>
+        <h1 class="">{{ post.title }}</h1>
+        <p class="">{{ post.content | safe }}</p>
+        <p class="">{{ post.hits }}</p>
+        <p class="">{{ post.category }}</p>
+        <p class="">{{ post.tags }}</p>
         <div class="my-2">
           {% if request.user == post.user %}
             {% if user.is_superuser or user.is_staff %}

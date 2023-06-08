@@ -2,175 +2,247 @@
 {% load static %}
 
 {% block link %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<link rel="stylesheet" href="{% static 'css/group_list.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/group_list.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock link %}
 
 {% block title %}Group list{% endblock title %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>Group List</h2>
-  
-  <!-- 필터 버튼 -->
-  <div class="mb-2">
-    <button class="btn btn-outline-dark filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
-        <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-      </svg> 필터
-    </button>
+  <div class="container mt-4">
+    <h2>Group List</h2>
+
+    <!-- 필터 버튼 -->
+    <div class="mb-2">
+      <button class="btn btn-outline-dark filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewbox="0 0 16 16">
+          <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        필터
+      </button>
+    </div>
+    <h2 class="d-block m-4">전체 목록입니다.</h2>
+    <!-- card 목록 -->
+    <div class="d-flex flex-wrap m-4 px-1">
+      {% for group in filtered_groups %}
+        <a class="card_single mx-2" href="{% url 'posts:group_detail' group.pk %}" data-tags="{% for tag in group.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+          <div class="card_img">
+            <form class="like-form" data-post-id="{{ group.pk }}">
+              {% csrf_token %}
+              {% if request.user in group.like_users.all %}
+                <button class="likebtn" type="submit">
+                  <i class="bi bi-heart-fill" id="post-heart-{{ post.pk }}"></i>
+                </button>
+              {% else %}
+                <button class="likebtn" type="submit">
+                  <i class="bi bi-heart" id="post-heart-{{ post.pk }}"></i>
+                </button>
+              {% endif %}
+            </form>
+            {% for image in group.groupimage_set.all %}
+              {% if image.image.url %}
+                {% if forloop.first %}
+                  <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                {% endif %}
+              {% else %}
+                <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="card_desc">
+            <div class="card_title d-flex align-content-center my-1">
+              {{ group.title }}
+            </div>
+            <div class="info text-muted">
+              {{ group.user }}
+              {{ group.category }}
+              {% for tag in group.tags.all %}
+                #{{ tag }}
+              {% endfor %}
+              {{ group.hits }}
+            </div>
+            <div class="card_content">
+              {{ group.content|truncatechars:'20' | safe }}
+            </div>
+          </div>
+        </a>
+        {% empty %}
+        <h2>해당 조건의 모임이 없습니다.</h2>
+      {% endfor %}
+    </div>
   </div>
 
-  {% for group in filtered_groups %}
-    <p>작성자: {{ group.user }}</p>
-    <p>제목: <a href="{% url 'posts:group_detail' group.pk %}">{{ group.title }}</a></p>
-    <p>내용: {{ group.content }}</p>
-    <!-- 추가적인 그룹 정보 표시 -->
-    <p>태그: {% for tag in group.tags.all %} #{{ tag }} {% endfor %}</p>
-    <p>조회수: {{ group.hits }}</p>
-    <p>생성일: {{ group.created_at }}</p>
-    <hr>
-  {% empty %}
-    <h2>해당 조건의 모임이 없습니다.</h2>
-  {% endfor %}
-</div>
-
-<!-- 필터 모달 -->
-<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="filterModalLabel">필터</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form method="get" action="{% url 'posts:group_list' %}">
-          <div class="mb-3">
-            <label for="days" id="label-bold" class="form-label">요일</label>
-            <div class="filter-options">
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="monday"> 월
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="tuesday"> 화
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="wednesday"> 수
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="thursday"> 목
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="friday"> 금
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="saturday"> 토
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="day" value="sunday"> 일
-              </label>
+  <!-- 필터 모달 -->
+  <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filterModalLabel">필터</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="get" action="{% url 'posts:group_list' %}">
+            <div class="mb-3">
+              <label for="days" id="label-bold" class="form-label">요일</label>
+              <div class="filter-options">
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="monday">
+                  월
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="tuesday">
+                  화
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="wednesday">
+                  수
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="thursday">
+                  목
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="friday">
+                  금
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="saturday">
+                  토
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="day" value="sunday">
+                  일
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="regions" id="label-bold" class="form-label">지역</label>
-            <div class="filter-options">
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="seoul"> 서울
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="incheon"> 인천
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="gyeonggi-do"> 경기도
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="gangwon-do"> 강원도
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="gyeong-nam"> 경남
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="gyeong-buk"> 경북
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="jeon-nam"> 전남
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="jeon-buk"> 전북
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="chung-nam"> 충남
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="region" value="chung-buk"> 충북
-              </label>
+            <div class="mb-3">
+              <label for="regions" id="label-bold" class="form-label">지역</label>
+              <div class="filter-options">
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="seoul">
+                  서울
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="incheon">
+                  인천
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="gyeonggi-do">
+                  경기도
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="gangwon-do">
+                  강원도
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="gyeong-nam">
+                  경남
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="gyeong-buk">
+                  경북
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="jeon-nam">
+                  전남
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="jeon-buk">
+                  전북
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="chung-nam">
+                  충남
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="region" value="chung-buk">
+                  충북
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="genders" id="label-bold" class="form-label">성별</label>
-            <div class="filter-options">
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="gender" value="unisex"> 모두
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="gender" value="male"> 남
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="gender" value="female"> 여
-              </label>
+            <div class="mb-3">
+              <label for="genders" id="label-bold" class="form-label">성별</label>
+              <div class="filter-options">
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="gender" value="unisex">
+                  모두
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="gender" value="male">
+                  남
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="gender" value="female">
+                  여
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="propensities" id="label-bold"  class="form-label">활동성</label>
-            <div class="filter-options">
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="propensity" value="active"> 활동적
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="propensity" value="inactive"> 비활동적
-              </label>
+            <div class="mb-3">
+              <label for="propensities" id="label-bold" class="form-label">활동성</label>
+              <div class="filter-options">
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="propensity" value="active">
+                  활동적
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="propensity" value="inactive">
+                  비활동적
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="categories" id="label-bold" class="form-label">카테고리</label>
-            <div class="filter-options">
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="sports"> 운동 스포츠
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="diy"> DIY 공예
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="reading study"> 독서 공부
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="art music movie"> 미술 음악 영화
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="healing"> 힐링
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="cook"> 요리
-              </label>
-              <label class="btn btn-outline-secondary">
-                <input type="checkbox" name="category" value="cultural activities"> 문화 활동
-              </label>
+            <div class="mb-3">
+              <label for="categories" id="label-bold" class="form-label">카테고리</label>
+              <div class="filter-options">
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="sports">
+                  운동 스포츠
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="diy">
+                  DIY 공예
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="reading study">
+                  독서 공부
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="art music movie">
+                  미술 음악 영화
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="healing">
+                  힐링
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="cook">
+                  요리
+                </label>
+                <label class="btn btn-outline-secondary">
+                  <input type="checkbox" name="category" value="cultural activities">
+                  문화 활동
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <button type="submit" class="btn btn-dark">적용하기</button>
               <a class="btn btn-secondary" href="{% url 'posts:group_list' %}">초기화</a>
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock content %}
 
 {% block script %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@0.9.15/dist/js/bootstrap-multiselect.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@0.9.15/dist/js/bootstrap-multiselect.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="{% static 'js/carousel.js' %}"></script>
 {% endblock script %}
