@@ -72,15 +72,16 @@ i {
     font-weight: 500;
     padding: 16px 20px;
 } 
-.card_title {
+.card_desc > .card_title {
     color: rgb(23, 23, 23);
     font-size: 1.125rem;
     word-break: keep-all;
 }
-.card-content {
+.card_desc > .card-content {
     color: rgb(55, 55, 55);
     font-size: 0.875rem;
     font-weight: 500;
     word-break: keep-all;
+    overflow: hidden;
 }
 
