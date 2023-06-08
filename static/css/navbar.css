@@ -1,3 +1,4 @@
+@import url('https://webfontworld.github.io/score/SCoreDream.css');
 
 header {
   display: flex;
@@ -5,13 +6,14 @@ header {
   align-items: center;
   padding: 20px;
   background-color: rgb(250, 236, 217);
-  top: 0;
   width: 100%;
   z-index: 1000;
-  height: 50px;
+  height: 60px;
   position: fixed;
   transition: top 0.3s ease-in-out; 
   border-bottom: 1.2px solid rgb(20, 19, 19);  
+  text-align: center;
+
 }
 
 .left-nav-links {
@@ -19,10 +21,16 @@ header {
   list-style: none;
   padding: 0;
   margin: 0;
+
 }
+#nav .container a img {
+  margin: 5px;
+}
+
 
 .left-nav-links > div {
   margin: 0 10px;
+  padding-top: 5px;
 }
 
 .left-nav-links > div a {
@@ -30,7 +38,10 @@ header {
   color: #333;
 }
 
-
+.menu-links a {
+  margin-right: 20px;
+  
+}
 
 @media screen and (max-width: 768px) {
   body {
@@ -47,7 +58,7 @@ header {
     bottom: 0;
     left: 0;
     background-color: #ffffff;
-    height: 50px;
+    height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -57,16 +68,90 @@ header {
     border-top: 1.2px solid rgb(20, 19, 19);
   }
 
-  nav ul {
+ 
+  nav .left-nav-links {
+    display: flex;
     flex-direction: row;
     margin-bottom: 0;
   }
-
-  nav ul li {
+  
+  nav .left-nav-links div {
     margin: 0 10px;
   }
-
  
 }
 
+/* @media (max-width: 767px) {
+  .navbar .left-nav-links div span {
+    display: inline;
+  }
+  
+  .navbar .left-nav-links div img {
+    display: inline;
+    margin-right: 5px;
+  }
+}
 
+@media (min-width: 768px) {
+  .navbar .left-nav-links div span {
+    display: none;
+  }
+} */
+    
+
+     /* @media (min-width: 768px) {
+      .navbar .left-nav-links div span {
+        display: none;
+      }
+      
+      .navbar .left-nav-links div img {
+        display: inline;
+        margin-right: 5px;
+      }
+    } */
+
+    /* @media (max-width: 767px) {
+      .navbar .left-nav-links div span {
+        display: inline;
+      }
+      
+      .navbar .left-nav-links div img {
+        display: inline;
+        margin-right: 5px;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .navbar .left-nav-links div span {
+        display: none;
+      }
+      
+      .navbar .left-nav-links div img {
+        display: inline;
+        margin-right: 5px;
+      }
+    } 
+     */
+
+     @media (max-width: 767px) {
+      .navbar .left-nav-links div span {
+        display: inline;
+      }
+      
+      .navbar .left-nav-links div img {
+        display: inline;
+        margin-right: 5px;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .navbar .left-nav-links div img{
+        display: none;
+      }
+      .navbar .left-nav-links div span
+      .navbar .left-nav-links div img {
+        display: inline;
+        margin-right: 5px;
+      }
+    }
+    
