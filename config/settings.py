@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +20,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5_j!)7gb+rx@=!irp4fe8*3p()o$v96g&e6u-9hu$8)q0z58s+'
+# SECRET_KEY = 'django-insecure-5_j!)7gb+rx@=!irp4fe8*3p()o$v96g&e6u-9hu$8)q0z58s+'
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'port-0-hobbyhub-koh2xlimjxmaz.sel4.cloudtype.app',]
 
 
 # Application definition
@@ -36,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'django_extensions',
     'imagekit',
+    'crispy_forms',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
     'django.contrib.admin',
@@ -44,6 +49,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.google',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 TAGGIT_CASE_INSENSITIVE = True
@@ -64,7 +84,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates',],
+        'DIRS': [ BASE_DIR / 'templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,6 +153,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+STATIC_ROOT = '/staticfiles'
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_URL = '/media/'
@@ -143,3 +165,42 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+SITE_ID = 1
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True 
+
+# Summernote 필수 설정
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+INSTALLED_APPS += ['django_summernote']
+
+SUMMERNOTE_THEME = 'bs4'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SUMMERNOTE_CONFIG = {
+    'attachment_filesize_limit': 1024 * 1024 * 10,
+    # Summernote settings
+    'summernote': {
+        'width': 720,
+        'height': 480,
+        'lang': 'ko-KR',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough','clear']],
+            ['fontname', ['fontname ']], 
+            ['fontsize', ['fontsize']], 
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']], 
+            ['help', ['help']],
+        ],
+    }
+}

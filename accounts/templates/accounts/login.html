@@ -7,4 +7,9 @@
         {{ form.as_p }}
         <button type="submit">로그인</button>
     </form>
+
+    {% load socialaccount %}
+<a href="{% provider_login_url 'naver'%}"> NAVER Social Login </a> 
+<a href="{% provider_login_url 'google' %}"> Google Social Login </a> 
+
 {% endblock %}
