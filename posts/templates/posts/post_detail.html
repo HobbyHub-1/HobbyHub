@@ -51,9 +51,13 @@
       <div class="post_info col p-4">
         <h1 class="title">{{ post.title }}</h1>
         <p class="title">{{ post.content }}</p>
-        <p class="title">{{ post.hits }}</p>
-        <p class="title">{{ post.category }}</p>
-        <p class="title">{{ post.tags }}</p>
+        <p class="title">조회수 : {{ post.hits }}</p>
+        <p class="title">카테고리 : {{ post.category }}</p>
+        <p class="title">
+          {% for tag in post.tags.all %}
+            태그: #{{ tag.name }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
         <div class="my-2">
           {% if request.user == post.user %}
             {% if user.is_superuser or user.is_staff %}

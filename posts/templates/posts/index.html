@@ -78,11 +78,10 @@
             </div>
             <div class="card_tags text-muted">
               <div class="info">
-                {{ post.hits }}
-                {{ post.category }}
-                {% for tag in post.tags.all %}{{ tag.name }}
-                  {% if not forloop.last %},
-                  {% endif %}
+                조회수: {{ post.hits }}<br>
+                카테고리: {{ post.category }}<br>
+                {% for tag in post.tags.all %}
+                  태그: #{{ tag.name }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
               </div>
             </div>
