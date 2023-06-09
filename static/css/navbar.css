@@ -13,8 +13,8 @@ header {
   z-index: 1000;
   height: 60px;
   position: fixed;
-  transition: top 0.3s ease-in-out; 
-  border-bottom: 1.2px solid rgb(20, 19, 19);  
+  transition: top 0.3s ease-in-out;
+  border-bottom: 1.2px solid rgb(20, 19, 19);
   text-align: center;
 }
 #nav .container-lg nav {
@@ -27,12 +27,10 @@ header {
   list-style: none;
   padding: 0;
   margin: 0;
-
 }
 #nav .container-lg a img {
   margin: 5px;
 }
-
 
 .left-nav-links > div {
   margin: 0 10px;
@@ -46,7 +44,6 @@ header {
 
 .menu-links a {
   margin-right: 20px;
-  
 }
 
 @media screen and (max-width: 768px) {
@@ -71,17 +68,15 @@ header {
     border-top: 1.2px solid rgb(20, 19, 19);
   }
 
- 
   nav .left-nav-links {
     display: flex;
     flex-direction: row;
     margin-bottom: 0;
   }
-  
+
   nav .left-nav-links div {
     margin: 0 10px;
   }
- 
 }
 
      @media (max-width: 767px) {

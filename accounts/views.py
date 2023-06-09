@@ -99,8 +99,8 @@ def change_password(request):
         form = CustomPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important to update the session
-            return redirect('accounts:profile')
+            update_session_auth_hash(request, user)  
+            return redirect('accounts:profile', username=request.user.username)
     else:
         form = CustomPasswordChangeForm(user=request.user)
     context = {
