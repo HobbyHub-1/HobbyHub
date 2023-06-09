@@ -1,18 +1,10 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-}
 
-.menu {
-  background-color: #fff;
-  padding: 10px;
-}
 
 .menu-list {
   list-style: none;
@@ -28,9 +20,6 @@ body {
   border: none;
 }
 
-
-
-
 .menu-item {
   position: relative;
   display: inline-block;
@@ -41,17 +30,15 @@ body {
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 16px; /* 이미지 크기 조절 */
-  height: auto; /* 이미지 비율 유지 */
+  width: 16px; 
+  height: auto; 
 }
 
 .menu-item-text {
-  font-size: 14px; /* 텍스트 크기 조절 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  margin-top: 5px; /* 텍스트와 이미지 사이 간격 조절 */
+  font-size: 14px; 
+  text-align: center; 
+  margin-top: 5px; 
 }
-
-
 
 @media screen and (min-width: 768px) {
   .menu-list {
@@ -64,6 +51,6 @@ body {
   .menu-item {
     border: 1px solid #ccc;
   }
-}
+} */
 
 
