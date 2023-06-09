@@ -18,7 +18,7 @@
         </div>
         <!-- 프로필 -->
         <div class="user_info">
-          <h2 class="user-name fw-bold">{{ user.username }}</h2>
+          <h2 class="user-name fw-bold">{{ person.username }}</h2>
           <div class="social_icon d-flex justify-content-center">
             {% if user.email %}
             <a class='text-dark' href="javascript:void(0)" onclick="copyToClipboard('{{ user.email }}')">

@@ -22,20 +22,20 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 # 회원가입
 class CustomUserCreationForm(UserCreationForm):
-    name = forms.CharField(label='이름*', widget=forms.TextInput(attrs={'placeholder': '성함을 입력해 주세요'}))
+    name = forms.CharField(label='이름', required=False, widget=forms.TextInput(attrs={'placeholder': ' '}))
     email = forms.EmailField(
         label='이메일',
         required=False,
-        widget=forms.EmailInput(attrs={'placeholder': '이메일을 입력해 주세요'})
+        widget=forms.EmailInput(attrs={'placeholder': ' '})
         )
     password1 = forms.CharField(
         label='비밀번호*', 
-        widget=forms.PasswordInput(attrs={'placeholder' : '영문과 숫자를 조합해주세요'}),
+        widget=forms.PasswordInput(attrs={'placeholder' : ' '}),
         help_text=None,
         )
     password2 = forms.CharField(
         label='비밀번호 확인*', 
-        widget=forms.PasswordInput(attrs={'placeholder' : '비밀번호를 확인해주세요'}),
+        widget=forms.PasswordInput(attrs={'placeholder' : ' '}),
         )
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
@@ -44,7 +44,7 @@ class CustomUserCreationForm(UserCreationForm):
             'username': '아이디*',
         }
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder' : '아이디를 입력해주세요'}),
+            'username': forms.TextInput(attrs={'placeholder' : ' '}),
         }
         help_texts = {
             'username': None,
@@ -60,6 +60,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     password = None
     name = forms.CharField(
+        required=False,
         label='이름',
         widget=forms.TextInput(
             attrs={
@@ -70,6 +71,7 @@ class CustomUserChangeForm(UserChangeForm):
     )
     
     email = forms.EmailField(
+        required=False,
         label='이메일',
         widget=forms.TextInput(
             attrs={

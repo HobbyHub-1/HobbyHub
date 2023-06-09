@@ -1,8 +1,5 @@
 //팔로우 비동기
 const form = document.querySelector('#follow-form')
-const csrftoken = document
-  .querySelector('[name=csrfmiddlewaretoken]')
-  .value
 
 form
   .addEventListener('submit', function (event) {
