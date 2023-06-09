@@ -1,4 +1,12 @@
+@import url('https://webfontworld.github.io/score/SCoreDream.css');
 
+.logo {
+    width: 108px;
+    height: 18px;
+    background: url('https://cdn.discordapp.com/attachments/1100972477645078538/1116232008218185778/logo1-2.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
 
 @media (max-width: 991px) {
   .order-lg-1 {
