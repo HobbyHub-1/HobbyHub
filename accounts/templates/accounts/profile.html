@@ -18,117 +18,144 @@
         </div>
         <!-- 프로필 -->
         <div class="user_info">
-          <h2 class="user-name fw-bold">{{ person.username }}</h2>
-          <div class="social_icon">
+          <h2 class="user-name fw-bold">{{ user.username }}</h2>
+          <div class="social_icon d-flex justify-content-center">
             {% if user.email %}
-              <a class='text-dark' href="javascript:void(0)" onclick="copyToClipboard('{{ user.email }}')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                </svg>
-              </a>
-            {% endif %}
-          </div>
-          <div class="follow_box">
-            <div class="d-flex justify-content-center align-items-center">
-            <!-- 팔로워/팔로잉 수 -->              
-              <p class="user-follow-text m-0">팔로잉</p>
-              <button type="button" id="followings-count" class="btn" data-bs-toggle="modal" data-bs-target="#followingModal">{{ person.followings.all|length }}</button>
-              <p class="user-follow-text m-0">팔로워</p>
-              <button type="button" id="followers-count" class="btn" data-bs-toggle="modal" data-bs-target="#followerModal">{{ person.followers.count }}</button>
-            </div>
-          </div>
-
-          <div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="followingModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="followingModalLabel">팔로잉 목록</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  {% for following in person.followings.all %}
-                    <div class="d-flex justify-content-between mb-2">
-                      <a href="{% url 'accounts:profile' following %}" class="d-flex">
-                        {% if person.profile_image %}
-                            <img class="rounded-circle" src="{{ person.profile_image.url }}" width="50px" alt="Profile Image">
-                        {% else %}
-                            <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="50px" alt="Default Profile Image">
-                        {% endif %}
-                        {{ following }}
-                      </a>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal fade" id="followerModal" tabindex="-1" aria-labelledby="followerModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="followerModalLabel">팔로워 목록</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  {% for follower in person.followers.all %}
-                    <div class="d-flex justify-content-between mb-2">
-                      <a class='text-dark link-underline link-underline-opacity-0' href="{% url 'accounts:profile' follower %}" class="d-flex">
-                        {% if person.profile_image %}
-                            <img class="rounded-circle" src="{{ person.profile_image.url }}" width="50px" alt="Profile Image">
-                        {% else %}
-                            <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="50px" alt="Default Profile Image">
-                        {% endif %}
-                        {{ follower }}
-                      </a>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-        
-        <!-- 로그인+본인 프로필이어야 노출되는 부분 -->
-        <div class="Enable Login my-3">
-          {% if user == person %}
-            <div class="profile_update">
-              <a href="{% url 'accounts:update' %}">
-                <button class="btn btn-outline-dark" style="width: 144px;">프로필 업데이트</button>
-              </a>
-            </div>
-            <div class="change_password">
-              <a href="{% url 'accounts:password' %}">
-                <button class="btn btn-outline-dark mt-2" style="width: 144px;">비밀번호 변경</button>
-              </a>
-            </div>
-            <div class='small'>
-              <br>
-              <br>
-              <br>
-              <br>
-              <a class='ms-1 px-1' href="{% url 'accounts:delete' username=user.username %}">
-                <button type="submit" class="link-underline link-underline-opacity-0 btn btn-link text-danger m-1 p-0" onclick="return confirm('정말 탈퇴하시겠습니까?')">
-                  <p class="text-body-tertiary">              
-                    회원탈퇴
-                  </p>
-                </button>            
-              </a>
-            </div>
-          {% else %}          
-            <div class="follow-btn">
-              <form id="follow-form" data-user-id="{{ person.pk }}">
-                {% csrf_token %}
-                {% if request.user in person.followers.all %}
-                  <input type="submit" value="언팔로우" class="btn btn-dark fw-bold">
-                {% else %}
-                  <input type="submit" value="팔로우" class="btn btn-outline-dark fw-bold {% if not user.is_authenticated %}disabled{% endif %}">
-                {% endif %}
-              </form>
-            </div>
+            <a class='text-dark' href="javascript:void(0)" onclick="copyToClipboard('{{ user.email }}')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+              </svg>
+            </a>
+            <script>
+              function copyToClipboard(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+  
+                const notification = document.createElement('div');
+                notification.innerText = '이메일 주소가 복사되었습니다.';
+                notification.style.position = 'fixed';
+                notification.style.bottom = '10px';
+                notification.style.left = '50%';
+                notification.style.transform = 'translateX(-50%)';
+                notification.style.background = '#f2f2f2';
+                notification.style.padding = '10px';
+                notification.style.borderRadius = '5px';
+                notification.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+  
+                document.body.appendChild(notification);
+                setTimeout(function() {
+                  document.body.removeChild(notification);
+                }, 3000);
+              }
+            </script>
           {% endif %}
-           </div>
+        </div>
+        <div class="follow_box">
+          <div class="d-flex justify-content-center align-items-center">
+          <!-- 팔로워/팔로잉 수 -->              
+            <p class="user-follow-text m-0">팔로잉</p>
+            <button type="button" id="followings-count" class="btn" data-bs-toggle="modal" data-bs-target="#followingModal">{{ person.followings.all|length }}</button>
+            <p class="user-follow-text m-0">팔로워</p>
+            <button type="button" id="followers-count" class="btn" data-bs-toggle="modal" data-bs-target="#followerModal">{{ person.followers.count }}</button>
           </div>
+        </div>
+        <!-- 팔로잉 모달 -->
+        <div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="followingModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="followingModalLabel">팔로잉 목록</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {% for following in person.followings.all %}
+                  <div class="d-flex justify-content-between mb-2">
+                    <a href="{% url 'accounts:profile' following %}" class="d-flex">
+                      {% if person.profile_image %}
+                          <img class="rounded-circle" src="{{ person.profile_image.url }}" width="50px" alt="Profile Image">
+                      {% else %}
+                          <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="50px" alt="Default Profile Image">
+                      {% endif %}
+                      {{ following }}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 팔로워 모달 -->
+        <div class="modal fade" id="followerModal" tabindex="-1" aria-labelledby="followerModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="followerModalLabel">팔로워 목록</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {% for follower in person.followers.all %}
+                  <div class="d-flex justify-content-between mb-2">
+                    <a class='text-dark link-underline link-underline-opacity-0' href="{% url 'accounts:profile' follower %}" class="d-flex">
+                      {% if person.profile_image %}
+                          <img class="rounded-circle" src="{{ person.profile_image.url }}" width="50px" alt="Profile Image">
+                      {% else %}
+                          <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="50px" alt="Default Profile Image">
+                      {% endif %}
+                      {{ follower }}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      <!-- 로그인+본인 프로필이어야 노출되는 부분 -->
+      <div class="Enable Login my-3">
+        {% if user == person %}
+          <div class="profile_update">
+            <a href="{% url 'accounts:update' %}">
+              <button class="btn btn-outline-dark" style="width: 144px;">프로필 업데이트</button>
+            </a>
+          </div>
+          <div class="change_password">
+            <a href="{% url 'accounts:password' %}">
+              <button class="btn btn-outline-dark mt-2" style="width: 144px;">비밀번호 변경</button>
+            </a>
+          </div>
+          <div class='small'>
+            <br>
+            <br>
+            <br>
+            <br>
+            <a class='ms-1 px-1' href="{% url 'accounts:delete' username=user.username %}">
+              <button type="submit" class="link-underline link-underline-opacity-0 btn btn-link text-danger m-1 p-0" onclick="return confirm('정말 탈퇴하시겠습니까?')">
+                <p class="text-body-tertiary">              
+                  회원탈퇴
+                </p>
+              </button> 
+            </a>
+          </div>
+        {% else %}          
+          <div class="follow-btn">
+            <form id="follow-form" data-user-id="{{ person.pk }}">
+              {% csrf_token %}
+              {% if request.user in person.followers.all %}
+                <input type="submit" value="언팔로우" class="btn btn-dark fw-bold">
+              {% else %}
+                <input type="submit" value="팔로우" class="btn btn-outline-dark fw-bold {% if not user.is_authenticated %}disabled{% endif %}">
+              {% endif %}
+            </form>
+          </div>
+        {% endif %}
+        </div>
       </div>
-    </div>    
+    </div>
+  </div>    
   <!-- 오른쪽영역 -->
   <div class="right_field col-8 my-4">
     <div>
@@ -157,7 +184,7 @@
           </div>
         </div>        
       </div>
-    </div>
+    </div>  
     <br>
     <div class='my-4'>
       <h4 class='text-center mb-4'>{{ person.username }} 님이 좋아하는 그룹</h4>
