@@ -40,8 +40,7 @@ class GroupForm(forms.ModelForm):
         widget = forms.TextInput(
         attrs={'class': 'form-control',
                'placeholder': '제목을 입력하세요',}),)
-    tags = TagField(label='',
-        widget=TagField())
+    tags = TagField()
     day = forms.ChoiceField(label='', 
         choices=Group.day_choices, 
         widget=forms.Select(attrs={'class': 'form-select', }),)
