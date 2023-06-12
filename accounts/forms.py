@@ -22,41 +22,39 @@ class CustomAuthenticationForm(AuthenticationForm):
     )
 
 # 회원가입
-class CustomUserCreationForm(forms.Form):
-    username = UsernameField(
-        label='아이디*',
-        widget=forms.TextInput(attrs={'placeholder': ' '}),
-        help_text=None,
-        label_suffix=''
-    )
-    password1 = forms.CharField(
-        label='비밀번호*',
-        widget=forms.PasswordInput(attrs={'placeholder' : ' '}),
-        help_text=None,
-        label_suffix=''
-    )
-    password2 = forms.CharField(
-        label='비밀번호 확인*',
-        label_suffix='',
-        widget=forms.PasswordInput(attrs={'placeholder' : ' '}),
-    )
-    name = forms.CharField(
-        label='이름',
-        label_suffix='',
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': ' '})
-    )
+class CustomUserCreationForm(UserCreationForm):
+    name = forms.CharField(label='이름*', widget=forms.TextInput(attrs={'placeholder': ' '}))
     email = forms.EmailField(
         label='이메일',
         required=False,
-        widget=forms.EmailInput(attrs={'placeholder': ' '}),
-        label_suffix=''
-    )
-    
+        widget=forms.EmailInput(attrs={'placeholder': ' '})
+        )
+    password1 = forms.CharField(
+        label='비밀번호*', 
+        widget=forms.PasswordInput(attrs={'placeholder' : ' '}),
+        help_text=None,
+        )
+    password2 = forms.CharField(
+        label='비밀번호 확인*', 
+        widget=forms.PasswordInput(attrs={'placeholder' : ' '}),
+        )
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+        fields = ('username', 'password1', 'password2', 'name', 'email')
+        labels = {
+            'username': '아이디*',
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder' : ' '}),
+        }
+        help_texts = {
+            'username': None,
+        }
+
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if username and get_user_model().objects.filter(username=username).exists():
-            raise forms.ValidationError('중복된 아이디입니다.')
+            raise ValidationError('중복된 아이디입니다.')
         return username
 
 # 회원정보 변경
