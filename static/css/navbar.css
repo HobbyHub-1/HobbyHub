@@ -1,4 +1,5 @@
 @import url('https://webfontworld.github.io/score/SCoreDream.css');
+
 a {
   color: inherit;
   text-decoration: none;
@@ -40,6 +41,7 @@ header {
 .left-nav-links > div a {
   text-decoration: none;
   color: #333;
+  
 }
 
 .menu-links a {

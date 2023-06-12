@@ -1,47 +1,66 @@
-@import url("https://webfontworld.github.io/score/SCoreDream.css");
+ @import url("https://webfontworld.github.io/score/SCoreDream.css"); 
 
-   .menu {
-    display: flex;
-    justify-content: center;
-  }
-
-    .menu-list {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-    
+.menu-list {
+  display: flex;
+  justify-content: center;
 }
 
-  .menu-item {
+.menu-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-right: 90px;
+  justify-content: center;
 }
 
+.menu-item img {
+  display: block;
+  padding: 10px;
+  max-width: 70px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.menu-item .text {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-list {
+    flex-wrap: nowrap;
+    margin-right: 15px;
+  }
+
+  .menu-item {
+    flex: 0 0 auto;
+    margin-right: 12px;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+  }
+
   .menu-item img {
-    display: block;
-    padding: 10px;
-  
+    box-sizing: border-box;
+    height: 56px;
+    width: 56px;
+      /* margin: 0px 0px 6px;
+    min-width: 0px;
+    align-items: center;
+    border-radius: 50%;
+    height: 56px;
+    width: 56px; 
+    object-fit: contain;
+    background-color: white;
+    border: 1px solid rgb(102, 102, 102);
+    display: flex;
+    margin-top: 15px;
+    margin-right: 5px; */
   }
 
-  .menu-item .text {
-    display: none;
+  .menu-item span {
+    font-size: 12px;
   }
-
-
-  @media (max-width: 768px) {
-    .menu-item img {
-      display: none;
-    }
-
-    .menu-item .text {
-      display: block;
-    }
-    
-  } 
-
+}
 
 
