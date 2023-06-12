@@ -6,11 +6,14 @@ from .models import Post, PostImage, PostComment, Group, GroupImage, GroupCommen
 from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
 from django.db.models import Q
 from taggit.models import Tag
+from django.db.models import Count
 
 # Create your views here.
 # 1 index
 def index(request):
     posts = Post.objects.all()
+    like_posts = Post.objects.annotate(like_count=Count('like_users')).order_by('-like_count')[:4]
+    hit_posts = Post.objects.order_by('-hits')[:8]
 
     categories = posts.values_list('category', flat=True).distinct()
     category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
@@ -33,6 +36,8 @@ def index(request):
 
     context ={
         'posts': posts,
+        'like_posts': like_posts,
+        'hit_posts': hit_posts,
         'tags': tags,
         'category_list': category_list,
         'selected_category': selected_category,

@@ -41,7 +41,7 @@ tagButtons.forEach(button => {
 });
 // 게시물 필터링 함수
 function filterPostsByTag(tag) {
-  const posts = document.querySelectorAll('.card_single');
+  const posts = document.querySelectorAll('.theme_card_single');
   posts.forEach(post => {
     const postTags = post.dataset.tags.split(',');
     if (postTags.includes(tag) || tag === 'all') {
