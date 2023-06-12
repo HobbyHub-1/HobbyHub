@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock link %}
 
 {% block content %}
-<h1>Signup</h1>
+<div class='signup-page'>
+  <div class='signup-page__title'>
+    <h3>HOBBY HUB</h3>
+    <h4>Sign up</h4>
+  </div>
+  <form method="post" class='signup-page__form'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">등록</button>
+  </form>
+</div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">등록</button>
-</form>
 {% endblock %}

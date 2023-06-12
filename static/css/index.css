@@ -1,8 +1,9 @@
 @font-face {
-     font-family: 'S-CoreDream';
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-     font-weight: normal;
-     font-style: normal;
+  font-family: "S-CoreDream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 * {
   box-sizing: border-box;
@@ -10,10 +11,6 @@
 a {
   color: inherit;
   text-decoration: none;
-}
-.container {
-  margin: 0px 10px;
-  width: 100%;
 }
 
 /* 케로젤 */
@@ -26,17 +23,15 @@ a {
   border-bottom: 2px solid rgb(23, 23, 23);
 }
 
-
 /* card 목록 제목 */
 .card_single {
   position: relative;
   width: 292px;
   height: 400px;
-  padding:0%;
+  padding: 0%;
   background-color: rgb(255, 242, 225);
   border: 2px solid rgb(23, 23, 23);
 }
-
 
 /* card 이미지 */
 .card_img {
@@ -60,27 +55,26 @@ a {
 i {
   color: white;
   background: none;
-  font: 1.5em bold ;
+  font: 1.5em bold;
 }
-
 
 /* card 내용 정보 */
 .card_desc {
-    display: flex;
-    flex-flow: column nowrap;
-    font-family: 'S-CoreDream';
-    font-weight: 500;
-    padding: 16px 20px;
-} 
-.card_title {
-    color: rgb(23, 23, 23);
-    font-size: 1.125rem;
-    word-break: keep-all;
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: "S-CoreDream";
+  font-weight: 500;
+  padding: 16px 20px;
 }
-.card-content {
-    color: rgb(55, 55, 55);
-    font-size: 0.875rem;
-    font-weight: 500;
-    word-break: keep-all;
+.card_desc > .card_title {
+  color: rgb(23, 23, 23);
+  font-size: 1.125rem;
+  word-break: keep-all;
 }
-
+.card_desc > .card-content {
+  color: rgb(55, 55, 55);
+  font-size: 0.875rem;
+  font-weight: 500;
+  word-break: keep-all;
+  overflow: hidden;
+}

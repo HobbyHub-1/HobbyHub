@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -14,16 +15,18 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    {% block link %}{% endblock link %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+{% block link %}{% endblock link %}
     <title>{% block title %}{% endblock title %}</title>
     {% block style %}{% endblock style %}
   </head>
 
   <body>
     <nav>{% include "navbar.html" %}</nav>
+  
     
-    <main>{% block content %}{% endblock content %}</main>
-    
+    <main class="main">{% block content %}{% endblock content %}</main>
+      
 <footer>{% include "footer.html" %}</footer> 
 
 
