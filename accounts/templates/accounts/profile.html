@@ -72,18 +72,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                {% for following in person.followings.all %}
-                  <div class="d-flex justify-content-between mb-2">
-                    <a href="{% url 'accounts:profile' following %}" class="d-flex">
-                      {% if person.profile_image %}
-                          <img class="rounded-circle" src="{{ person.profile_image.url }}" width="50px" alt="Profile Image">
-                      {% else %}
-                          <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="50px" alt="Default Profile Image">
-                      {% endif %}
-                      {{ following }}
-                    </a>
-                  </div>
-                {% endfor %}
+                {% for follower in person.followings.all %}
+                <div class="d-flex justify-content-between mb-2">
+                  <a class='text-dark link-underline link-underline-opacity-0' href="{% url 'accounts:profile' follower %}" class="d-flex">
+                    {% if person.profile_image %}
+                        <img class="rounded-circle" src="{{ person.profile_image.url }}" width="50px" alt="Profile Image">
+                    {% else %}
+                        <img class="rounded-circle" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="50px" alt="Default Profile Image">
+                    {% endif %}
+                    {{ follower }}
+                  </a>
+                </div>
+              {% endfor %}
               </div>
             </div>
           </div>
