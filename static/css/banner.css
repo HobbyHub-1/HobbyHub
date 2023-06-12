@@ -1,0 +1,77 @@
+/* * {
+  box-sizing: border-box;
+}
+
+.css-h1habm {
+  border-bottom: 2px solid rgb(23, 23, 23);
+  background: rgb(255, 120, 44);
+
+  }
+
+@media (min-width: 769px) {
+  .css-1rzbugm {
+    max-width: 960px;
+    display: block;
+    height: 316px;
+    background: url(https://image.nicetomeetme.kr/32729/리추얼_데탑960.png) 50% 50% / cover no-repeat;
+    margin: 0 auto;
+  }
+
+  .css-1sss9s3 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .css-1rzbugm {
+    display: none;
+  }
+
+  .css-1sss9s3 {
+    display: block;
+    height: 288px;
+    background: url(https://image.nicetomeetme.kr/32928/리추얼_모바일.png) 50% 50% / contain no-repeat;
+    margin: 0 auto;
+    margin-top: 25px;
+  }
+}   */
+
+
+* {
+  box-sizing: border-box;
+}
+
+.banner {
+  border-bottom: 2px solid rgb(23, 23, 23);
+  background: rgb(255, 120, 44);
+  height: 200px;
+
+  }
+
+@media (min-width: 769px) {
+  .banner1 {
+    max-width: 960px;
+    display: block;
+    height: 316px;
+    background: url() 50% 50% / cover no-repeat;
+    margin: 0 auto;
+  }
+
+  .banner2 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner1{
+    display: none;
+  }
+
+  .banner2 {
+    display: block;
+    height: 288px;
+    background: url() 50% 50% / contain no-repeat;
+    margin: 0 auto;
+    margin-top: 25px;
+  }
+}  
