@@ -1,0 +1,230 @@
+[
+{
+    "model": "posts.group",
+    "pk": 1,
+    "fields": {
+        "user": 4,
+        "title": "김신혜 그룹 제목",
+        "subtitle": "",
+        "address": "서울 강남구 가로수길 5",
+        "content": "<p>김신혜 그룹 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/e9c16d9f-ae66-490b-be22-ec65963f2d6a.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 6,
+        "day": "monday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "diy",
+        "created_at": "2023-06-12T05:47:46.295Z",
+        "updated_at": "2023-06-12T06:26:35.061Z",
+        "like_users": [
+            5,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 2,
+    "fields": {
+        "user": 4,
+        "title": "김신혜 그룹 제목2입니다.",
+        "subtitle": "",
+        "address": "서울 성동구 가람길 46",
+        "content": "<p>김신혜 그룹 내용2 요리입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/578ff7ec-d5c1-440f-a90d-76ccaaa6709f.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 5,
+        "day": "thursday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "cook",
+        "created_at": "2023-06-12T05:48:41.846Z",
+        "updated_at": "2023-06-12T06:24:52.987Z",
+        "like_users": [
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 3,
+    "fields": {
+        "user": 5,
+        "title": "제목수정",
+        "subtitle": "",
+        "address": "서울 강남구 가로수길 9",
+        "content": "<p>내용수정</p>",
+        "hits": 3,
+        "day": "monday",
+        "region": "seoul",
+        "gender": "male",
+        "propensity": "inactive",
+        "category": "reading study",
+        "created_at": "2023-06-12T05:58:14.030Z",
+        "updated_at": "2023-06-12T06:25:00.985Z",
+        "like_users": [
+            6
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 4,
+    "fields": {
+        "user": 5,
+        "title": "농구 모임",
+        "subtitle": "",
+        "address": "서울 마포구 성미산로 51",
+        "content": "<p>농구 모임 내용</p><p><img src=\"/media/django-summernote/2023-06-12/4d1a0f88-5d97-4108-8fcb-3c91e06ef9f0.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 4,
+        "day": "tuesday",
+        "region": "seoul",
+        "gender": "male",
+        "propensity": "active",
+        "category": "sports",
+        "created_at": "2023-06-12T06:13:52.806Z",
+        "updated_at": "2023-06-12T06:25:06.457Z",
+        "like_users": [
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 5,
+    "fields": {
+        "user": 6,
+        "title": "최충현 모임입니다.",
+        "subtitle": "",
+        "address": "서울 성동구 광나루로 104",
+        "content": "<p>최충현 모임 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/bf1ab517-8b6b-40f9-ba4a-7a0b79e6eaac.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 3,
+        "day": "monday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "inactive",
+        "category": "cultural activities",
+        "created_at": "2023-06-12T06:16:37.636Z",
+        "updated_at": "2023-06-12T06:25:12.420Z",
+        "like_users": [
+            7
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 6,
+    "fields": {
+        "user": 6,
+        "title": "최충현 음악 모임입니다.",
+        "subtitle": "",
+        "address": "서울 강북구 노해로 3",
+        "content": "<p>최충현 음악 모임 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/d16df2fe-a771-4ebe-a2ca-21e26197870f.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 4,
+        "day": "saturday",
+        "region": "seoul",
+        "gender": "male",
+        "propensity": "inactive",
+        "category": "art music movie",
+        "created_at": "2023-06-12T06:17:31.215Z",
+        "updated_at": "2023-06-12T06:26:40.709Z",
+        "like_users": [
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 7,
+    "fields": {
+        "user": 7,
+        "title": "추연선 그룹 제목입니다",
+        "subtitle": "",
+        "address": "서울 강동구 상암로3길 81",
+        "content": "<p>그룹 내용</p><p><img src=\"/media/django-summernote/2023-06-12/3e9ab31c-d91c-4f1a-b8dd-45f5e067d7e4.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 3,
+        "day": "sunday",
+        "region": "seoul",
+        "gender": "female",
+        "propensity": "inactive",
+        "category": "diy",
+        "created_at": "2023-06-12T06:20:57.791Z",
+        "updated_at": "2023-06-12T06:26:46.860Z",
+        "like_users": [
+            5,
+            8
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 8,
+    "fields": {
+        "user": 7,
+        "title": "추연선 그룹 제목입니다2",
+        "subtitle": "",
+        "address": "서울 강서구 가로공원로 173",
+        "content": "<p>추연선 그룹 내용입니다2</p><p><br></p><p><img src=\"/media/django-summernote/2023-06-12/bea893ee-ef5a-46e2-ba7f-199893b655ba.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 4,
+        "day": "tuesday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "inactive",
+        "category": "reading study",
+        "created_at": "2023-06-12T06:22:17.810Z",
+        "updated_at": "2023-06-12T06:28:55.092Z",
+        "like_users": [
+            8
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 9,
+    "fields": {
+        "user": 8,
+        "title": "임지혜 그룹 제목입니다",
+        "subtitle": "",
+        "address": "서울 강북구 노해로 3",
+        "content": "<p>내용입니다</p><p><img src=\"/media/django-summernote/2023-06-12/ffa81e1c-e682-40dd-827c-be24b1d55c79.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "day": "wednesday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "inactive",
+        "category": "diy",
+        "created_at": "2023-06-12T06:27:52.375Z",
+        "updated_at": "2023-06-12T06:28:48.721Z",
+        "like_users": [
+            5
+        ]
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 10,
+    "fields": {
+        "user": 8,
+        "title": "미술모임",
+        "subtitle": "",
+        "address": "서울 노원구 공릉로 95",
+        "content": "<p>미술내용</p><p><img src=\"/media/django-summernote/2023-06-12/b0d5c61e-1a30-4815-b99b-30b4c3362eba.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "day": "thursday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "art music movie",
+        "created_at": "2023-06-12T06:28:33.034Z",
+        "updated_at": "2023-06-12T06:28:58.804Z",
+        "like_users": [
+            5
+        ]
+    }
+}
+]
