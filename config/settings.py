@@ -155,7 +155,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = '/staticfiles'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
 
@@ -182,25 +182,13 @@ SUMMERNOTE_THEME = 'bs4'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+#클릭재킹 방지설정 변경
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 SUMMERNOTE_CONFIG = {
     'attachment_filesize_limit': 1024 * 1024 * 10,
     # Summernote settings
     'summernote': {
-        'width': 720,
-        'height': 480,
-        'lang': 'ko-KR',
-        'toolbar': [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough','clear']],
-            ['fontname', ['fontname ']], 
-            ['fontsize', ['fontsize']], 
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', 'codeview']], 
-            ['help', ['help']],
-        ],
+    
     }
 }
