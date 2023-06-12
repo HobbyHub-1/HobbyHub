@@ -1,17 +1,33 @@
 from django import forms
 from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
-from taggit.forms import TagField
 from django_summernote.widgets import SummernoteWidget
 
 class PostForm(forms.ModelForm):
-    tags = TagField()
+    title = forms.CharField(label='',
+        widget = forms.TextInput(
+        attrs={'class': 'form-control',
+               'placeholder': '제목을 입력하세요',
+               'autofocus': True,}),)
+    subtitle = forms.CharField(label='',
+        widget = forms.TextInput(
+        attrs={'class': 'form-control',
+               'placeholder': '소제목을 입력하세요',}),)
+    category = forms.ChoiceField(label='', 
+        choices=Group.category_choices, 
+        widget=forms.Select(attrs={'class': 'form-select'}),)
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].label = ''
+        self.fields['tags'].widget.attrs.update({
+            'placeholder': '태그를 입력해주세요.',
+            'class': 'form-control',}),
     class Meta:
         model = Post
-        fields = ( 'title', 'content', 'category', 'tags',)
+        fields = ( 'title', 'category', 'content',  'tags',)
         widgets = {
             'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
         }
-
+        labels =None
 
 class PostImageFrom(forms.ModelForm):
     image = forms.ImageField(
@@ -39,13 +55,14 @@ class GroupForm(forms.ModelForm):
     title = forms.CharField(label='',
         widget = forms.TextInput(
         attrs={'class': 'form-control',
-               'placeholder': '제목을 입력하세요',}),)
-    tags = TagField()
-    day = forms.ChoiceField(label='', 
-        choices=Group.day_choices, 
-        widget=forms.Select(attrs={'class': 'form-select', }),)
-    region = forms.ChoiceField(label='', 
-        choices=Group.region_choices, 
+               'placeholder': '제목을 입력하세요',
+                'autofocus': True,}),)
+    subtitle = forms.CharField(label='',
+        widget = forms.TextInput(
+        attrs={'class': 'form-control',
+               'placeholder': '소제목을 입력하세요',}),)
+    category = forms.ChoiceField(label='카테고리', 
+        choices=Group.category_choices, 
         widget=forms.Select(attrs={'class': 'form-select'}),)
     gender = forms.ChoiceField(label='', 
         choices=Group.gender_choices, 
@@ -53,19 +70,30 @@ class GroupForm(forms.ModelForm):
     propensity = forms.ChoiceField(label='',
         choices=Group.propensity_choices, 
         widget=forms.Select(attrs={'class': 'form-select'}),)
-    category = forms.ChoiceField(label='', 
-        choices=Group.category_choices, 
+    day = forms.ChoiceField(label='요일', 
+        choices=Group.day_choices, 
+        widget=forms.Select(attrs={'class': 'form-select', }),)
+    region = forms.ChoiceField(label='', 
+        choices=Group.region_choices, 
         widget=forms.Select(attrs={'class': 'form-select'}),)
+    address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': '주소를 입력하세요',}))
+    
+    def __init__(self, *args, **kwargs):
+        super(GroupForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].label = ''
+        self.fields['tags'].widget.attrs.update({
+            'placeholder': '태그를 입력하세요. ',
+            'class': 'form-control',})
     class Meta:
         model = Group
-        fields = ('title', 'tags', 'category', 'day', 'region', 'gender', 'propensity', 'content','address',)
+        fields = ('title', 'category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
         widgets = {
-        'content': SummernoteWidget(),}
-        labels =None
+            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
+        }
 
 
 class GroupImageFrom(forms.ModelForm):
-    image = forms.ImageField(label='모임 소개 이미지 업로드', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
+    image = forms.ImageField(label='', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
 
     class Meta:
         model = GroupImage

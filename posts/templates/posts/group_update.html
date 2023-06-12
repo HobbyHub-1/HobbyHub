@@ -12,17 +12,81 @@
 {% endblock link %}
 
 {% block title %}Group update{% endblock title %}
+{% block style %}
+  <style>
+    .body-container {
+      margin-top: 50px;
+    }
 
+    form div {
+      margin-bottom: 10px;
+    }
+  </style>
+{% endblock style %}
 {% block content %}
-  <h1>Group update</h1>
-  <div class="container-md">
+<div class="container-md body-container">
     <form action="{% url 'posts:group_update' group.pk %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ group_form.as_p }}
-      {{ group_image_form.as_p }}
-      <input type="submit" value="update">
+      <!-- 세부 설정 아코디언 -->
+      <div class="accordion" id="accordions">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#choice1" aria-expanded="true" aria-controls="choice1">
+              세부 설정
+            </button>
+          </h2>
+          <!-- 기본 설정 -->
+          <div id="choice1" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h5>
+                <strong class="badge text-bg-secondary mb-2">기본 설정</strong>
+              </h5>
+              <div>
+                <span>카테고리</span>{{ group_form.category }}</div>
+              <div>
+                <span>성별</span>{{ group_form.gender }}</div>
+              <div>
+                <span>성향</span>{{ group_form.propensity }}</div>
+            </div>
+            <!-- 일정 및 장소 -->
+            <div class="accordion-body">
+              <h5>
+                <strong class="badge text-bg-secondary mb-2">일정 및 장소</strong>
+              </h5>
+              <div>
+                <span>요일</span>{{ group_form.day }}</div>
+              <div>
+                <span>지역</span>{{ group_form.region }}</div>
+              <div class="input-group mb-3">
+                {{ group_form.address }}
+                <button class="btn btn-outline-secondary btn-sm content-end " type="button" id="addressSearchBtn">주소 검색</button>
+              </div>
+              <div id="map" style="width:75%;height:250px;margin-top:10px;display:none"></div>
+            </div>
+            <!-- 대표이미지-->
+            <div class="accordion-body">
+              <h5>
+                <strong class="badge text-bg-secondary mb-2">대표 이미지</strong>
+              </h5>
+              <span>{{ group_image_form.as_p }}※ 대표이미지는 3장까지 업로드가 가능합니다</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 제목 입력 -->
+      <div>{{ group_form.title }}</div>
+      <div>{{ group_form.subtitle }}</div>
+      <!-- 세부 설명 입력 -->
+      <div>{{ group_form.content }}</div>
+      <!-- 태그 입력 -->
+      <div>{{ group_form.tags }}
+        <span class="ms-1">※ 콤마(,)로 태그를 분리합니다.</span>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <input class="btn btn-dark btn-sm me-md-2" type="submit" value="수정하기">
+        <a class="btn btn-dark btn-sm" href="{% url 'posts:group_list' %}">뒤로가기</a>
+      </div>
     </form>
-    <a href="{% url 'posts:group_list' %}">뒤로가기</a>
   </div>
 {% endblock content %}
 

@@ -15,10 +15,25 @@
   <div class="container-md">
     <form action="{% url 'posts:post_update' post.pk %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ post_form.as_p }}
+      <!-- 제목 -->
+      <div>{{ post_form.title }}</div>
+      <div>{{ post_form.subtitle }}</div>
+      <!-- 대표 이미지 -->
       {{ post_image_form.as_p }}
-      <input type="submit" value="update">
+      <!-- 세부 내용 작성 -->
+      <div>{{ post_form.content }}</div>
+      <!-- 카테고리 -->
+      <strong class="ms-2">카테고리</strong>
+      <div>{{ post_form.category }}</div>
+      <!-- 태그 -->
+      <strong class="ms-2">태그</strong>
+      <div>
+        {{ post_form.tags }}
+        <p class="ms-1 text-muted">※ 콤마(,)로 태그를 분리합니다.</p>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <input class="btn btn-dark btn-sm me-md-2" type="submit" value="수정하기">
+        <a class="btn btn-dark btn-sm" href="{% url 'posts:index' %}">뒤로가기</a>
     </form>
-    <a href="{% url 'posts:index' %}">Home</a>
   </div>
 {% endblock content %}
