@@ -46,6 +46,7 @@ header {
   margin-right: 20px;
 }
 
+/* 모바일 환경에서 사용될 스타일 */
 @media screen and (max-width: 768px) {
   body {
     padding-bottom: 50px;
@@ -79,39 +80,39 @@ header {
   }
 }
 
-     @media (max-width: 767px) {
-      #nav .container-lg nav {
-        margin-right: 0px;
-        margin-left: 0px;
-      }
-      .container-lg nav .left-nav-links {
-        display: flex;
-        justify-content: space-evenly;
-      }
-      nav .left-nav-links div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0px 0px;
-      }
-      /* .navbar .left-nav-links div img {
-        display: block;
-        margin-right: 5px;
-      } */
-      #nav .container-lg .menu-links {
-        display: none;
-      }
-    }
-    
-    @media (min-width: 768px) {
-      .navbar .left-nav-links div img{
-        display: none;
-      }
-      .navbar .left-nav-links div span
-      .navbar .left-nav-links div img {
-        display: inline;
-        margin-right: 5px;
-      }
-    }
+@media (max-width: 768px) {
+  #nav .container-lg nav {
+    margin-right: 0px;
+    margin-left: 0px;
+    height: 67px;
+  }
+  .container-lg nav .left-nav-links {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  nav .left-nav-links div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  /* .navbar .left-nav-links div img {
+    display: block;
+    margin-right: 5px;
+  } */
+  #nav .container-lg .menu-links {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar .left-nav-links div img{
+    display: none;
+  }
+  .navbar .left-nav-links div span
+  .navbar .left-nav-links div img {
+    display: inline;
+    margin-right: 5px;
+  }
+}
     
