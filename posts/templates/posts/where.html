@@ -43,7 +43,7 @@
   <div class="filter-container">
     <label for="day-filter">요일: </label>
     <select id="day-filter" class="filter-select" data-filter-type="day">
-      <option value="">All</option>
+      <option value="">-</option>
       <option value="monday">월요일</option>
       <option value="tuesday">화요일</option>
       <option value="wednesday">수요일</option>
@@ -56,7 +56,7 @@
   <div class="filter-container">
     <label for="region-filter">지역: </label>
     <select id="region-filter" class="filter-select" data-filter-type="region">
-      <option value="">All</option>
+      <option value="">-</option>
       <option value="seoul">서울</option>
       <option value="incheon">인천</option>
       <option value="gyeonggi-do">경기도</option>
@@ -72,7 +72,7 @@
   <div class="filter-container">
     <label for="gender-filter">성별: </label>
     <select id="gender-filter" class="filter-select" data-filter-type="gender">
-      <option value="">All</option>
+      <option value="">-</option>
       <option value="unisex">남녀 혼합</option>
       <option value="male">남자</option>
       <option value="female">여자</option>
@@ -81,7 +81,7 @@
   <div class="filter-container">
     <label for="propensity-filter">활동성: </label>
     <select id="propensity-filter" class="filter-select" data-filter-type="propensity">
-      <option value="">All</option>
+      <option value="">-</option>
       <option value="active">활동적 모임</option>
       <option value="inactive">비활동적 모임</option>
     </select>
@@ -89,7 +89,7 @@
   <div class="filter-container">
     <label for="category-filter">카테고리: </label>
     <select id="category-filter" class="filter-select" data-filter-type="category">
-      <option value="">All</option>
+      <option value="">-</option>
       <option value="sports">운동, 스포츠</option>
       <option value="diy">DIY 공예</option>
       <option value="reading study">독서, 공부</option>
@@ -99,6 +99,7 @@
       <option value="cultural activities">문화활동</option>
     </select>
   </div>
+  <a class="btn btn-dark" href="{% url 'posts:where' %}">초기화</a>
 </div>
 
 <div id="map" style="width:500px;height:500px; top: 20px;"></div>
@@ -235,7 +236,7 @@
             (filters.category === "all" || filters.category === data.category)
           );
 
-          if (shouldDisplay) {
+          if (shouldDisplay || (filters.day === "" && filters.region === "" && filters.gender === "" && filters.propensity === "" && filters.category === "")) {
             marker.setMap(map);
           } else {
             marker.setMap(null);
