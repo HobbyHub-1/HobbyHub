@@ -460,11 +460,21 @@ def search(request):
 
 # category 카테고리
 def category(request, subject):
+    category_choices = {
+        'sports': '운동 스포츠',
+        'diy': 'DIY 공예',
+        'reading study': '독서 공부',
+        'art music movie': '미술 음악 영화',
+        'healing': '힐링',
+        'cook': '요리',
+        'cultural activities': '문화 활동',
+    }
+    category_subject = category_choices.get(subject, '')
     posts = Post.objects.filter(category=subject)
     groups = Group.objects.filter(category=subject)
     context = {
         'posts': posts,
         'groups': groups,
-        'category_subject': subject,
+        'category_subject': category_subject,
     }
     return render(request, 'posts/category.html', context)

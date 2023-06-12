@@ -34,7 +34,11 @@
         <p class="">{{ post.content | safe }}</p>
         <p class="">{{ post.hits }}</p>
         <p class="">{{ post.category }}</p>
-        <p class="">{{ post.tags }}</p>
+        <p class="">
+          {% for tag in post.tags.all %}
+            태그: #{{ tag }}
+          {% endfor %}
+        </p>
         <div class="my-2">
           {% if request.user == post.user %}
             {% if user.is_superuser or user.is_staff %}

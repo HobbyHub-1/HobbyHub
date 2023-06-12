@@ -4,32 +4,99 @@
 {% block link %}
 {% endblock link %}
 
-{% block title %}Categoy{% endblock title %}
+{% block title %}Category{% endblock title %}
 
 {% block style %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/category.css' %}">
 {% endblock style %}
 
 {% block content %}
-<h1>카테고리: {{ category_subject }}</h1>
+<div class="category-container">
+  <div>
+    <div>
+      <h2 class="category-title">"{{ category_subject }}" 소모임</h2>
+      <h3 class="category-content">
+        {% if category_subject == '운동 스포츠' %}
+          운동 스포츠에 대한 내용입니다.
+        {% elif category_subject == 'DIY 공예' %}
+          DIY 공예에 대한 내용입니다.
+        {% elif category_subject == '독서 공부' %}
+          독서 공부에 대한 내용입니다.
+        {% elif category_subject == '미술 음악 영화' %}
+          미술 음악 영화에 대한 내용입니다.
+        {% elif category_subject == '힐링' %}
+          힐링에 대한 내용입니다.
+        {% elif category_subject == '요리' %}
+          요리에 대한 내용입니다.
+        {% elif category_subject == '문화 활동' %}
+          문화 활동에 대한 내용입니다.
+        {% endif %}
+      </h3>
+    </div>
+  </div>
+  <div class="scroll-container">
+    <ul class="scroll-content">
+      {% for group in groups %}
+      <li class="card_single">
+        <a href="{% url 'posts:group_detail' group.pk %}">
+          <div class="card_img">
+            <form class="like-form" data-post-id="{{ group.pk }}">
+              {% csrf_token %}
+              {% if request.user in group.like_users.all %}
+              <button class="likebtn" type="submit">
+                <i class="bi bi-heart-fill" id="post-heart-{{ post.pk }}"></i>
+              </button>
+              {% else %}
+              <button class="likebtn" type="submit">
+                <i class="bi bi-heart" id="post-heart-{{ post.pk }}"></i>
+              </button>
+              {% endif %}
+            </form>
+            {% for image in group.groupimage_set.all %}
+            {% if image.image.url %}
+            {% if forloop.first %}
+            <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+            {% endif %}
+            {% else %}
+            <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+            {% endif %}
+            {% endfor %}
+          </div>
+          <div class="card_desc">
+            <div class="card_title d-flex align-content-center my-1">
+              {{ group.title }}
+            </div>
+            <div class="info text-muted">
+              {{ group.user }}<br>
+              {{ category_subject }}<br>
+              {% for tag in group.tags.all %}
+              #{{ tag }}
+              {% endfor %}
+            </div>
+            <div class="card_content">
+              {{ group.content|truncatechars:'20' | safe }}
+            </div>
+            <div>
+              조회수: {{ group.hits }}
+            </div>
+          </div>
+        </a>
+      </li>
+      {% empty %}
+      <h2>해당 카테고리에 대한 모임이 없습니다.</h2>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 
-<h2>Posts</h2>
-<ul>
-  {% for post in posts %}
-    <li>{{ post.title }}</li>
-  {% empty %}
-    <li>No posts found.</li>
-  {% endfor %}
-</ul>
-
-<h2>Groups</h2>
-<ul>
-  {% for group in groups %}
-    <li>{{ group.title }}</li>
-  {% empty %}
-    <li>No groups found.</li>
-  {% endfor %}
-</ul>
 {% endblock content %}
 
 {% block script %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@0.9.15/dist/js/bootstrap-multiselect.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock script %}
