@@ -1,6 +1,10 @@
 from django import forms
 from .models import Post, PostImage, PostComment, Group, GroupImage, GroupComment
-from django_summernote.widgets import SummernoteWidget
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+
+class SomeForm(forms.Form):
+    content = forms.CharField(widget=SummernoteWidget()) 
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(label='',
@@ -23,15 +27,15 @@ class PostForm(forms.ModelForm):
             'class': 'form-control',}),
     class Meta:
         model = Post
-        fields = ( 'title', 'category', 'content',  'tags',)
+        fields = ( 'title','subtitle', 'category', 'content',  'tags',)
         widgets = {
-            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
+            'content': SummernoteWidget(),
         }
         labels =None
 
 class PostImageFrom(forms.ModelForm):
     image = forms.ImageField(
-        label='취미 소개 이미지 업로드', 
+        label='대표이미지는 3장까지 업로드', 
         widget=forms.ClearableFileInput(
             attrs={
                 'class': 'form-control', 
@@ -86,7 +90,7 @@ class GroupForm(forms.ModelForm):
             'class': 'form-control',})
     class Meta:
         model = Group
-        fields = ('title', 'category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
+        fields = ('title', 'subtitle','category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
         widgets = {
             'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
         }

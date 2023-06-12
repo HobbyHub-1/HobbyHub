@@ -15,7 +15,6 @@
     .body-container {
       margin-top: 50px;
     }
-
     form div {
       margin-bottom: 10px;
     }
@@ -29,9 +28,9 @@
       <div>{{ post_form.title }}</div>
       <div>{{ post_form.subtitle }}</div>
       <!-- 대표 이미지 -->
-      {{ post_image_form.as_p }}
+        {{ post_image_form.as_p }}
       <!-- 세부 내용 작성 -->
-      <div>{{ post_form.content }}</div>
+      <div id="summernote">{{ post_form.content }}</div>
       <!-- 카테고리 -->
       <strong class="ms-2">카테고리</strong>
       <div>{{ post_form.category }}</div>
@@ -48,4 +47,15 @@
     </form>
   </div>
 {% endblock content %}
-{% block script %}{% endblock script %}
+{% block script %}
+<script>
+  $(document).ready(function() {
+    $('#summernote').summernote({
+      placeholder: 'Hello Bootstrap 4',
+      tabsize: 2,
+      height: 100
+    });
+});
+  
+</script>
+{% endblock script %}
