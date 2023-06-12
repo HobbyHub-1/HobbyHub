@@ -10,8 +10,19 @@
   <script src="summernote-bs5.js"></script>
 {% endblock link %}
 {% block title %}post_update{% endblock title %}
+{% block style %}
+  <style>
+    .body-container {
+      margin-top: 50px;
+    }
+
+    form div {
+      margin-bottom: 10px;
+    }
+  </style>
+{% endblock style %}
 {% block content %}
-  <h1>post_update</h1>
+  <div class="container-md body-container">
   <div class="container-md">
     <form action="{% url 'posts:post_update' post.pk %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}

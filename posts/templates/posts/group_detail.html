@@ -1,81 +1,127 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block link %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/group_detail.css' %}">
 {% endblock link %}
-
 {% block title %}Group{% endblock title %}
-
-{% block style %}
-{% endblock style %}
-
 {% block content %}
-<h2>{{ group.title }}</h2>
-  <p>{{ group.content }}</p>
-  <!-- 추가적인 그룹 정보 표시 -->
-  <p>주소: {{ group.address }}</p>
-  <p>분류: {{ group.get_category_display }}</p>
-  <p>태그: {% for tag in group.tags.all %} #{{ tag }} {% endfor %}</p>
-  <p>조회수: {{ group.hits }}</p>
-  {% if request.user.is_authenticated %}
-    <form id="likes-form" data-group-id="{{ group.pk }}" class="index--heart flex-grow-1">
-      {% csrf_token %}
-        {% if request.user in group.like_users.all %}
-        <button class="btn btn-outline-dark btn-lg align-content-center w-10" type="submit">
-          <i class="bi bi-suit-heart-fill" id="group-heart"></i>
-        </button>
-        {% else %}
-        <button class="btn btn-outline-dark btn-lg align-content-center w-10" type="submit">
-          <i class="bi bi-suit-heart" id="group-heart"></i>
-        </button>
-        {% endif %}
-    </form>
-    {% else %}
-    <div class="index--heart flex-grow-1">
-      <button class="btn btn-outline-dark btn-lg align-content-center w-10" type="submit">
-        <i class="bi bi-suit-heart" id="group-heart"></i>
-      </button>
+<div class="container-md">
+
+  <!-- ## 화면 상단 케로젤+정보 ## -->
+  <div class="row mt-5">
+    <!-- 케로젤 이미지 -->
+    <div class="post_detail_carousel_container col-md-8 my-3" style="height: 600px">
+      <div class="carousel">
+        <div class="slides">
+            <!-- 그룹 이미지 표시 -->
+          {% for group_image in group_images %}
+            <img class="slide" src="{{ group_image.image.url }}" alt="Slide 1">
+          {% endfor %}
+        </div>
+        <button class="prev-button">&lt;</button>
+        <button class="next-button">&gt;</button>
+        <div class="dots">
+          <button class="dot"></button>
+          <button class="dot"></button>
+          <button class="dot"></button>
+        </div>
+      </div>
     </div>
-  {% endif %}
-  <!-- 그룹 이미지 표시 -->
-  {% for group_image in group_images %}
-    <img src="{{ group_image.image.url }}" alt="Group Image">
-  {% empty %}
-    <p>이미지가 없습니다.</p>
-  {% endfor %}
+    <!-- 주요 정보 -->
+    <div class="post_info col p-4">
+      <h1 class="title">{{ group.title }}</h1>
+      <p class="title">{{ group.subtitle }}</p>
+      <p class="hits">{{ group.hits }}</p>
+      <p class="category">{{ group.get_category_display }}</p>
+      <p class="address">{{ group.address }}</p>
+      <p class="tags">
+        {% for tag in group.tags.all %} 
+          #{{ tag }} 
+        {% endfor %}
+      </p>
+      <!-- 좋아요 -->
+      {% if request.user.is_authenticated %}
+        <form id="likes-form" data-group-id="{{ group.pk }}" class="index--heart flex-grow-1">
+          {% csrf_token %}
+          {% if request.user in group.like_users.all %}
+            <button class="likebtn align-content-center" type="submit">
+              <i class="bi bi-heart-fill" id="group-heart"></i>
+            </button>
+          {% else %}
+            <button class="likebtn align-content-center" type="submit">
+              <i class="bi bi-heart" id="group-heart"></i>
+            </button>
+          {% endif %}
+        </form>
+      {% else %}
+        <div class="index--heart flex-grow-1">
+          <button class="likebtn align-content-center" type="submit">
+            <i class="bi bi-suit-heart" id="group-heart"></i>
+          </button>
+        </div>
+      {% endif %}
+      <!-- 삭제 수정 목록보기 : 버튼 -->
+      <div class="my-2">
+        {% if request.user == group.user %}
+          <form class="d-inline" action="{% url 'posts:group_delete' group.pk %}" method="POST">
+            {% csrf_token %}
+            <input class="btn btn-dark btn-sm" type="submit" value="삭제">
+          </form>
+          <a class="btn btn-dark btn-sm" href="{% url 'posts:group_update' group.pk %}"><i class="bi bi-pencil-square"></i>수정하기</a>
+        {% endif %}
+        <!-- 완성후 목록보기 버튼은 삭제할 예정입니다. -->
+        <a class="btn btn-dark btn-sm" href="{% url 'posts:group_list' %}">목록보기</a>
+      </div>
 
-  {% if request.user == group.user %}
-    <form action="{% url 'posts:group_delete' group.pk %}" method="POST">
+      <!-- 대표 이미지 나열 -->
+      <div class="container-md post_detail_content">
+        {% for group_image in group_images %}
+          <img class="col" width="100" src="{{ group_image.image.url }}" alt="Group Image">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- 상세 내용 -->
+  <div>
+    <p class="content">{{ group.content | safe }}</p>
+  </div>
+
+  <!-- 댓글-->
+  <div class="comments row p-3">
+    <h4>댓글 목록</h4>
+    <hr>
+    {% for comment in group_comments %}
+      <div class="">
+        <p>{{ comment.content }}</p>
+        <span class="d-inline text-muted">
+          {{ comment.user }}|
+          {{ comment.created_string }}
+          {% if request.user == comment.user %}
+            <form class="d-inline" action="{% url 'posts:group_comments_delete' group.pk comment.pk %}" method="POST">
+              {% csrf_token %}
+              <input type="submit" class="btn btn-outline-secondary btn-sm ms-5" value="삭제">
+            </form>
+          {% endif %}
+        </span>
+      </div>
+    {% endfor %}
+    <form class="mt-4" action="{% url 'posts:group_comments_create' group.pk  %}" method="POST">
       {% csrf_token %}
-      <input type="submit" value="삭제">
+      {{ group_comment_form }}
+      <input type="submit">
     </form>
-    <a href="{% url 'posts:group_update' group.pk %}">수정하기</a>
-  {% endif %}
-  <a href="{% url 'posts:group_list' %}">뒤로가기</a>
+  </div>
 
-  <h4>댓글 목록</h4>
-  {% for comment in group_comments %}
-    <p><strong>{{ comment.user }}</strong>
-      <br>{{ comment.content }} {{ comment.created_string }}
-    </p>
-    {% if request.user == comment.user %}
-      <form action="{% url 'posts:group_comments_delete' group.pk comment.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="삭제">
-      </form>
-    {% endif %}
-  {% endfor %}
-  <hr>
+</div>
 
-  <form action="{% url 'posts:group_comments_create' group.pk  %}" method="POST">
-    {% csrf_token %}
-    {{ group_comment_form }}
-    <input type="submit" value="댓글 작성">
-  </form>
+
 {% endblock content %}
 
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/carousel.js' %}"></script>
 <script src="{% static 'js/group_detail.js' %}"></script>
 {% endblock script %}

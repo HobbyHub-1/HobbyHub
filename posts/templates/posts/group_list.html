@@ -7,14 +7,13 @@
   <link rel="stylesheet" href="{% static 'css/group_list.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/card.css' %}">
 {% endblock link %}
 
 {% block title %}Group list{% endblock title %}
 
 {% block content %}
   <div class="container mt-4">
-    <h2>Group List</h2>
 
     <!-- 필터 버튼 -->
     <div class="mb-2">
@@ -31,18 +30,18 @@
       {% for group in filtered_groups %}
         <a class="card_single mx-2" href="{% url 'posts:group_detail' group.pk %}" data-tags="{% for tag in group.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
           <div class="card_img">
-            <form class="like-form" data-post-id="{{ group.pk }}">
-              {% csrf_token %}
-              {% if request.user in group.like_users.all %}
-                <button class="likebtn" type="submit">
-                  <i class="bi bi-heart-fill" id="post-heart-{{ post.pk }}"></i>
-                </button>
-              {% else %}
-                <button class="likebtn" type="submit">
-                  <i class="bi bi-heart" id="post-heart-{{ post.pk }}"></i>
-                </button>
-              {% endif %}
-            </form>
+            <!-- 좋아요 버튼 -->
+            {% comment %} {% if request.user.is_authenticated %}
+              <form id="likes-form" data-group-id="{{ group.pk }}" class="index--heart flex-grow-1">
+                {% if request.user in group.like_users.all %}
+                  <i class="bi bi-heart-fill" ></i>
+                {% else %}
+                  <i class="bi bi-heart" id="group-heart"></i>
+                {% endif %}
+              </form>
+            {% else %}
+              <i class="bi bi-heart" id="group-heart"></i>
+            {% endif %} {% endcomment %}
             {% for image in group.groupimage_set.all %}
               {% if image.image.url %}
                 {% if forloop.first %}
@@ -66,7 +65,7 @@
               {{ group.hits }}
             </div>
             <div class="card_content">
-              {{ group.content|truncatechars:'20' | safe }}
+              {{ group.subtitle }}
             </div>
           </div>
         </a>
