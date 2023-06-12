@@ -1,0 +1,167 @@
+[
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "user": 4,
+        "title": "김신혜 제목입니다",
+        "subtitle": "",
+        "content": "<p>김신혜 내용입니다</p><p><img src=\"/media/django-summernote/2023-06-12/72bbd3cc-6fc8-445a-93a8-eb1793674a86.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 6,
+        "category": "DIY",
+        "created_at": "2023-06-12T05:46:19.313Z",
+        "updated_at": "2023-06-12T06:26:00.081Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "user": 4,
+        "title": "김신혜 취미 만들기",
+        "subtitle": "",
+        "content": "<p>김신혜 취미 만들기 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/de1f9d46-437c-483b-a1a7-6ee746910a81.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "category": "운동",
+        "created_at": "2023-06-12T05:49:22.346Z",
+        "updated_at": "2023-06-12T06:22:50.409Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 3,
+    "fields": {
+        "user": 5,
+        "title": "제목",
+        "subtitle": "",
+        "content": "<p>내용</p>",
+        "hits": 2,
+        "category": "diy",
+        "created_at": "2023-06-12T05:55:18.649Z",
+        "updated_at": "2023-06-12T06:22:57.067Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 4,
+    "fields": {
+        "user": 5,
+        "title": "권준혁 제목",
+        "subtitle": "",
+        "content": "<p>권준혁 내용</p><p><img src=\"/media/django-summernote/2023-06-12/6e00ea36-2641-44e8-ac83-564d38f4824d.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 3,
+        "category": "reading study",
+        "created_at": "2023-06-12T06:12:44.500Z",
+        "updated_at": "2023-06-12T06:23:03.184Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "title": "권준혁 제목 2",
+        "subtitle": "",
+        "content": "<p>취미는 농구</p><p><img src=\"/media/django-summernote/2023-06-12/044be51e-4ee2-4942-89d7-7504c4c3ff10.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "category": "sports",
+        "created_at": "2023-06-12T06:13:13.074Z",
+        "updated_at": "2023-06-12T06:23:08.814Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 6,
+    "fields": {
+        "user": 6,
+        "title": "최충현 제목입니다",
+        "subtitle": "",
+        "content": "<p>최충현 내용입니다<br></p>",
+        "hits": 3,
+        "category": "art music movie",
+        "created_at": "2023-06-12T06:15:17.671Z",
+        "updated_at": "2023-06-12T06:23:14.062Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 7,
+    "fields": {
+        "user": 6,
+        "title": "최충현 제목입니다2",
+        "subtitle": "",
+        "content": "<p>최충현 내용입니다2</p><p><img src=\"/media/django-summernote/2023-06-12/5842cdaa-8a0d-4fce-b9ef-fb0959966baa.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "category": "healing",
+        "created_at": "2023-06-12T06:15:51.171Z",
+        "updated_at": "2023-06-12T06:23:20.290Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 8,
+    "fields": {
+        "user": 7,
+        "title": "추연선 제목입니다",
+        "subtitle": "",
+        "content": "<p>추연선 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/f70bcb2c-4885-4ed0-b955-f9f649af1444.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 3,
+        "category": "reading study",
+        "created_at": "2023-06-12T06:19:16.907Z",
+        "updated_at": "2023-06-12T06:26:06.230Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 9,
+    "fields": {
+        "user": 7,
+        "title": "추연선 제목입니다2",
+        "subtitle": "",
+        "content": "<p>추연선 내용입니다2</p><p><img src=\"/media/django-summernote/2023-06-12/4d917322-1ea1-40cb-8c7f-3714c04d13c6.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 3,
+        "category": "diy",
+        "created_at": "2023-06-12T06:20:09.565Z",
+        "updated_at": "2023-06-12T06:26:11.832Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 10,
+    "fields": {
+        "user": 8,
+        "title": "임지혜 제목입니다",
+        "subtitle": "",
+        "content": "<p>임지혜 내용입니다</p><p><img src=\"/media/django-summernote/2023-06-12/ab0b6730-f1bb-4b32-9300-205f93ccd5cd.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "category": "reading study",
+        "created_at": "2023-06-12T06:24:10.616Z",
+        "updated_at": "2023-06-12T06:26:17.815Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 11,
+    "fields": {
+        "user": 8,
+        "title": "임지혜 제목입니다2",
+        "subtitle": "",
+        "content": "<p>임지혜 내용입니다2</p><p><img src=\"/media/django-summernote/2023-06-12/01985a50-99d4-40a3-b5ca-94b61c255689.jpg\" style=\"width: 400px;\"><br></p>",
+        "hits": 2,
+        "category": "healing",
+        "created_at": "2023-06-12T06:24:38.462Z",
+        "updated_at": "2023-06-12T06:26:24.754Z",
+        "like_users": []
+    }
+}
+]
