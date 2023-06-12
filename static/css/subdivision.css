@@ -1,6 +1,6 @@
 @import url("https://webfontworld.github.io/score/SCoreDream.css");
 
-   .menu {
+ .menu {
     display: flex;
     justify-content: center;
   }
@@ -29,19 +29,18 @@
 
   .menu-item .text {
     display: none;
-  }
+  } 
 
 
   @media (max-width: 768px) {
     .menu-item img {
       display: none;
+        
     }
 
     .menu-item .text {
       display: block;
+      
     }
-    
-  } 
 
-
-
+  }   
