@@ -33,7 +33,8 @@ def index(request):
     if selected_slugs:
         selected_tags = selected_slugs.split(',')
         posts = posts.filter(tags__slug__in=selected_tags).distinct()
-
+    else:
+        posts = posts[4:]
     context ={
         'posts': posts,
         'like_posts': like_posts,

@@ -82,10 +82,11 @@
     {% endfor %}
   </div>
     <hr>
-    <h2 class="theme-posts d-block m-4"> 테마에 맞춰 4개 card 노출됩니다. </h2>
+    <h2 class="theme-posts d-block m-4">테마별 취미 모음</h2>
     <!-- card 목록 -->
     <div class="d-flex flex-wrap m-4 px-1">
-      {% for post in posts %}
+      {% comment %} 최신순으로 출력 {% endcomment %}
+      {% for post in posts|slice:"4:" %} 
         <a class="theme_card_single mx-2" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
           <div class="card_img">
             <form class="like-form" data-post-id="{{ post.pk }}">
@@ -139,7 +140,8 @@
 
 <!-- 태그 필터링 버튼 -->
 <div class="p-2">
-  <h6 class="text-muted mb-3 ms-2">[전체] [운동스포츠] [요리] [DIY공예]</h6>
+  <h6 class="text-muted mb-3 ms-2"></h6>
+  <button class="btn btn-outline-secondary btn-sm hobby-tags-btn" data-slug="all">전체</button>
   {% for tag in tags %}
     {% if request.GET.tags == tag.slug %}
       <button class="btn btn-outline-secondary btn-sm hobby-tags-btn hobby-tags-btn-active" data-slug="{{ tag.slug }}">{{ tag }}</button>
@@ -150,11 +152,11 @@
 </div>
 <hr>
 
-<h2 class="hit-posts d-block m-4">전체 목록 8개 필터링 되어 노출 됩니다. 조회수 순서</h2>
+<h2 class="hit-posts d-block m-4">전체 취미목록</h2>
 <!-- card 목록 -->
 <div class="d-flex flex-wrap m-4 px-1">
   {% for post in hit_posts %}
-    <a class="card_single mx-2" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+    <a class="card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
       <div class="card_img">
         <form class="like-form" data-post-id="{{ post.pk }}">
           {% csrf_token %}
