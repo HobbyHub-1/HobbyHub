@@ -472,6 +472,12 @@ def category(request, subject):
     category_subject = category_choices.get(subject, '')
     posts = Post.objects.filter(category=subject)
     groups = Group.objects.filter(category=subject)
+
+    for group in groups:
+        group.like_count = group.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+
+    groups = sorted(groups, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+
     context = {
         'posts': posts,
         'groups': groups,
