@@ -1,0 +1,62 @@
+.signup-page {
+  width : 350px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signup-page__title{
+  margin-top:30px;
+  width : 350px;
+}
+
+.signup-page__title h4 {
+  margin-bottom: 10px;
+}
+
+.signup-page__title h3 {
+  font-weight : 700;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.signup-page h3{
+  margin-top : 20px;
+  margin-bottom : 5px;
+  text-decoration : underline;
+  width : 350px;
+}
+
+.signup-page h4{
+  margin-bottom : 50px;
+  width : 350px;
+}
+
+.signup-page__form label {
+  display: block;
+  font-weight : 700;
+  width: 300px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.signup-page__form input {
+  display: block;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid rgb(95, 95, 95);
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.signup-page__form button{
+  width: 80px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  background-color: rgb(51, 51, 51);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

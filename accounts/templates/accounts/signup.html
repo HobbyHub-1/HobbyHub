@@ -1,60 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block style %}
-<style>
-  .signup-page {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.signup-page__logo h1 {
-    font-family: 'Passion One', cursive;
-    margin-bottom: 10px;
-}
-.signup-page__logo h4 {
-    margin-top: 10px;
-    margin-bottom: 40px;
-}
-
-.signup-page__form {
-  margin-top: 20px;
-}
-.signup-page__form label {
-  display: block;
-  text-align: left;
-  margin-bottom: 5px;
-}
-
-.signup-page__form input {
-  display: block;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid lightgray;
-  margin-bottom: 20px;
-  padding: 10px;
-}
-
-.signup-page__form button{
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  background-color: rgb(51, 51, 51);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-</style>
-{% endblock style %}
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock link %}
 
 {% block content %}
 <div class='signup-page'>
-  <div class='signup-page__logo'>
-    <h3 class='border-bottom border-dark mx-auto m-4 mb-1' style='width : 200px;'>HOBBY HUB</h3>
-    <h4 class='mb-5'>Sign up</h4>
+  <div class='signup-page__title'>
+    <h3>HOBBY HUB</h3>
+    <h4>Sign up</h4>
   </div>
   <form method="post" class='signup-page__form'>
       {% csrf_token %}
