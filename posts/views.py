@@ -6,11 +6,14 @@ from .models import Post, PostImage, PostComment, Group, GroupImage, GroupCommen
 from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
 from django.db.models import Q
 from taggit.models import Tag
+from django.db.models import Count
 
 # Create your views here.
 # 1 index
 def index(request):
     posts = Post.objects.all()
+    like_posts = Post.objects.annotate(like_count=Count('like_users')).order_by('-like_count')[:4]
+    hit_posts = Post.objects.order_by('-hits')[:8]
 
     categories = posts.values_list('category', flat=True).distinct()
     category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
@@ -33,6 +36,8 @@ def index(request):
 
     context ={
         'posts': posts,
+        'like_posts': like_posts,
+        'hit_posts': hit_posts,
         'tags': tags,
         'category_list': category_list,
         'selected_category': selected_category,
@@ -460,11 +465,27 @@ def search(request):
 
 # category 카테고리
 def category(request, subject):
+    category_choices = {
+        'sports': '운동 스포츠',
+        'diy': 'DIY 공예',
+        'reading study': '독서 공부',
+        'art music movie': '미술 음악 영화',
+        'healing': '힐링',
+        'cook': '요리',
+        'cultural activities': '문화 활동',
+    }
+    category_subject = category_choices.get(subject, '')
     posts = Post.objects.filter(category=subject)
     groups = Group.objects.filter(category=subject)
+
+    for group in groups:
+        group.like_count = group.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+
+    groups = sorted(groups, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+
     context = {
         'posts': posts,
         'groups': groups,
-        'category_subject': subject,
+        'category_subject': category_subject,
     }
     return render(request, 'posts/category.html', context)

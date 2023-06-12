@@ -7,18 +7,102 @@
 {% block title %}Group create{% endblock title %}
 
 {% block style %}
+<style>
+  #filter-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .filter-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+
+  .filter-select {
+    margin-left: 10px;
+  }
+
+  #filter-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+</style>
 {% endblock style %}
 
 {% block content %}
-  <a href="{% url 'posts:index' %}">[MAIN PAGE]</a>
-  <div id="map" style="width:500px;height:500px;"></div>
-  
-  {% comment %}
-  {% for data in group_data %}
-    <p>{{ data.pk }}, {{ data.title }}, {{ data.content }}, {{ data.address }}, {{ data.gender }}, {{ data.category }}, {{ data.region }}</p>
-  {% endfor %}
-  {% endcomment %}
+<div id="filter-container">
+  <div class="filter-container">
+    <label for="day-filter">요일: </label>
+    <select id="day-filter" class="filter-select" data-filter-type="day">
+      <option value="">-</option>
+      <option value="monday">월요일</option>
+      <option value="tuesday">화요일</option>
+      <option value="wednesday">수요일</option>
+      <option value="thursday">목요일</option>
+      <option value="friday">금요일</option>
+      <option value="saturday">토요일</option>
+      <option value="sunday">일요일</option>
+    </select>
+  </div>
+  <div class="filter-container">
+    <label for="region-filter">지역: </label>
+    <select id="region-filter" class="filter-select" data-filter-type="region">
+      <option value="">-</option>
+      <option value="seoul">서울</option>
+      <option value="incheon">인천</option>
+      <option value="gyeonggi-do">경기도</option>
+      <option value="gangwon-do">강원도</option>
+      <option value="gyeong-nam">경상남도</option>
+      <option value="gyeong-buk">경상북도</option>
+      <option value="jeon-nam">전라남도</option>
+      <option value="jeon-buk">전라북도</option>
+      <option value="chung-nam">충청남도</option>
+      <option value="chung-buk">충청북도</option>
+    </select>
+  </div>
+  <div class="filter-container">
+    <label for="gender-filter">성별: </label>
+    <select id="gender-filter" class="filter-select" data-filter-type="gender">
+      <option value="">-</option>
+      <option value="unisex">남녀 혼합</option>
+      <option value="male">남자</option>
+      <option value="female">여자</option>
+    </select>
+  </div>
+  <div class="filter-container">
+    <label for="propensity-filter">활동성: </label>
+    <select id="propensity-filter" class="filter-select" data-filter-type="propensity">
+      <option value="">-</option>
+      <option value="active">활동적 모임</option>
+      <option value="inactive">비활동적 모임</option>
+    </select>
+  </div>
+  <div class="filter-container">
+    <label for="category-filter">카테고리: </label>
+    <select id="category-filter" class="filter-select" data-filter-type="category">
+      <option value="">-</option>
+      <option value="sports">운동, 스포츠</option>
+      <option value="diy">DIY 공예</option>
+      <option value="reading study">독서, 공부</option>
+      <option value="art music movie">미술, 음악, 영화감상</option>
+      <option value="healing">힐링</option>
+      <option value="cook">요리</option>
+      <option value="cultural activities">문화활동</option>
+    </select>
+  </div>
+  <a class="btn btn-dark" href="{% url 'posts:where' %}">초기화</a>
+</div>
 
+<div id="map" style="width:500px;height:500px; top: 20px;"></div>
 {% endblock content %}
 
 {% block script %}
@@ -26,6 +110,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/async/3.2.0/async.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    var filters = {
+      day: "all",         // 요일
+      region: "all",    // 지역
+      gender: "all",      // 성별
+      propensity: "all",    // 활동성
+      category: "all"     // 카테고리
+    };
+
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showMap, showError, { enableHighAccuracy: true });
@@ -74,7 +166,12 @@
           address: "{{ data.address }}",
           description: "{{ data.content }}",
           pk: "{{ data.pk }}",
-          latlng: null
+          latlng: null,
+          day: "{{ data.day }}",
+          region: "{{ data.region }}",
+          gender: "{{ data.gender }}",
+          propensity: "{{ data.propensity }}",
+          category: "{{ data.category }}"
         },
         {% endfor %}
       ];
@@ -119,20 +216,57 @@
             // 인포윈도우 열기
             infowindow.open(map, marker);
           });
+
+          data.marker = marker;
+        });
+
+        applyFilters();
+      });
+
+      function applyFilters() {
+        gatheringData.forEach(function(data) {
+          var marker = data.marker;
+
+          // 필터링 조건에 따라 마커를 표시하거나 숨깁니다.
+          var shouldDisplay = (
+            (filters.day === "all" || filters.day === data.day) &&
+            (filters.region === "all" || filters.region === data.region) &&
+            (filters.gender === "all" || filters.gender === data.gender) &&
+            (filters.propensity === "all" || filters.propensity === data.propensity) &&
+            (filters.category === "all" || filters.category === data.category)
+          );
+
+          if (shouldDisplay || (filters.day === "" && filters.region === "" && filters.gender === "" && filters.propensity === "" && filters.category === "")) {
+            marker.setMap(map);
+          } else {
+            marker.setMap(null);
+          }
+        });
+      }
+
+      // 필터링 옵션 변경 시 이벤트 핸들러 등록
+      var filterSelects = document.querySelectorAll(".filter-select");
+      filterSelects.forEach(function(select) {
+        select.addEventListener("change", function() {
+          var filterType = select.dataset.filterType;
+          var filterValue = select.value;
+
+          filters[filterType] = filterValue;
+          applyFilters();
         });
       });
-      }
+    }
 
     function showError(error) {
       switch(error.code) {
         case error.PERMISSION_DENIED:
-          alert("위치 정보 제공이 거부되었습니다.");
+          alert("사용자가 위치 정보 사용을 거부했습니다.");
           break;
         case error.POSITION_UNAVAILABLE:
           alert("위치 정보를 사용할 수 없습니다.");
           break;
         case error.TIMEOUT:
-          alert("위치 정보를 가져오는 데 시간이 초과되었습니다.");
+          alert("위치 정보를 가져오는 시간이 초과되었습니다.");
           break;
         case error.UNKNOWN_ERROR:
           alert("알 수 없는 오류가 발생했습니다.");
@@ -140,7 +274,6 @@
       }
     }
 
-    // 페이지 로드 시 바로 모달 창 표시 및 위치 정보 요청
     getLocation();
   });
 </script>

@@ -1,80 +1,167 @@
 {% extends 'base.html' %}
-{% load static %}
-
 {% block link %}
+  <!-- include libraries(jQuery, bootstrap) -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+  <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- include summernote css/js-->
+  <link href="summernote-bs5.css" rel="stylesheet">
+  <script src="summernote-bs5.js"></script>
 {% endblock link %}
-
 {% block title %}Group create{% endblock title %}
-
 {% block style %}
+  <style>
+    .body-container {
+      margin-top: 50px;
+    }
+    form div {
+      margin-bottom: 10px;
+    }
+  </style>
 {% endblock style %}
-
 {% block content %}
-<h1>group_create</h1>
-  <form action="{% url 'posts:group_create' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ group_form.as_p }}
-    <button type="button" id="addressSearchBtn">주소 검색</button>
-
-    <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cb746573691fe924faae69321b18243c&libraries=services"></script>
-    <script>
-      var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-          mapOption = {
-              center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-              level: 5 // 지도의 확대 레벨
-          };
-
-      //지도를 미리 생성
-      var map = new daum.maps.Map(mapContainer, mapOption);
-      //주소-좌표 변환 객체를 생성
-      var geocoder = new daum.maps.services.Geocoder();
-      //마커를 미리 생성
-      var marker = new daum.maps.Marker({
-          position: new daum.maps.LatLng(37.537187, 127.005476),
-          map: map
-      });
-
-
-      function sample5_execDaumPostcode() {
-          new daum.Postcode({
-              oncomplete: function(data) {
-                  var addr = data.address; // 최종 주소 변수
-
-                  // 주소 정보를 해당 필드에 넣는다.
-                  document.querySelector("input[name='address']").value = addr;                  // 주소로 상세 정보를 검색
-                  geocoder.addressSearch(data.address, function(results, status) {
-                      // 정상적으로 검색이 완료됐으면
-                      if (status === daum.maps.services.Status.OK) {
-
-                          var result = results[0]; //첫번째 결과의 값을 활용
-
-                          // 해당 주소에 대한 좌표를 받아서
-                          var coords = new daum.maps.LatLng(result.y, result.x);
-                          // 지도를 보여준다.
-                          mapContainer.style.display = "block";
-                          map.relayout();
-                          // 지도 중심을 변경한다.
-                          map.setCenter(coords);
-                          // 마커를 결과값으로 받은 위치로 옮긴다.
-                          marker.setPosition(coords)
-                      }
-                  });
-              }
-          }).open();
-      }
-
-      var addressSearchBtn = document.getElementById('addressSearchBtn');
-        addressSearchBtn.addEventListener('click', sample5_execDaumPostcode);
-    </script>
-    <p></p>
-    {{ group_image_form.as_p }}
-    <input type="submit" value="create">
-  </form>
-  <a href="{% url 'posts:group_list' %}">뒤로가기</a>
+  <div class="container-md body-container">
+    <form action="{% url 'posts:group_create' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- 세부 설정 아코디언 -->
+      <div class="accordion" id="accordions">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#choice1" aria-expanded="true" aria-controls="choice1">
+              세부 설정
+            </button>
+          </h2>
+          <!-- 기본 설정 -->
+          <div id="choice1" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h5><strong class="badge text-bg-secondary mb-2">기본 설정</strong></h5>
+              <div><span>카테고리</span>{{ group_form.category }}</div>
+              <div><span>성별</span>{{ group_form.gender }}</div>
+              <div><span>성향</span>{{ group_form.propensity }}</div>
+            </div>
+            <!-- 일정 및 장소 -->
+            <div class="accordion-body">
+              <h5><strong class="badge text-bg-secondary mb-2">일정 및 장소</strong></h5>
+              <div><span>요일</span>{{ group_form.day }}</div>
+              <div><span>지역</span>{{ group_form.region }}</div>
+              <div class="input-group mb-3">
+                {{ group_form.address }}
+                <button class="btn btn-outline-secondary btn-sm content-end " type="button" id="addressSearchBtn">주소 검색</button>
+              </div>
+              <div id="map" style="width:75%;height:250px;margin-top:10px;display:none"></div>
+            </div>
+            <!-- 대표이미지-->
+            <div class="accordion-body">
+              <h5><strong class="badge text-bg-secondary mb-2">대표 이미지</strong></h5>
+              <span>{{ group_image_form.as_p }}※ 대표이미지는 3장까지 업로드가 가능합니다</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 제목 입력 -->
+      <div>{{ group_form.title }}</div>
+      <div>{{ group_form.subtitle }}</div>
+      <!-- 세부 설명 입력 -->
+      <div>{{ group_form.content }}</div>
+      <!-- 태그 입력 -->
+      <div>{{ group_form.tags }}<span class="ms-1">※ 콤마(,)로 태그를 분리합니다.</span>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <input class="btn btn-dark btn-sm me-md-2" type="submit" value="그룹 만들기">
+        <a class="btn btn-dark btn-sm" href="{% url 'posts:group_list' %}">뒤로가기</a>
+      </div>
+    </form>
+  </div>
 {% endblock content %}
 
 {% block script %}
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cb746573691fe924faae69321b18243c&libraries=services"></script>
+  <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+      mapOption = {
+        center: new daum
+          .maps
+          .LatLng(37.537187, 127.005476), // 지도의 중심좌표
+        level: 5 // 지도의 확대 레벨
+      };
+
+    //지도를 미리 생성
+    var map = new daum
+      .maps
+      .Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum
+      .maps
+      .services
+      .Geocoder();
+    //마커를 미리 생성
+    var marker = new daum
+      .maps
+      .Marker({
+        position: new daum
+          .maps
+          .LatLng(37.537187, 127.005476),
+        map: map
+      });
+
+    function sample5_execDaumPostcode() {
+      new daum
+        .Postcode({
+          oncomplete: function (data) {
+            var addr = data.address; // 최종 주소 변수
+
+            // 주소 정보를 해당 필드에 넣는다.
+            document
+              .querySelector("input[name='address']")
+              .value = addr; // 주소로 상세 정보를 검색
+            geocoder.addressSearch(data.address, function (results, status) {
+              // 정상적으로 검색이 완료됐으면
+              if (status === daum.maps.services.Status.OK) {
+
+                var result = results[0]; //첫번째 결과의 값을 활용
+
+                // 해당 주소에 대한 좌표를 받아서
+                var coords = new daum
+                  .maps
+                  .LatLng(result.y, result.x);
+                // 지도를 보여준다.
+                mapContainer.style.display = "block";
+                map.relayout();
+                // 지도 중심을 변경한다.
+                map.setCenter(coords);
+                // 마커를 결과값으로 받은 위치로 옮긴다.
+                marker.setPosition(coords)
+              }
+            });
+          }
+        })
+        .open();
+    }
+
+    var addressSearchBtn = document.getElementById('addressSearchBtn');
+    addressSearchBtn.addEventListener('click', sample5_execDaumPostcode);
+  </script>
+  <script src="lang/summernote-ko-KR.js"></script>
+  <script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
+  <script>
+      $(document).ready(function() {
+      //여기 아래 부분
+      $('#summernote').summernote({
+          height: 300,                 // 에디터 높이
+          minHeight: null,             // 최소 높이
+          maxHeight: null,             // 최대 높이
+        });
+      });
+      focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+    </script>
+    <script> 
+      $('#summernote').summernote({
+        placeholder: '여기에 내용 입력하세요~',
+        tabsize: 2,
+        height: 100
+      });
+    $('.dropdown-toggle').dropdown()
+  </script> 
 {% endblock script %}

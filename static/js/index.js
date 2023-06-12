@@ -1,6 +1,6 @@
 // card 게시물 상단 좋아요 비동기(하트 아이콘)
-let likeforms = document.querySelectorAll( `.like-form` );
-const csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
+var likeforms = document.querySelectorAll( `.like-form` );
+var csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
 
 likeforms.forEach((form) => {
   form.addEventListener('submit', function (event) {
@@ -15,7 +15,7 @@ likeforms.forEach((form) => {
     })
     .then((response) => {
       const isLiked = response.data.is_liked;
-      const heartIcon = form.querySelector( `#post-heart`);
+      const heartIcon = form.querySelector( `#post-heart-${postId}`);
         if (isLiked === true) {
             heartIcon.classList.remove('bi-heart');
             heartIcon.classList.add('bi-heart-fill');
@@ -32,7 +32,7 @@ likeforms.forEach((form) => {
 
 
 // 태그 버튼 클릭 이벤트 처리
-const tagButtons = document.querySelectorAll('.hobby-tags-btn');
+var tagButtons = document.querySelectorAll('.hobby-tags-btn');
 tagButtons.forEach(button => {
   button.addEventListener('click', () => {
     const selectedTag = button.dataset.slug;
@@ -41,7 +41,7 @@ tagButtons.forEach(button => {
 });
 // 게시물 필터링 함수
 function filterPostsByTag(tag) {
-  const posts = document.querySelectorAll('.card_single');
+  const posts = document.querySelectorAll('.theme_card_single');
   posts.forEach(post => {
     const postTags = post.dataset.tags.split(',');
     if (postTags.includes(tag) || tag === 'all') {

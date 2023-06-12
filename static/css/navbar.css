@@ -1,17 +1,26 @@
+@import url('https://webfontworld.github.io/score/SCoreDream.css');
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   background-color: rgb(250, 236, 217);
-  top: 0;
   width: 100%;
   z-index: 1000;
-  height: 50px;
+  height: 60px;
   position: fixed;
-  transition: top 0.3s ease-in-out; 
-  border-bottom: 1.2px solid rgb(20, 19, 19);  
+  transition: top 0.3s ease-in-out;
+  border-bottom: 1.2px solid rgb(20, 19, 19);
+  text-align: center;
+}
+#nav .container-lg nav {
+  margin-right: auto;
+  margin-left: 2%;
 }
 
 .left-nav-links {
@@ -20,18 +29,26 @@ header {
   padding: 0;
   margin: 0;
 }
+#nav .container-lg a img {
+  margin: 5px;
+}
 
 .left-nav-links > div {
   margin: 0 10px;
+  padding-top: 5px;
 }
 
 .left-nav-links > div a {
   text-decoration: none;
   color: #333;
+  
 }
 
+.menu-links a {
+  margin-right: 20px;
+}
 
-
+/* 모바일 환경에서 사용될 스타일 */
 @media screen and (max-width: 768px) {
   body {
     padding-bottom: 50px;
@@ -47,26 +64,57 @@ header {
     bottom: 0;
     left: 0;
     background-color: #ffffff;
-    height: 50px;
+    height: 60px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     overflow-x: hidden;
     z-index: 1000;
     border-top: 1.2px solid rgb(20, 19, 19);
   }
 
-  nav ul {
+  nav .left-nav-links {
+    display: flex;
     flex-direction: row;
     margin-bottom: 0;
   }
 
-  nav ul li {
+  nav .left-nav-links div {
     margin: 0 10px;
   }
-
- 
 }
 
+@media (max-width: 768px) {
+  #nav .container-lg nav {
+    margin-right: 0px;
+    margin-left: 0px;
+    height: 67px;
+  }
+  .container-lg nav .left-nav-links {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  nav .left-nav-links div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  /* .navbar .left-nav-links div img {
+    display: block;
+    margin-right: 5px;
+  } */
+  #nav .container-lg .menu-links {
+    display: none;
+  }
+}
 
+@media (min-width: 768px) {
+  .navbar .left-nav-links div img{
+    display: none;
+  }
+  .navbar .left-nav-links div span
+  .navbar .left-nav-links div img {
+    display: inline;
+    margin-right: 5px;
+  }
+}
+    

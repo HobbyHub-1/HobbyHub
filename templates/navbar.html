@@ -3,60 +3,85 @@
 {% endblock link %} {% block title %}{% endblock title %} 
 {% block style %}{% endblock style %} {% block content %}
 
- <header>
+<header>
   <nav class="navbar navbar-expand-lg fixed-top" id="nav">
-      <div class="container">
-          <!-- 로고 -->
-          <a href="{% url 'posts:index' %}">Logo</a> 
-          <div class="d-flex align-items-center gap-3">  
-          <!-- 메뉴바 -->
-            <nav>
-            <div class="left-nav-links">
-              <div><a href="{% url 'posts:index' %}">Home</a></div>
-              <div><a href="{% url 'posts:group_list' %}">Group</a></div>
-              <div><a href="{% url 'posts:where' %}">Location</a></div>
-              <div>
-              {% if request.user.is_authenticated %}
-              <a href="{% url 'accounts:profile' user.username %}">MyPage</a>
-              {% else %}
-              <a type="button" href="{% url 'accounts:login' %}" class="text-decoration-none text-secondary login-Btn"></a>
-              <a type="button" href="{% url 'accounts:signup' %}" class="text-decoration-none text-secondary login-Btn"></a>
-              {% endif %}
-              </div>
-            </div>
-            </nav>        
-          <!-- 로그인 및 회원가입 -->
-              {% if request.user.is_authenticated %}
-              {% comment %} <span>안녕하세요, {{ user }}님!</span> {% endcomment %}
-              <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
-              <a href="{% url 'accounts:update' %}">회원정보수정</a>
-              <form action="{% url 'accounts:logout' %}" method="POST">
-                {% csrf_token %}
-                <input type="submit" value="Logout">
-              </form>
-              {% else %}
-              <a type="button" href="{% url 'accounts:login' %}" class="text-decoration-none text-secondary login-Btn">Login</a>
-              <a type="button" href="{% url 'accounts:signup' %}" class="text-decoration-none text-secondary login-Btn">Sign up</a>
-              {% endif %}
+    <div class="container-lg">
+      <!-- 로고 -->
+      <a href="{% url 'posts:index' %}">
+        <img src="https://media.discordapp.net/attachments/1100972477645078538/1116235193481707570/logo1_2.png?width=330&height=91" alt="Logo" width="120" height="33">
+      </a>         
+      <!-- 메뉴바 -->
+      <nav>
+        <div class="left-nav-links">
+          <!--메인-->
+          <div>
+            <a href="{% url 'posts:index'  %}">
+              <img src="https://cdn-icons-png.flaticon.com/512/747/747420.png?w=1060&t=st=1686239776~exp=1686240376~hmac=b401c9220dcb430373a24cac4726f4644cc66723b27d3fcfa120e1558e31dc93" alt="메인" width="26" height="26">
+            </a>
+            <a href="{% url 'posts:index'  %}">
+              <span>메인</span>
+            </a>
           </div>
+          <!--그룹-->
+          <div>
+            <a href="{% url 'posts:group_list'  %}">
+              <img src="https://cdn-icons-png.flaticon.com/512/1243/1243615.png?w=1060&t=st=1686239874~exp=1686240474~hmac=cded211e818fe7317707a12f3c03afb2f343b5d9828af2278ea4409e7e64f026" alt="그룹" width="26" height="26">
+            </a>
+            <a href="{% url 'posts:group_list'  %}">
+              <span>그룹</span>
+            </a>
+          </div>
+          <!--위치-->
+          <div>
+            <a href="{% url 'posts:where' %}">
+              <img src="https://cdn-icons-png.flaticon.com/512/286/286036.png?w=1060&t=st=1686239922~exp=1686240522~hmac=901bdbaf8df7a455e884f011bc9cdb01c25d07d42b6081e0121df9d1c5049bd2" alt="위치" width="26" height="26">
+            </a>
+            <a href="{% url 'posts:where'  %}">
+              <span>위치</span>
+            </a>
+          </div>
+          <!--마이페이지-->
+          <div>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'accounts:profile' user.username %}">
+                  <img src="https://cdn-icons-png.flaticon.com/512/118/118174.png?w=1060&t=st=1686242538~exp=1686243138~hmac=38367ddfd5ff490fea21a75b9c6be909eff31b0a8be3ac1f8da3074e855209aa" alt="마이페이지" width="26" height="26">
+                </a>
+                <a href="{% url 'accounts:profile' user.username %}">
+                <span>마이페이지</span>
+                </a>
+            {% else %}
+                <a href="{% url 'accounts:login' %}">
+                  <img src="https://cdn-icons-png.flaticon.com/512/118/118174.png?w=1060&t=st=1686242538~exp=1686243138~hmac=38367ddfd5ff490fea21a75b9c6be909eff31b0a8be3ac1f8da3074e855209aa" alt="마이페이지" width="26" height="26">
+                </a>
+                <a href="{% url 'accounts:login' %}">
+                  <span>마이페이지</span>
+                </a>
+            {% endif %}
+          </div>
+        </div>
+      </nav>        
+      <!-- 로그인 및 회원가입 -->
+      <div class="menu-links">
+        {% if request.user.is_authenticated %}
+          <!-- 인증된 사용자 메뉴 -->   
+          <a href="{% url  'accounts:profile' user.username  %}">프로필</a>
+          <a href="{% url 'accounts:update' %}">회원정보수정</a>
+          <a href="{% url 'accounts:logout' %}" class="text-decoration-none text-secondary login-Btn">Logout</a> 
+        {% else %}
+          <!-- 비인증 사용자 메뉴 -->
+          <a type="button" href="{% url 'accounts:login' %}" class="text-decoration-none text-secondary login-Btn">Login</a>
+          <a type="button" href="{% url 'accounts:signup' %}" class="text-decoration-none text-secondary login-Btn">Sign up</a>
+        {% endif %}
       </div>
+    </div>
   </nav>
-</header>  
+</header> 
+
 
 {% endblock content %}{% block script %}
-window.addEventListener('scroll', function() {
-  var header = document.querySelector('header');
-  var scrollPos = window.scrollY;
-
-  if (scrollPos > 0) {
-    header.style.top = '0';
-  } else {
-    header.style.top = '-50px'; 
-  }
-});
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'js/index.js' %}"></script>
+
 {% endblock script %} 
 
 

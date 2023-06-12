@@ -14,11 +14,11 @@ const form = document.querySelector('#likes-form');
         .then((response) => {
           const isLiked = response.data.is_liked;
           if (isLiked) {
-            heartIcon.classList.remove('bi-suit-heart');
-            heartIcon.classList.add('bi-suit-heart-fill');
+            heartIcon.classList.remove('bi-heart');
+            heartIcon.classList.add('bi-heart-fill');
           } else {
-            heartIcon.classList.remove('bi-suit-heart-fill');
-            heartIcon.classList.add('bi-suit-heart');
+            heartIcon.classList.remove('bi-heart-fill');
+            heartIcon.classList.add('bi-heart');
           }
         })
         .catch((error) => {

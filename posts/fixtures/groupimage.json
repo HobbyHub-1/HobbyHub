@@ -1,0 +1,42 @@
+[
+{
+    "model": "posts.groupimage",
+    "pk": 2,
+    "fields": {
+        "group": 4,
+        "image": "group/placeimg_400_400_arch_3.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 3,
+    "fields": {
+        "group": 5,
+        "image": "group/placeimg_400_400_arch_2.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 4,
+    "fields": {
+        "group": 6,
+        "image": "group/placeimg_400_400_arch_1.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 5,
+    "fields": {
+        "group": 7,
+        "image": "group/placeimg_400_400_arch_5_cFbPaBb.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 6,
+    "fields": {
+        "group": 8,
+        "image": "group/placeimg_400_400_arch_3_BBEFfa5.jpg"
+    }
+}
+]
