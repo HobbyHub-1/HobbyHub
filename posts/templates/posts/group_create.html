@@ -22,7 +22,7 @@
 {% endblock style %}
 {% block content %}
   <div class="container-md body-container">
-    <form action="{% url 'posts:group_create' %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'posts:group_create' %}" method="POST" enctype="multipart/form-data" id="createGroupForm">      
       {% csrf_token %}
       <!-- 세부 설정 아코디언 -->
       <div class="accordion" id="accordions">
@@ -68,11 +68,12 @@
       <div>{{ group_form.tags }}<span class="ms-1">※ 콤마(,)로 태그를 분리합니다.</span>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <input class="btn btn-dark btn-sm me-md-2" type="submit" value="그룹 만들기">
+        <button class="btn btn-dark btn-sm me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#createConfirmationModal">그룹 만들기</button>
         <a class="btn btn-dark btn-sm" href="{% url 'posts:group_list' %}">뒤로가기</a>
       </div>
     </form>
   </div>
+
   {% if messages %}
   <ul class="messages">
     {% for message in messages %}
@@ -80,6 +81,24 @@
     {% endfor %}
   </ul>
 {% endif %}
+
+<div class="modal fade" id="createConfirmationModal" tabindex="-1" aria-labelledby="createConfirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createConfirmationModalLabel">그룹 생성</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        그룹을 생성하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-primary" id="createGroupBtn">생성하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
 
@@ -172,4 +191,14 @@
       });
     $('.dropdown-toggle').dropdown()
   </script> 
+  
+  <script>
+    var createGroupForm = document.getElementById('createGroupForm');
+    var createGroupBtn = document.getElementById('createGroupBtn');
+  
+    createGroupBtn.addEventListener('click', function() {
+      createGroupForm.submit();
+    });
+  </script>
+
 {% endblock script %}

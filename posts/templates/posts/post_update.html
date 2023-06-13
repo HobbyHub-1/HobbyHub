@@ -1,30 +1,30 @@
 {% extends 'base.html' %}
 {% block link %}
-  <!-- include libraries(jQuery, bootstrap) -->
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
-  <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- include libraries(jQuery, bootstrap) -->
+<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+<script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- include summernote css/js-->
-  <link href="summernote-bs5.css" rel="stylesheet">
-  <script src="summernote-bs5.js"></script>
+<!-- include summernote css/js-->
+<link href="summernote-bs5.css" rel="stylesheet">
+<script src="summernote-bs5.js"></script>
 {% endblock link %}
 {% block title %}post_update{% endblock title %}
 {% block style %}
-  <style>
-    .body-container {
-      margin-top: 50px;
-    }
+<style>
+  .body-container {
+    margin-top: 50px;
+  }
 
-    form div {
-      margin-bottom: 10px;
-    }
-  </style>
+  form div {
+    margin-bottom: 10px;
+  }
+</style>
 {% endblock style %}
 {% block content %}
-  <div class="container-md body-container">
+<div class="container-md body-container">
   <div class="container-md">
-    <form action="{% url 'posts:post_update' post.pk %}" method="POST" enctype="multipart/form-data">
+    <form id="updateForm" action="{% url 'posts:post_update' post.pk %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <!-- 제목 -->
       <div>{{ post_form.title }}</div>
@@ -43,8 +43,31 @@
         <p class="ms-1 text-muted">※ 콤마(,)로 태그를 분리합니다.</p>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <input class="btn btn-dark btn-sm me-md-2" type="submit" value="수정하기">
+        <button class="btn btn-dark btn-sm me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#updateModal">
+          수정하기
+        </button>
         <a class="btn btn-dark btn-sm" href="{% url 'posts:index' %}">뒤로가기</a>
+      </div>
     </form>
   </div>
+</div>
+
+<!-- 수정 모달 -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">게시물 수정</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>게시물을 수정하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+        <input class="btn btn-primary" type="submit" value="예" form="updateForm">
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
