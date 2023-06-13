@@ -92,7 +92,7 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ('title', 'subtitle','category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
         widgets = {
-            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
+            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '500px'}}),
         }
 
 

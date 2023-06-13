@@ -1,27 +1,30 @@
-const form = document.querySelector('#likes-form');
-    const heartIcon = document.querySelector('#group-heart');
+const form = document.querySelector( '#group-likes-form' );
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+      const csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
       const groupId = event.target.dataset.groupId;
-      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
       axios({
         method: 'post',
         url: `/posts/group/${groupId}/group_likes/`,
         headers: { 'X-CSRFToken': csrftoken },
       })
-        .then((response) => {
+        .then( ( response ) => {
           const isLiked = response.data.is_liked;
-          if (isLiked) {
+          const heartIcon = document.querySelector('#group-heart');
+          if (isLiked === true) {
             heartIcon.classList.remove('bi-heart');
             heartIcon.classList.add('bi-heart-fill');
           } else {
             heartIcon.classList.remove('bi-heart-fill');
             heartIcon.classList.add('bi-heart');
           }
+          const likeCountTag = document.querySelector('#like-count')
+          const likeCountData = response.data.like_count
+          likeCountTag.textContent = likeCountData
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error);
         });
     });
