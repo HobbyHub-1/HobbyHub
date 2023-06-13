@@ -64,8 +64,8 @@
       <div class="menu-links">
         {% if request.user.is_authenticated %}
           <!-- 인증된 사용자 메뉴 -->   
-          <a href="{% url  'accounts:profile' user.username  %}">프로필</a>
-          <a href="{% url 'accounts:update' %}">회원정보수정</a>
+          {% comment %} <a href="{% url  'accounts:profile' user.username  %}">프로필</a> {% endcomment %}
+          {% comment %} <a href="{% url 'accounts:update' %}">회원정보수정</a> {% endcomment %}
           <a href="{% url 'accounts:logout' %}" class="text-decoration-none text-secondary login-Btn">Logout</a> 
         {% else %}
           <!-- 비인증 사용자 메뉴 -->
