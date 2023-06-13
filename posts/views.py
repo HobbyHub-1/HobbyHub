@@ -7,6 +7,7 @@ from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupIma
 from django.db.models import Q
 from taggit.models import Tag
 from django.contrib import messages
+from django.db.models import Count
 
 # Create your views here.
 # 1 index
