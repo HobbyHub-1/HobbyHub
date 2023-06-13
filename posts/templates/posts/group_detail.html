@@ -107,11 +107,10 @@
       <!-- 삭제 수정 목록보기 : 버튼 -->
       <div class="my-2 text-end buttons">
         {% if request.user == group.user %}
-          <form class="d-inline" action="{% url 'posts:group_delete' group.pk %}" method="POST">
-            {% csrf_token %}
-            <input class="btn btn-outline-dark btn-sm" type="submit" value="삭제">
-          </form>
           <a class="btn btn-outline-dark btn-sm" href="{% url 'posts:group_update' group.pk %}"><i class="bi bi-pencil-square"></i>수정하기</a>
+        <button class="btn btn-dark btn-sm d-inline" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          삭제
+        </button>
         {% endif %}
         <!-- 완성후 목록보기 버튼은 삭제할 예정입니다. -->
         <a class="btn btn-outline-dark btn-sm" href="{% url 'posts:group_list' %}">목록보기</a>
@@ -119,7 +118,8 @@
 
     </div>
   </div>
-
+  
+ 
 <!--## navigation bar : 상세내용 + 댓글  ##-->
   <div class="mt-4 d-flex justify-content-center">
     <div class="col-md-10">
@@ -168,6 +168,29 @@
         </form>
       </div>
 
+    </div>
+  </div>
+</div>
+    
+    
+<!-- 삭제 모달 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">그룹 삭제 확인</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>그룹을 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+        <form class="d-inline" action="{% url 'posts:group_delete' group.pk  %}" method="POST">
+          {% csrf_token %}
+          <input class="btn btn-danger" type="submit" value="예">
+        </form>
+      </div>
     </div>
   </div>
 </div>
