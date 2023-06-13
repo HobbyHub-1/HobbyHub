@@ -18,27 +18,35 @@ a {
 .category-container {
   display: flex;
   align-items: center;
-  flex-direction: column;
-  overflow-x: auto;
-  padding: 10px 0;
-}
-
-.scroll-container {
-  display: flex;
-  overflow-y: hidden;
-  width: 50%;
-}
-
-.scroll-content {
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 0;
-  margin: 0;
-  white-space: nowrap;
+  justify-content: space-evenly;
+  margin-bottom: 50px;
 }
 
 .category-title {
   margin-top: 30px;
+}
+
+.right-section {
+  margin-top: 30px;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 0;
+  width: 80vw; 
+  margin: 0 auto; 
+}
+
+.scroll-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .card_single {

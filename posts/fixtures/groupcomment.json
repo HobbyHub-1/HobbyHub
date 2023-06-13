@@ -1,0 +1,244 @@
+[
+{
+    "model": "posts.groupcomment",
+    "pk": 1,
+    "fields": {
+        "group": 1,
+        "user": 5,
+        "content": "너무좋아요",
+        "created_at": "2023-06-12T06:14:22.799Z",
+        "updated_at": "2023-06-12T06:14:22.799Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 2,
+    "fields": {
+        "group": 2,
+        "user": 6,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:17:42.362Z",
+        "updated_at": "2023-06-12T06:17:42.362Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 3,
+    "fields": {
+        "group": 3,
+        "user": 6,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:17:52.683Z",
+        "updated_at": "2023-06-12T06:17:52.683Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 4,
+    "fields": {
+        "group": 4,
+        "user": 6,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:18:00.337Z",
+        "updated_at": "2023-06-12T06:18:00.337Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 5,
+    "fields": {
+        "group": 1,
+        "user": 7,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:21:04.551Z",
+        "updated_at": "2023-06-12T06:21:04.551Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 6,
+    "fields": {
+        "group": 2,
+        "user": 7,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:21:10.798Z",
+        "updated_at": "2023-06-12T06:21:10.798Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 7,
+    "fields": {
+        "group": 4,
+        "user": 7,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:21:16.757Z",
+        "updated_at": "2023-06-12T06:21:16.757Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 8,
+    "fields": {
+        "group": 5,
+        "user": 7,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:21:22.285Z",
+        "updated_at": "2023-06-12T06:21:22.285Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 9,
+    "fields": {
+        "group": 6,
+        "user": 7,
+        "content": "하이",
+        "created_at": "2023-06-12T06:21:32.598Z",
+        "updated_at": "2023-06-12T06:21:32.598Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 10,
+    "fields": {
+        "group": 1,
+        "user": 8,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:24:49.554Z",
+        "updated_at": "2023-06-12T06:24:49.554Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 11,
+    "fields": {
+        "group": 2,
+        "user": 8,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:24:57.946Z",
+        "updated_at": "2023-06-12T06:24:57.946Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 12,
+    "fields": {
+        "group": 3,
+        "user": 8,
+        "content": "하이",
+        "created_at": "2023-06-12T06:25:03.969Z",
+        "updated_at": "2023-06-12T06:25:03.969Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 13,
+    "fields": {
+        "group": 4,
+        "user": 8,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:25:09.011Z",
+        "updated_at": "2023-06-12T06:25:09.011Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 14,
+    "fields": {
+        "group": 5,
+        "user": 8,
+        "content": "하이",
+        "created_at": "2023-06-12T06:25:16.481Z",
+        "updated_at": "2023-06-12T06:25:16.481Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 15,
+    "fields": {
+        "group": 6,
+        "user": 8,
+        "content": "댓글",
+        "created_at": "2023-06-12T06:25:21.869Z",
+        "updated_at": "2023-06-12T06:25:21.869Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 16,
+    "fields": {
+        "group": 7,
+        "user": 8,
+        "content": "멋져요",
+        "created_at": "2023-06-12T06:25:29.537Z",
+        "updated_at": "2023-06-12T06:25:29.537Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 17,
+    "fields": {
+        "group": 8,
+        "user": 8,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:25:37.881Z",
+        "updated_at": "2023-06-12T06:25:37.881Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 18,
+    "fields": {
+        "group": 6,
+        "user": 5,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:26:44.063Z",
+        "updated_at": "2023-06-12T06:26:44.063Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 19,
+    "fields": {
+        "group": 7,
+        "user": 5,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:26:49.512Z",
+        "updated_at": "2023-06-12T06:26:49.512Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 20,
+    "fields": {
+        "group": 8,
+        "user": 5,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:26:56.716Z",
+        "updated_at": "2023-06-12T06:26:56.716Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 21,
+    "fields": {
+        "group": 9,
+        "user": 5,
+        "content": "좋아요",
+        "created_at": "2023-06-12T06:28:52.355Z",
+        "updated_at": "2023-06-12T06:28:52.355Z"
+    }
+},
+{
+    "model": "posts.groupcomment",
+    "pk": 22,
+    "fields": {
+        "group": 10,
+        "user": 5,
+        "content": "멋져요",
+        "created_at": "2023-06-12T06:29:03.247Z",
+        "updated_at": "2023-06-12T06:29:03.247Z"
+    }
+}
+]

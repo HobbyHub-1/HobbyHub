@@ -12,6 +12,8 @@ from django.contrib import messages
 # 1 index
 def index(request):
     posts = Post.objects.all()
+    like_posts = Post.objects.annotate(like_count=Count('like_users')).order_by('-like_count')[:4]
+    hit_posts = Post.objects.order_by('-hits')[:8]
 
     categories = posts.values_list('category', flat=True).distinct()
     category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
@@ -31,9 +33,12 @@ def index(request):
     if selected_slugs:
         selected_tags = selected_slugs.split(',')
         posts = posts.filter(tags__slug__in=selected_tags).distinct()
-
+    else:
+        posts = posts[4:]
     context ={
         'posts': posts,
+        'like_posts': like_posts,
+        'hit_posts': hit_posts,
         'tags': tags,
         'category_list': category_list,
         'selected_category': selected_category,
@@ -482,6 +487,12 @@ def category(request, subject):
     category_subject = category_choices.get(subject, '')
     posts = Post.objects.filter(category=subject)
     groups = Group.objects.filter(category=subject)
+
+    for group in groups:
+        group.like_count = group.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+
+    groups = sorted(groups, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+
     context = {
         'posts': posts,
         'groups': groups,
