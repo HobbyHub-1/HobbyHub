@@ -1,12 +1,58 @@
-<!-- accounts/update.html -->
 {% extends 'base.html' %}
+{% load static %}
 
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/update.css' %}">
+{% endblock link %}
 
 {% block content %}
-<form action="{% url 'accounts:update' %}" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class='my-3'>{{ form.as_p }}</div>
-  <input class='btn btn-primary w-100' type="submit" value="회원정보 수정">
-</form>
-
+<div class='text-center mx-auto my-5 update__form' style='width: 300px;'>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_email">이메일</label>
+      <input type="email" class="form-control" id="id_email" name="email" placeholder="이메일" 
+      {% if value %}
+      value="{{ form.email.value }}"
+      {% else %}
+      value=""
+      {% endif %}>
+    </div>
+    <div class="form-group">
+    <label for="id_name">이름</label>
+    <input type="text" class="form-control" id="id_name" name="name" placeholder="이름" 
+    {% if value %}
+    value="{{ form.name.value }}"
+    {% else %}
+    value=""
+    {% endif %}
+    >
+    </div>    
+    <div class="form-group">
+      <label for="id_profile_image">프로필 이미지</label>
+      <input type="file" class="form-control-file" id="id_profile_image" name="profile_image" placeholder="프로필 이미지">
+    </div>
+    
+    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">저장</button>
+  </form>
+ 
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header"></div>
+         <div class="modal-body">
+           저장되었습니다
+         </div>
+         <div class="modal-footer">
+           <a class="btn btn-secondary" href="{% url 'accounts:profile' request.user.username %}">확인</a>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/update.js' %}"></script>
+{% endblock script %}
