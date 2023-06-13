@@ -50,10 +50,10 @@
           {% for image in post.postimage_set.all %}
             {% if image.image.url %}
               {% if forloop.first %}
-                <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
               {% endif %}
             {% else %}
-              <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
             {% endif %}
           {% endfor %}
         </div>
@@ -104,10 +104,10 @@
             {% for image in post.postimage_set.all %}
               {% if image.image.url %}
                 {% if forloop.first %}
-                  <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                  <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
                 {% endif %}
               {% else %}
-                <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
               {% endif %}
             {% endfor %}
           </div>
@@ -173,10 +173,10 @@
         {% for image in post.postimage_set.all %}
           {% if image.image.url %}
             {% if forloop.first %}
-              <img class="card_img_tag" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
             {% endif %}
           {% else %}
-            <img class="card_img_tag" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+            <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
           {% endif %}
         {% endfor %}
       </div>

@@ -50,6 +50,7 @@ a {
   width: 290px;
   height: 220px;
   overflow: clip;
+  object-fit: cover;
   border-bottom: 2px solid rgb(23, 23, 23);
 }
 .like-form {
