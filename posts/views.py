@@ -6,7 +6,7 @@ from .models import Post, PostImage, PostComment, Group, GroupImage, GroupCommen
 from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
 from django.db.models import Q
 from taggit.models import Tag
-from django.db.models import Count
+from django.contrib import messages
 
 # Create your views here.
 # 1 index
@@ -86,10 +86,14 @@ def post_create(request):
             for tag in tags:
                 post.tags.add(tag.strip())
 
-            for file in files:
-                PostImage.objects.create(post=post, image=file)
-
-            return redirect('posts:post_detail', post.pk)
+            # 이미지 파일 개수 제한
+            files = request.FILES.getlist('image')
+            if len(files) <= 3:
+                for file in files:
+                    PostImage.objects.create(post=post, image=file)
+                return redirect('posts:post_detail', post.pk)
+            else:
+                messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
     else:
         post_form = PostForm()
         post_image_form = PostImageFrom()
@@ -322,7 +326,6 @@ def group_create(request):
     if request.method == 'POST':
         group_form = GroupForm(request.POST)
         group_image_form = GroupImageFrom(request.POST, request.FILES)
-        files = request.FILES.getlist('image')
         tags = request.POST.get('tags', '').split(',')
 
         if group_form.is_valid() and group_image_form.is_valid():
@@ -334,10 +337,14 @@ def group_create(request):
             for tag in tags:
                 group.tags.add(tag.strip())
 
-            for file in files:
-                GroupImage.objects.create(group=group, image=file)
-            
-            return redirect('posts:group_detail', group.pk)
+            # 이미지 파일 개수 제한
+            files = request.FILES.getlist('image')
+            if len(files) <= 3:
+                for file in files:
+                    GroupImage.objects.create(group=group, image=file)
+                return redirect('posts:group_detail', group.pk)
+            else:
+                messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
     else:
         group_form = GroupForm()
         group_image_form = GroupImageFrom()
@@ -346,6 +353,8 @@ def group_create(request):
         'group_image_form': group_image_form,
     }
     return render(request, 'posts/group_create.html', context)
+
+
 
 
 # group_delete 삭제
