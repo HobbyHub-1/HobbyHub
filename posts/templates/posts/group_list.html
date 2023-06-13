@@ -13,22 +13,33 @@
 {% block title %}Group list{% endblock title %}
 
 {% block content %}
-  <div class="container mt-4">
-
+  <div class="container mt-5">
+    <h2 class="d-block m-4">
+      <b>소모임</b>
+    </h2>
+    <h4 class="d-block mb-5">
+      하비허브 멤버들과 함께하는 소모임입니다.<br>
+      하비허브 멤버라면 누구나 소모임을 열고 참여할 수 있어요!
+    </h4>
+    <hr>
     <!-- 필터 버튼 -->
-    <div class="mb-2">
-      <button class="btn btn-outline-dark filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewbox="0 0 16 16">
-          <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-        </svg>
-        필터
-      </button>
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <div class="mb-3">
+          <a href="{% url 'posts:group_create' %}" class="btn btn-dark">+ 소모임 생성</a>
+          <button class="btn btn-outline-dark filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewbox="0 0 16 16">
+              <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            필터
+          </button>
+        </div>
+      </div>
     </div>
-    <h2 class="d-block m-4">전체 목록입니다.</h2>
     <!-- card 목록 -->
-    <div class="d-flex flex-wrap m-4 px-1">
+    <div class="card_container">
       {% for group in filtered_groups %}
-        <a class="card_single mx-2" href="{% url 'posts:group_detail' group.pk %}" data-tags="{% for tag in group.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+        <a class="card_single mx-2 mb-4" href="{% url 'posts:group_detail' group.pk %}" data-tags="{% for tag in group.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
           <div class="card_img">
             <!-- 좋아요 버튼 -->
             {% comment %} {% if request.user.is_authenticated %}
