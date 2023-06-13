@@ -1,0 +1,29 @@
+.update__form label {
+  display: block;
+  font-weight : 700;
+  width: 300px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.update__form input {
+  display: block;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid rgb(95, 95, 95);
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.update__form button{
+  width: 80px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  background-color: rgb(51, 51, 51);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
