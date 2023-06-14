@@ -43,7 +43,9 @@
   text-align: center; 
 }
 
-@media (max-width: 767px) {
+
+
+@media (max-width: 960px) {
   .c-banner1 {
     flex-direction: column-reverse;
     justify-content: center;
@@ -87,7 +89,7 @@
   justify-content: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 960px) {
   .c2-banner1 {
     flex-direction: column-reverse;
     justify-content: center;
@@ -110,7 +112,7 @@
   justify-content: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 960px) {
   .c3-banner1 {
     flex-direction: column-reverse;
     justify-content: center;
@@ -134,7 +136,7 @@
   width: 100%;
   height: 100%;
   background: #999;
-  transition: 1s ease-in-out;
+  transition: 3s ease-in-out;
 }
 .slide {
   width: 100%;
@@ -191,8 +193,3 @@
 .active {
   background: gray;
 }
-
-
-
-
-

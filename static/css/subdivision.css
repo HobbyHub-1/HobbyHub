@@ -12,13 +12,20 @@
   text-align: center;
   margin-right: 90px;
   justify-content: center;
+  margin-top: 30px;
 }
 
-.menu-item img {
+/* .menu-item img {
   display: block;
   padding: 10px;
   max-width: 70px;
   height: auto;
+  transition: transform 0.3s ease;
+} */
+.menu-item img {
+  box-sizing: border-box;
+  height: auto;
+  max-width: 100%;
   transition: transform 0.3s ease;
 }
 
@@ -26,10 +33,11 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .menu-list {
     flex-wrap: nowrap;
-    margin-right: 15px;
+    margin-right:15px;
+    justify-content: space-between;
   }
 
   .menu-item {
