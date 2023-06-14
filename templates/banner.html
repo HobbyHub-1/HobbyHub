@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="{% static 'css/banner.css' %}" />
 {% endblock head %}
 {% block content %}
-
-<!-- 케로젤 배너1 -->
+{% comment %} <!-- 케로젤 배너1 -->
 <div class="c1-banner">
   <div class="c-banner1">
     <div>
@@ -40,7 +39,58 @@
     </div>
     <img src="https://cdn-icons-png.flaticon.com/512/985/985478.png?w=1060&t=st=1686644496~exp=1686645096~hmac=2400acefd5466edb39a6db31c274b13b24fcdd8f2b01d12e53a0ab0857f40b16" alt="배너" class="c-banner-img">
   </div>
-</div>
+</div>  {% endcomment %}
+
+
+{% comment %} <div class="carousel_container">
+  <div class="carousel">
+    <div class="slides">
+      <div class="slide w-100">
+        <div class="c1-banner">
+          <div class="c-banner1">
+            <div>
+              <p class="c-t1">STUDY</p>
+              <p class="c-t2">글쓰기는 자기 발견과 성장의 기회입니다.</p>
+              <p class="c-t2">매일 조금씩 나아지는 모습이 나의 진정한 성공입니다.</p>
+            </div>
+            <img src="https://www.nicetomeetme.kr/images/main/store_icon.png" alt="배너" class="c-banner-img">
+          </div>
+        </div>
+      </div>
+      <div class="slide w-100">
+        <div class="c2-banner">
+          <div class="c-banner1">
+          <div>
+            <p class="c-t1">ACTIVITY</p>
+            <p class="c-t2">스포츠는 몸과 마음을 강화하는 길입니다.</p>
+            <p class="c-t2">운동은 스트레스를 해소하고 자신감을 키우는 방법입니다.</p>
+          </div>
+          <img src="https://cdn-icons-png.flaticon.com/512/901/901788.png?w=1060&t=st=1686644544~exp=1686645144~hmac=2fe3408d80af5f22a259548b6d3e7056237fa3f735e1cf3fd42bd40f78e5c687" alt="배너" class="c-banner-img">
+        </div>
+      </div>
+      </div>
+      <div class="slide w-100">
+        <div class="c3-banner">
+          <div class="c-banner1">
+          <div>
+            <p class="c-t1">COOK</p>
+            <p class="c-t2">요리는 소중한 추억을 만들어줍니다</p>
+            <p class="c-t2">음식은 사람들을 함께 모으는 힘이 있습니다.</p>
+          </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/985/985478.png?w=1060&t=st=1686644496~exp=1686645096~hmac=2400acefd5466edb39a6db31c274b13b24fcdd8f2b01d12e53a0ab0857f40b16" alt="배너" class="c-banner-img">
+      </div>
+    </div>
+      </div>
+    </div>
+    <button class="prev-button">&lt;</button>
+    <button class="next-button">&gt;</button>
+    <div class="dots">
+      <button class="dot"></button>
+      <button class="dot"></button>
+      <button class="dot"></button>
+    </div>
+  </div>
+</div>  {% endcomment %}
 
 
 
@@ -61,6 +111,8 @@
 
 
 {% block script %}
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="{% static 'js/index.js' %}"></script>
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/index.js' %}"></script> 
+<script src="{% static 'js/carousel.js' %}"></script>
+
 {% endblock script %}

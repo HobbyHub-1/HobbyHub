@@ -50,6 +50,9 @@ class PostImageFrom(forms.ModelForm):
 
 
 class PostCommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': '댓글을 입력하세요', }))
     class Meta:
         model = PostComment
         fields = ( 'content',)
@@ -92,7 +95,7 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ('title', 'subtitle','category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
         widgets = {
-            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
+            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '500px'}}),
         }
 
 
@@ -105,6 +108,10 @@ class GroupImageFrom(forms.ModelForm):
 
 
 class GroupCommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': '댓글을 입력하세요', }))
     class Meta:
         model = GroupComment
         fields = ( 'content',)
+        
