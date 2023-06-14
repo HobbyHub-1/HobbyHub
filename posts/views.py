@@ -13,9 +13,9 @@ from django.db.models import Count
 # Create your views here.
 # 1 index
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-created_at')
     like_posts = Post.objects.annotate(like_count=Count('like_users')).order_by('-like_count')[:4]
-    hit_posts = Post.objects.order_by('-hits')[:8]
+    hit_posts = Post.objects.order_by('-hits')
 
     categories = posts.values_list('category', flat=True).distinct()
     category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
@@ -36,7 +36,7 @@ def index(request):
         selected_tags = selected_slugs.split(',')
         posts = posts.filter(tags__slug__in=selected_tags).distinct()
     else:
-        posts = posts[4:]
+        posts = posts[:8]
     context ={
         'posts': posts,
         'like_posts': like_posts,
@@ -280,7 +280,6 @@ def group_list(request):
 
     filtered_groups = Group.objects.filter(filter_args).distinct()
     filtered_groups_count = filtered_groups.count()
-    print("필터링된 그룹 개수:", filtered_groups_count)
 
     group_images = []
     for group in filtered_groups: 

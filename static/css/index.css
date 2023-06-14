@@ -28,9 +28,11 @@ a {
   position: relative;
   width: 292px;
   height: 400px;
-  padding: 0%;
+  padding: 0;
+  margin-right: 20px;
   background-color: rgb(255, 242, 225);
-  border: 2px solid rgb(23, 23, 23);
+  border: 2px solid gray;
+  border-radius: 10px;
 }
 
 .theme_card_single {
@@ -39,7 +41,18 @@ a {
   height: 400px;
   padding: 0%;
   background-color: rgb(255, 242, 225);
-  border: 2px solid rgb(23, 23, 23);
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+
+.hit_card_single {
+  position: relative;
+  width: 292px;
+  height: 400px;
+  padding: 0%;
+  background-color: rgb(255, 242, 225);
+  border: 2px solid gray;
+  border-radius: 10px;
 }
 
 /* card 이미지 */
@@ -47,11 +60,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 290px;
+  width: 288px;
   height: 220px;
   overflow: clip;
-  object-fit: cover;
-  border-bottom: 2px solid rgb(23, 23, 23);
+  border-bottom: 2px solid gray;
+  border-radius: 10px 10px 0 0;
 }
 .like-form {
   position: absolute;
@@ -63,7 +76,7 @@ a {
   border: none;
 }
 i {
-  color: white;
+  color: red;
   background: none;
   font: 1.5em bold;
 }

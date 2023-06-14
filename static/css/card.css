@@ -13,20 +13,24 @@ a.card_single {
   position: relative;
   width: 292px;
   height: 400px;
-  padding: 0%;
+  padding: 0;
+  margin-right: 20px;
   background-color: rgb(255, 242, 225);
-  border: 2px solid rgb(23, 23, 23);
+  border: 2px solid gray;
+  border-radius: 10px;
 }
+
 
 /* card 이미지 */
 .card_img {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 288px;
   height: 220px;
   overflow: clip;
-  border-bottom: 2px solid rgb(23, 23, 23);
+  border-bottom: 2px solid gray;
+  border-radius: 10px 10px 0 0;
 }
 .like-form {
   position: absolute;
@@ -38,7 +42,7 @@ a.card_single {
   border: none;
 }
 i {
-  color: white;
+  color: red;
   background: none;
   font: 1.5em bold;
 }
