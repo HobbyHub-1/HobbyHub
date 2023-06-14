@@ -14,14 +14,14 @@ a {
 }
 
 /* 케로젤 */
-.carousel_container {
+/* .carousel_container {
   overflow: clip;
   background: #f8f7fa;
   height: 400px;
   width: 100%;
   margin-bottom: 16px;
   border-bottom: 2px solid rgb(23, 23, 23);
-}
+} */
 
 /* card 목록 제목 */
 .card_single {
@@ -31,7 +31,7 @@ a {
   padding: 0%;
   background-color: rgb(255, 242, 225);
   border: 2px solid rgb(23, 23, 23);
-}
+} 
 
 .theme_card_single {
   position: relative;
