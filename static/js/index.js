@@ -1,10 +1,10 @@
 // card 게시물 상단 좋아요 비동기(하트 아이콘)
 var likeforms = document.querySelectorAll( `.like-form` );
-var csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
 
 likeforms.forEach((form) => {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+    const csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
     const postId = event.target.dataset.postId;
     axios({
       method: 'post',
@@ -51,8 +51,8 @@ function filterPostsByTag(tag) {
     }
   });
 }
-// 페이지 로드시 초기 필터링 설정
-document.addEventListener('DOMContentLoaded', () => {
-  const initialTag = document.querySelector('.hobby-tags-btn-active').dataset.slug;
-  filterPostsByTag(initialTag);
-});
+// // 페이지 로드시 초기 필터링 설정
+// document.addEventListener('DOMContentLoaded', () => {
+//   const initialTag = document.querySelector('.hobby-tags-btn-active').dataset.slug;
+//   filterPostsByTag(initialTag);
+// });
