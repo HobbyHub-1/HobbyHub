@@ -32,7 +32,7 @@ tagButtons.forEach(button => {
 
 // 게시물 필터링 함수
 function filterPostsByTag(tag) {
-  const posts = document.querySelectorAll('.hit_card_single');
+  const posts = document.querySelectorAll('.tag-button');
   posts.forEach(post => {
     const postTags = post.dataset.tags.split(',');
     console.log(postTags)
