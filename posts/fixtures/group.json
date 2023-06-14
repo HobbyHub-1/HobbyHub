@@ -1,230 +1,242 @@
 [
 {
     "model": "posts.group",
-    "pk": 1,
-    "fields": {
-        "user": 4,
-        "title": "김신혜 그룹 제목",
-        "subtitle": "",
-        "address": "서울 강남구 가로수길 5",
-        "content": "<p>김신혜 그룹 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/e9c16d9f-ae66-490b-be22-ec65963f2d6a.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 6,
-        "day": "monday",
-        "region": "seoul",
-        "gender": "unisex",
-        "propensity": "active",
-        "category": "diy",
-        "created_at": "2023-06-12T05:47:46.295Z",
-        "updated_at": "2023-06-12T06:26:35.061Z",
-        "like_users": [
-            5,
-            7,
-            8
-        ]
-    }
-},
-{
-    "model": "posts.group",
-    "pk": 2,
-    "fields": {
-        "user": 4,
-        "title": "김신혜 그룹 제목2입니다.",
-        "subtitle": "",
-        "address": "서울 성동구 가람길 46",
-        "content": "<p>김신혜 그룹 내용2 요리입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/578ff7ec-d5c1-440f-a90d-76ccaaa6709f.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 5,
-        "day": "thursday",
-        "region": "seoul",
-        "gender": "unisex",
-        "propensity": "active",
-        "category": "cook",
-        "created_at": "2023-06-12T05:48:41.846Z",
-        "updated_at": "2023-06-12T06:24:52.987Z",
-        "like_users": [
-            6,
-            7,
-            8
-        ]
-    }
-},
-{
-    "model": "posts.group",
-    "pk": 3,
+    "pk": 25,
     "fields": {
         "user": 5,
-        "title": "제목수정",
-        "subtitle": "",
-        "address": "서울 강남구 가로수길 9",
-        "content": "<p>내용수정</p>",
-        "hits": 3,
+        "title": "낚시 모임",
+        "subtitle": "낚싯대를 들고 힐링하며 물고기를 낚는 모임입니다.",
+        "address": "인천 중구 월미로 1",
+        "content": "<p>낚싯대를 들고 힐링하며 물고기를 낚는 모임입니다.<br></p>",
+        "hits": 1,
         "day": "monday",
-        "region": "seoul",
-        "gender": "male",
-        "propensity": "inactive",
-        "category": "reading study",
-        "created_at": "2023-06-12T05:58:14.030Z",
-        "updated_at": "2023-06-12T06:25:00.985Z",
-        "like_users": [
-            6
-        ]
+        "region": "incheon",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "sports",
+        "created_at": "2023-06-14T07:09:57.697Z",
+        "updated_at": "2023-06-14T07:09:57.816Z",
+        "like_users": []
     }
 },
 {
     "model": "posts.group",
-    "pk": 4,
+    "pk": 26,
     "fields": {
         "user": 5,
         "title": "농구 모임",
-        "subtitle": "",
-        "address": "서울 마포구 성미산로 51",
-        "content": "<p>농구 모임 내용</p><p><img src=\"/media/django-summernote/2023-06-12/4d1a0f88-5d97-4108-8fcb-3c91e06ef9f0.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 4,
-        "day": "tuesday",
-        "region": "seoul",
+        "subtitle": "농구 모임입니다.",
+        "address": "인천 부평구 체육관로 60",
+        "content": "<p>같이 운동하며 친목도 쌓고 건강도 증진시켜봐요!</p>",
+        "hits": 1,
+        "day": "thursday",
+        "region": "incheon",
         "gender": "male",
         "propensity": "active",
         "category": "sports",
-        "created_at": "2023-06-12T06:13:52.806Z",
-        "updated_at": "2023-06-12T06:25:06.457Z",
-        "like_users": [
-            6,
-            7,
-            8
-        ]
+        "created_at": "2023-06-14T07:11:06.873Z",
+        "updated_at": "2023-06-14T07:11:06.972Z",
+        "like_users": []
     }
 },
 {
     "model": "posts.group",
-    "pk": 5,
+    "pk": 27,
     "fields": {
-        "user": 6,
-        "title": "최충현 모임입니다.",
-        "subtitle": "",
-        "address": "서울 성동구 광나루로 104",
-        "content": "<p>최충현 모임 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/bf1ab517-8b6b-40f9-ba4a-7a0b79e6eaac.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 3,
-        "day": "monday",
-        "region": "seoul",
+        "user": 5,
+        "title": "종이 공예",
+        "subtitle": "종이로 원하는 것을 만들어 봐요!",
+        "address": "인천 부평구 체육관로 14",
+        "content": "<p>종이로 원하는 것을 만들어 봐요!<br>예술적 감각과 친목을 기르는 모임입니다.</p>",
+        "hits": 1,
+        "day": "wednesday",
+        "region": "incheon",
         "gender": "unisex",
         "propensity": "inactive",
-        "category": "cultural activities",
-        "created_at": "2023-06-12T06:16:37.636Z",
-        "updated_at": "2023-06-12T06:25:12.420Z",
-        "like_users": [
-            7
-        ]
-    }
-},
-{
-    "model": "posts.group",
-    "pk": 6,
-    "fields": {
-        "user": 6,
-        "title": "최충현 음악 모임입니다.",
-        "subtitle": "",
-        "address": "서울 강북구 노해로 3",
-        "content": "<p>최충현 음악 모임 내용입니다.</p><p><img src=\"/media/django-summernote/2023-06-12/d16df2fe-a771-4ebe-a2ca-21e26197870f.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 4,
-        "day": "saturday",
-        "region": "seoul",
-        "gender": "male",
-        "propensity": "inactive",
-        "category": "art music movie",
-        "created_at": "2023-06-12T06:17:31.215Z",
-        "updated_at": "2023-06-12T06:26:40.709Z",
-        "like_users": [
-            7,
-            8
-        ]
-    }
-},
-{
-    "model": "posts.group",
-    "pk": 7,
-    "fields": {
-        "user": 7,
-        "title": "추연선 그룹 제목입니다",
-        "subtitle": "",
-        "address": "서울 강동구 상암로3길 81",
-        "content": "<p>그룹 내용</p><p><img src=\"/media/django-summernote/2023-06-12/3e9ab31c-d91c-4f1a-b8dd-45f5e067d7e4.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 3,
-        "day": "sunday",
-        "region": "seoul",
-        "gender": "female",
-        "propensity": "inactive",
         "category": "diy",
-        "created_at": "2023-06-12T06:20:57.791Z",
-        "updated_at": "2023-06-12T06:26:46.860Z",
-        "like_users": [
-            5,
-            8
-        ]
+        "created_at": "2023-06-14T07:12:57.123Z",
+        "updated_at": "2023-06-14T07:12:57.230Z",
+        "like_users": []
     }
 },
 {
     "model": "posts.group",
-    "pk": 8,
+    "pk": 28,
     "fields": {
-        "user": 7,
-        "title": "추연선 그룹 제목입니다2",
-        "subtitle": "",
-        "address": "서울 강서구 가로공원로 173",
-        "content": "<p>추연선 그룹 내용입니다2</p><p><br></p><p><img src=\"/media/django-summernote/2023-06-12/bea893ee-ef5a-46e2-ba7f-199893b655ba.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 4,
+        "user": 5,
+        "title": "소프트웨어 개발 (게임 제작) 모임",
+        "subtitle": "소프트웨어 개발 능력을 향상시키는 모임입니다!",
+        "address": "인천 부평구 체육관로 18",
+        "content": "<p>소프트웨어 개발 능력을 길러 본인만의 게임을 만들어 보는 모임입니다!</p>",
+        "hits": 1,
         "day": "tuesday",
-        "region": "seoul",
+        "region": "incheon",
         "gender": "unisex",
         "propensity": "inactive",
         "category": "reading study",
-        "created_at": "2023-06-12T06:22:17.810Z",
-        "updated_at": "2023-06-12T06:28:55.092Z",
-        "like_users": [
-            8
-        ]
+        "created_at": "2023-06-14T07:14:10.526Z",
+        "updated_at": "2023-06-14T07:14:10.625Z",
+        "like_users": []
     }
 },
 {
     "model": "posts.group",
-    "pk": 9,
+    "pk": 29,
     "fields": {
-        "user": 8,
-        "title": "임지혜 그룹 제목입니다",
-        "subtitle": "",
-        "address": "서울 강북구 노해로 3",
-        "content": "<p>내용입니다</p><p><img src=\"/media/django-summernote/2023-06-12/ffa81e1c-e682-40dd-827c-be24b1d55c79.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 2,
-        "day": "wednesday",
+        "user": 5,
+        "title": "영화 감상 모임입니다.",
+        "subtitle": "재밌는 영화 같이 감상해요!",
+        "address": "서울 강남구 가로수길 5",
+        "content": "<p>재밌는 영화도 감상하고 식사까지 어떠세요?</p>",
+        "hits": 1,
+        "day": "thursday",
         "region": "seoul",
         "gender": "unisex",
         "propensity": "inactive",
-        "category": "diy",
-        "created_at": "2023-06-12T06:27:52.375Z",
-        "updated_at": "2023-06-12T06:28:48.721Z",
-        "like_users": [
-            5
-        ]
+        "category": "art music movie",
+        "created_at": "2023-06-14T07:15:29.345Z",
+        "updated_at": "2023-06-14T07:15:29.438Z",
+        "like_users": []
     }
 },
 {
     "model": "posts.group",
-    "pk": 10,
+    "pk": 30,
     "fields": {
-        "user": 8,
-        "title": "미술모임",
-        "subtitle": "",
-        "address": "서울 노원구 공릉로 95",
-        "content": "<p>미술내용</p><p><img src=\"/media/django-summernote/2023-06-12/b0d5c61e-1a30-4815-b99b-30b4c3362eba.jpg\" style=\"width: 400px;\"><br></p>",
-        "hits": 2,
+        "user": 5,
+        "title": "사진찍기 모임",
+        "subtitle": "자신만의 추억을 사진으로 간직해봐요!",
+        "address": "서울 마포구 한강난지로 28",
+        "content": "<p>자신만의 추억을 사진으로 간직해봐요!<br>본인의 가장 예쁜 순간을 서로가 사진으로 남겨주는 모임입니다.</p>",
+        "hits": 1,
+        "day": "sunday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "sports",
+        "created_at": "2023-06-14T07:16:35.358Z",
+        "updated_at": "2023-06-14T07:18:22.972Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 31,
+    "fields": {
+        "user": 5,
+        "title": "베이킹 모임",
+        "subtitle": "같이 맛있는 빵을 만들어봐요!",
+        "address": "인천 부평구 체육관로 24",
+        "content": "<p>같이 맛있는 빵을 만들어봐요!<br>베이킹 능력을 기르며 동시에 맛있는 빵을 먹는 모임입니다!</p>",
+        "hits": 1,
+        "day": "friday",
+        "region": "incheon",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "cook",
+        "created_at": "2023-06-14T07:17:57.664Z",
+        "updated_at": "2023-06-14T07:17:57.758Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 32,
+    "fields": {
+        "user": 5,
+        "title": "드라이브 모임",
+        "subtitle": "같이 드라이브 하실분~!",
+        "address": "서울 중구 한강대로 405",
+        "content": "<p>한강에서 탁 트인 경치와 함께 스트레스를 풀어보는 드라이브 모임입니다.</p>",
+        "hits": 1,
         "day": "thursday",
         "region": "seoul",
         "gender": "unisex",
         "propensity": "active",
+        "category": "healing",
+        "created_at": "2023-06-14T07:19:48.260Z",
+        "updated_at": "2023-06-14T07:19:48.351Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 33,
+    "fields": {
+        "user": 4,
+        "title": "클라이밍 모임",
+        "subtitle": "같이 스릴 즐기실분 ~!",
+        "address": "인천 계양구 계양산로 1",
+        "content": "<p>클라이밍을 통해 건강과 스릴을 챙기실 분들에게 어울리는 모임입니다!</p>",
+        "hits": 1,
+        "day": "wednesday",
+        "region": "incheon",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "sports",
+        "created_at": "2023-06-14T07:21:30.776Z",
+        "updated_at": "2023-06-14T07:21:30.879Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 34,
+    "fields": {
+        "user": 6,
+        "title": "반려동물 산책 모임",
+        "subtitle": "반려동물과 함께 산책하실분~!",
+        "address": "서울 광진구 강변북로 2273",
+        "content": "<p>반려동물의 행복과 사람의 행복을 동시에 느낄 수 있는 모임입니다!</p>",
+        "hits": 1,
+        "day": "wednesday",
+        "region": "seoul",
+        "gender": "unisex",
+        "propensity": "active",
+        "category": "healing",
+        "created_at": "2023-06-14T07:23:17.955Z",
+        "updated_at": "2023-06-14T07:23:18.052Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 35,
+    "fields": {
+        "user": 7,
+        "title": "캔들 만들기 모임",
+        "subtitle": "캔들 같이 만들어보실분~",
+        "address": "인천 부평구 체육관로 32",
+        "content": "<p>캔들 만드는 과정이 궁금하시거나 캔들을 만들어 보고 싶은 분들은 모두 참여해주세요~!</p>",
+        "hits": 1,
+        "day": "wednesday",
+        "region": "incheon",
+        "gender": "female",
+        "propensity": "inactive",
+        "category": "diy",
+        "created_at": "2023-06-14T07:24:53.086Z",
+        "updated_at": "2023-06-14T07:24:53.177Z",
+        "like_users": []
+    }
+},
+{
+    "model": "posts.group",
+    "pk": 36,
+    "fields": {
+        "user": 8,
+        "title": "음악 감상 모임입니다.",
+        "subtitle": "음악 같이 감상하실분~!",
+        "address": "경기 부천시 계남로 19",
+        "content": "<p>각자의 음악 취향을 공유하는 모임입니다~!</p>",
+        "hits": 1,
+        "day": "tuesday",
+        "region": "gyeonggi-do",
+        "gender": "female",
+        "propensity": "inactive",
         "category": "art music movie",
-        "created_at": "2023-06-12T06:28:33.034Z",
-        "updated_at": "2023-06-12T06:28:58.804Z",
-        "like_users": [
-            5
-        ]
+        "created_at": "2023-06-14T07:26:32.986Z",
+        "updated_at": "2023-06-14T07:26:33.077Z",
+        "like_users": []
     }
 }
 ]

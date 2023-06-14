@@ -1,10 +1,9 @@
-// card 게시물 상단 좋아요 비동기(하트 아이콘)
-var likeforms = document.querySelectorAll( `.like-form` );
+var likeforms = document.querySelectorAll( `.HHlike-form` );
+var csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
 
 likeforms.forEach((form) => {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    const csrftoken = document.querySelector( `[name=csrfmiddlewaretoken]` ).value;
     const postId = event.target.dataset.postId;
     axios({
       method: 'post',
@@ -29,4 +28,3 @@ likeforms.forEach((form) => {
     });
   });
 });
-

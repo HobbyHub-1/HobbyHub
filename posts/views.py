@@ -13,9 +13,9 @@ from django.db.models import Count
 # Create your views here.
 # 1 index
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-created_at')
     like_posts = Post.objects.annotate(like_count=Count('like_users')).order_by('-like_count')[:4]
-    hit_posts = Post.objects.order_by('-hits')[:8]
+    hit_posts = Post.objects.order_by('-hits')
 
     categories = posts.values_list('category', flat=True).distinct()
     category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
@@ -36,7 +36,7 @@ def index(request):
         selected_tags = selected_slugs.split(',')
         posts = posts.filter(tags__slug__in=selected_tags).distinct()
     else:
-        posts = posts[4:]
+        posts = posts[:8]
     context ={
         'posts': posts,
         'like_posts': like_posts,
@@ -280,7 +280,6 @@ def group_list(request):
 
     filtered_groups = Group.objects.filter(filter_args).distinct()
     filtered_groups_count = filtered_groups.count()
-    print("필터링된 그룹 개수:", filtered_groups_count)
 
     group_images = []
     for group in filtered_groups: 
@@ -489,16 +488,27 @@ def category(request, subject):
     }
     category_subject = category_choices.get(subject, '')
     posts = Post.objects.filter(category=subject)
-    groups = Group.objects.filter(category=subject)
 
-    for group in groups:
-        group.like_count = group.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+    for post in posts:
+        post.like_count = post.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
 
-    groups = sorted(groups, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+    posts = sorted(posts, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+
+    image_mapping = {
+        '운동 스포츠': 'img/20210918505437.jpg',
+        'DIY 공예': 'img/md_5b2115306e4f2.jpg',
+        '독서 공부': 'img/reading.jpeg',
+        '미술 음악 영화': 'img/art.jpeg',
+        '힐링': 'img/healing.jpg',
+        '요리': 'img/cook2.jpg',
+        '문화 활동': 'img/Cultural.jpg'
+    }
+
+    image_path = image_mapping.get(category_subject, '')
 
     context = {
         'posts': posts,
-        'groups': groups,
         'category_subject': category_subject,
+        'image_path': image_path,
     }
-    return render(request, 'posts/category.html', context)
+    return render(request, 'posts/category2.html', context)

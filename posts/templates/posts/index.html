@@ -7,33 +7,68 @@
 {% endblock link %}
 {% block title %}HobbyHub{% endblock title %}
 {% block content %}
-  <div class="container">
-
-    <!-- 케로젤 -->
-    <div class="carousel_container">
-      <div class="carousel">
-        <div class="slides">
-          <img class="slide w-100" src="https://i.pinimg.com/564x/60/1e/63/601e63a60b651de03c34c8c2baf04b6e.jpg" alt="Slide 2">
-          <img class="slide w-100" src="https://i.pinimg.com/564x/f1/04/1e/f1041e3b553da9ac2e4492bb8e48f897.jpg" alt="Slide 1">
-          <img class="slide w-100" src="https://picsum.photos/seed/3/1920/1080" alt="Slide 3">
-        </div>
-        <button class="prev-button">&lt;</button>
-        <button class="next-button">&gt;</button>
-        <div class="dots">
-          <button class="dot"></button>
-          <button class="dot"></button>
-          <button class="dot"></button>
+<!-- 케로젤 -->  
+<div class="carousel_container">
+  <div class="carousel">
+    <div class="slides">
+      <div class="slide w-100">
+        <div class="c1-banner">
+          <div class="c-banner1">
+            <div>
+              <p class="c-t1">STUDY</p>
+              <p class="c-t2">글쓰기는 자기 발견과 성장의 기회입니다.</p>
+              <p class="c-t2">매일 조금씩 나아지는 모습이 나의 진정한 성공입니다.</p>
+            </div>
+            <img src="https://www.nicetomeetme.kr/images/main/store_icon.png" alt="배너" class="c-banner-img">
+          </div>
         </div>
       </div>
+      <div class="slide w-100">
+        <div class="c2-banner">
+          <div class="c-banner1">
+          <div>
+            <p class="c-t1">ACTIVITY</p>
+            <p class="c-t2">스포츠는 몸과 마음을 강화하는 길입니다.</p>
+            <p class="c-t2">운동은 스트레스를 해소하고 자신감을 키우는 방법입니다.</p>
+          </div>
+          <img src="https://cdn-icons-png.flaticon.com/512/901/901788.png?w=1060&t=st=1686644544~exp=1686645144~hmac=2fe3408d80af5f22a259548b6d3e7056237fa3f735e1cf3fd42bd40f78e5c687" alt="배너" class="c-banner-img">
+        </div>
+      </div>
+      </div>
+      <div class="slide w-100">
+        <div class="c3-banner">
+          <div class="c-banner1">
+          <div>
+            <p class="c-t1">COOK</p>
+            <p class="c-t2">요리는 소중한 추억을 만들어줍니다</p>
+            <p class="c-t2">음식은 사람들을 함께 모으는 힘이 있습니다.</p>
+          </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/985/985478.png?w=1060&t=st=1686644496~exp=1686645096~hmac=2400acefd5466edb39a6db31c274b13b24fcdd8f2b01d12e53a0ab0857f40b16" alt="배너" class="c-banner-img">
+      </div>
     </div>
-<div class="border">
+      </div>
+    </div>
+    <button class="prev-button">&lt;</button>
+    <button class="next-button">&gt;</button>
+    <div class="dots">
+      <button class="dot"></button>
+      <button class="dot"></button>
+      <button class="dot"></button>
+    </div>
+  </div>
+</div> 
+
+
   {% include "subdivision.html" %}
+  <div class="container">
+<div class="border">
 </div>
-  <h2 class="like-posts d-block m-4">좋아요 버튼 누른 수에 따라 인기 취미 4개 </h2>
+<div class="container">
+  <h2 class="like-posts d-block m-4">지금 가장 인기있는 취미</h2>
   <!-- card 목록 -->
-  <div class="d-flex flex-wrap m-4 px-1">
+  <div class="d-flex flex-wrap m-4 px-1 justify-content-center">
     {% for post in like_posts %}
-      <a class="card_single mx-2" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+      <a class="card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
         <div class="card_img">
           <form class="like-form" data-post-id="{{ post.pk }}">
             {% csrf_token %}
@@ -50,7 +85,7 @@
           {% for image in post.postimage_set.all %}
             {% if image.image.url %}
               {% if forloop.first %}
-                <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: auto;">
               {% endif %}
             {% else %}
               <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
@@ -75,19 +110,19 @@
             </div>
           </div>
           <div class="card_content">
-            {{ post.content|truncatechars:'20' | safe }}
+            {{ post.subtitle }}
           </div>
         </div>
       </a>
     {% endfor %}
   </div>
     <hr>
-    <h2 class="theme-posts d-block m-4">테마별 취미 모음</h2>
+    <h2 class="d-block m-4">테마별 취미 모음</h2>
     <!-- card 목록 -->
-    <div class="d-flex flex-wrap m-4 px-1">
+    <div class="d-flex flex-wrap m-4 px-1 justify-content-center">
       {% comment %} 최신순으로 출력 {% endcomment %}
-      {% for post in posts|slice:"4:" %} 
-        <a class="theme_card_single mx-2" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+      {% for post in posts %} 
+        <a class="theme_card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
           <div class="card_img">
             <form class="like-form" data-post-id="{{ post.pk }}">
               {% csrf_token %}
@@ -104,7 +139,7 @@
             {% for image in post.postimage_set.all %}
               {% if image.image.url %}
                 {% if forloop.first %}
-                  <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                  <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: auto;">
                 {% endif %}
               {% else %}
                 <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
@@ -129,7 +164,7 @@
               </div>
             </div>
             <div class="card_content">
-              {{ post.content|truncatechars:'20' | safe }}
+              {{ post.subtitle }}
             </div>
           </div>
         </a>
@@ -140,7 +175,7 @@
 
 <!-- 태그 필터링 버튼 -->
 <div class="p-2">
-  <h6 class="text-muted mb-3 ms-2"></h6>
+  <h6 class="text-muted ms-2"></h6>
   <button class="btn btn-outline-secondary btn-sm hobby-tags-btn" data-slug="all">전체</button>
   {% for tag in tags %}
     {% if request.GET.tags == tag.slug %}
@@ -152,11 +187,12 @@
 </div>
 <hr>
 
-<h2 class="hit-posts d-block m-4">전체 취미목록</h2>
+<h2 class="d-block m-4">전체 취미목록</h2>
 <!-- card 목록 -->
-<div class="d-flex flex-wrap m-4 px-1">
+<div class="hit-posts d-flex flex-wrap m-4 px-1 justify-content-center">
   {% for post in hit_posts %}
-    <a class="card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+  <div class="morePosts mx-2 mb-4" id="morePosts{{ forloop.counter }}">
+    <a class="hit_card_single" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
       <div class="card_img">
         <form class="like-form" data-post-id="{{ post.pk }}">
           {% csrf_token %}
@@ -173,7 +209,7 @@
         {% for image in post.postimage_set.all %}
           {% if image.image.url %}
             {% if forloop.first %}
-              <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: auto;">
             {% endif %}
           {% else %}
             <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
@@ -198,19 +234,26 @@
           </div>
         </div>
         <div class="card_content">
-          {{ post.content|truncatechars:'20' | safe }}
+          {{ post.subtitle }}
         </div>
       </div>
     </a>
+  </div>
   {% endfor %}
+</div>
+<div class="d-flex mb-2">
+  <button id="newPostsBtn" class="mx-auto btn btn-secondary">더보기</button>
 </div>
 <hr>
 </div>
+
+{% include 'banner.html' %}
 
 {% endblock content %}
 {% block script %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="{% static 'js/index.js' %}"></script>
-  <script src="{% static 'js/carousel.js' %}"></script>
+  {% comment %} <script src="{% static 'js/carousel.js' %}"></script> {% endcomment %}
+  <script src="{% static 'js/index_more_button.js' %}"></script>
   <script src="{% static 'js/navbar.js' %}"></script>
 {% endblock script %}
