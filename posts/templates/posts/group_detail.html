@@ -4,7 +4,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
   <link rel="stylesheet" href="{% static 'css/group_detail.css' %}">
-  <link rel="stylesheet" href="{% static 'css/group_detail.scss' %}">
 {% endblock link %}
 {% block title %}Group{% endblock title %}
 {% block content %}
@@ -13,12 +12,12 @@
 <!-- ## 화면 상단 케로젤+정보 ## -->
   <div class="row mt-5">
     <!-- 케로젤 이미지 -->
-    <div class="group_detail_carousel_container col-lg-8 my-3 p-0">
+    <div class="group_detail_carousel_container col my-3 p-0">
       <div class="carousel">
         <div class="slides">
             <!-- 그룹 이미지 표시 -->
           {% for group_image in group_images %}
-            <img class="slide" src="{{ group_image.image.url }}" alt="Slide 1">
+            <img class="slide" src="{{ group_image.image.url }}" alt="Slide 1"   srcset="{{ group_image.image.url }} 320w, {{ group_image.image.url }} 480w, {{ group_image.image.url }} 800w" sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px">
           {% endfor %}
         </div>
         <button class="prev-button">&lt;</button>
@@ -32,10 +31,11 @@
     </div>
 
     <!-- 주요 정보 -->
-    <div class="post_info col p-lg-4 ms-3">
-      <p class="category">{{ group.get_category_display }}</p>
+    <div class="post_info col-lg-4 p-lg-4 ms-3">
+      <span class="category">{{ group.get_category_display }}</span>
       <h2 class="title">{{ group.title }}</h2>
       <h5 class="subtitle">{{ group.subtitle }}</h5>
+
       <!-- 그룹 작성자 프로필 -->
       <div class="user justify-content-center my-4">
         {% if group.user.profile_image %}
@@ -47,7 +47,8 @@
       </div>
 
       <hr style="color: rgb(238, 128, 65);">
-      <div class="mt-4">
+
+      <div class="mt-4 icons">
         <p class="day">
           <i class="bi bi-calendar-check-fill me-2"></i>
           {{ group.day }}
@@ -57,6 +58,7 @@
           {{ group.address }}
         </p>
         <p class="tags">
+          <i class="bi bi-tags-fill me-2"></i>
           {% for tag in group.tags.all %} 
             #{{ tag }} 
           {% endfor %}
@@ -66,38 +68,38 @@
           {{ group.hits }}
         </p>
         <!-- 좋아요 -->
+        <div class="my-1">
           {% if request.user.is_authenticated %}
             <form id="group-likes-form" data-group-id="{{ group.pk }}">
               {% csrf_token %}
               {% if request.user in group.like_users.all %}
                 <button class="likebtn mb-2 align-content-center"  type="submit">
-                  <i class="bi bi-heart-fill" id="group-heart"></i>
+                  <i class="me-2 bi bi-heart-fill" id="group-heart"></i>
                   <span id="like-count">
-                    {{ group.like_users.count }}
+                    {{ group.like_users.all|length }}
                   </span>
                 </button>
               {% else %}
                 <button class="likebtn mb-2 align-content-center"  type="submit">
-                  <i class="bi bi-heart" id="group-heart"></i>
+                  <i class="me-2 bi bi-heart" id="group-heart"></i>
                   <span id="like-count">
-                    {{ group.like_users.count }}
+                    {{ group.like_users.all|length }}
                   </span>
                 </button>
               {% endif %}
             </form>
           {% else %}
             <button class="likebtn mb-2 align-content-center"  type="submit">
-              <i class="bi bi-heart" id="group-heart"></i>
+              <i class="me-2 bi bi-heart" id="group-heart"></i>
               <span id="like-count">
-                {{ group.like_users.count }}
+                {{ group.like_users.all|length }}
               </span>
             </button>
           {% endif %}
+        </div>
       </div>
 
-
-
-    <!-- 대표 이미지 나열 -->
+      <!-- 대표 이미지 나열 -->
       <div class="container-md post_detail_content my-4">
         {% for group_image in group_images %}
           <img class="col" width="100" src="{{ group_image.image.url }}" alt="Group Image">
@@ -107,13 +109,12 @@
       <!-- 삭제 수정 목록보기 : 버튼 -->
       <div class="my-2 text-end buttons">
         {% if request.user == group.user %}
-          <a class="btn btn-outline-dark btn-sm" href="{% url 'posts:group_update' group.pk %}"><i class="bi bi-pencil-square"></i>수정하기</a>
-        <button class="btn btn-dark btn-sm d-inline" data-bs-toggle="modal" data-bs-target="#deleteModal">
-          삭제
-        </button>
+          <a class="btn btn-color btn-outline-light btn-sm" href="{% url 'posts:group_update' group.pk %}"><i class="bi bi-pencil-square"></i>수정하기</a>
+          <button class="btn btn-color btn-outline-light btn-sm d-inline" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          삭제</button>
         {% endif %}
         <!-- 완성후 목록보기 버튼은 삭제할 예정입니다. -->
-        <a class="btn btn-outline-dark btn-sm" href="{% url 'posts:group_list' %}">목록보기</a>
+        <a class="btn btn-color btn-outline-light btn-sm" href="{% url 'posts:group_list' %}">목록보기</a>
       </div>
 
     </div>
@@ -137,63 +138,69 @@
         <p class="">{{ group.content | safe }}</p>
       </div>
 
+      <!-- 위로가기 Top -->
       <div class="my-5 d-flex justify-content-center">
-        <a href="#" class="btn top" style="width: 10rem;">Top</a>
+        <a href="#" class="btn btn-color btn-outline-light">Top</a>
       </div>
 
 
-<!-- 댓글 -->
-      <div class="comments row p-3" id="comment">
+<!-- ## 댓글 ## -->
+      <div class="comments" id="comment">
         <h4>comment</h4>
-        <hr>
+
+        <hr style="color: rgb(238, 128, 65);">
+
         {% for comment in group_comments %}
-          <div class="">
-            <p>{{ comment.content }}</p>
-            <span class="d-inline text-muted">
-              {{ comment.user }}|
-              {{ comment.created_string }}
+          <div class="comment mx-3 my-3">
+            <p class="d-inline text-muted comment_info">
+              {{ comment.user }} {{ comment.created_string }}
+              <!-- 댓글 삭제 -->
               {% if request.user == comment.user %}
                 <form class="d-inline" action="{% url 'posts:group_comments_delete' group.pk comment.pk %}" method="POST">
                   {% csrf_token %}
-                  <input type="submit" class="btn btn-outline-secondary btn-sm ms-5" value="삭제">
+                  <input type="submit" class="btn btn-color btn-outline-light-secondary btn-sm ms-5" value="삭제">
                 </form>
               {% endif %}
-            </span>
+            </p>
+            <p>{{ comment.content }}</p>
           </div>
         {% endfor %}
-        <form class="mt-4" action="{% url 'posts:group_comments_create' group.pk  %}" method="POST">
+
+        <!-- 댓글 작성창 -->
+        <form class="mt-4 row w-100 m-0" action="{% url 'posts:group_comments_create' group.pk  %}" method="POST">
           {% csrf_token %}
-          {{ group_comment_form }}
-          <input type="submit">
+          <div class="col">
+            {{ group_comment_form.content }}
+          </div>
+          <input class="col-lg-1 btn btn-color btn-outline-light" type="submit" value="댓글 작성">
         </form>
       </div>
 
     </div>
   </div>
 </div>
-    
-    
+
 <!-- 삭제 모달 -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">그룹 삭제 확인</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>그룹을 삭제하시겠습니까?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
-        <form class="d-inline" action="{% url 'posts:group_delete' group.pk  %}" method="POST">
-          {% csrf_token %}
-          <input class="btn btn-danger" type="submit" value="예">
-        </form>
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">그룹 삭제 확인</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>그룹을 삭제하시겠습니까?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+          <form class="d-inline" action="{% url 'posts:group_delete' group.pk  %}" method="POST">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="예">
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 {% endblock content %}
