@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock link %}
+
+{% block title %}Category{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/category.css' %}">
+
+{% endblock style %}
+
+{% block content %}
+<div class='container my-4'>
+  <div class='row row-col-1 mt-5 row-cols-sm-2 d-flex align-items-center'>
+    <div class='col-12 col-sm-7 order-sm-1'>
+      <h3 class='text-center mb-1'>
+        <b>"{{ category_subject }}"</b>
+      </h3>
+      <br>
+      <h4 class='text-start lh-base'>
+        {% if category_subject == '운동 스포츠' %}
+            함께 운동하며 즐거움과 뿌듯함을 느껴보세요.
+          복잡한 생각으로 몸이 축 처진 날,
+          아무것도 이룬 것이 없다고 느껴지는 날 몸을 움직이세요.
+          몸과 마음은 동떨어져 있지 않고 직접적으로 연결된다는 것을 깨닫게 될 거예요.
+          마음이 어지러울 때, 고민하는 것을 멈추고 달려보는 것 어때요?
+          복잡한 생각에서 벗어나 되고 다시 도전할 힘이 솟아날 거예요!
+        {% elif category_subject == 'DIY 공예' %}
+          다양한 것들을 직접 만들어보면서 소통해요!
+          손재주가 뛰어난 당신 나만의 개성이 담긴 물건을 직접 만들어 보세요.
+          손재주가 뛰어나지 않더라도 괜찮아요, 처음에는 누구나 어려운걸요
+          두려워하지 않고 도전했을때 분명 좋은 나만의 '작품'이 만들어져있을거에요.
+        {% elif category_subject == '독서 공부' %}
+          내가 원하는 것을 나만의 속도로 파고드는 시간
+          새로운 것을 공부하고, 책을 읽는 이유는 내가 관성처럼 
+          살고 있는 세계를 다르게 보기 위함이예요. 
+          몰랐던 것을 새롭게 배우면, 
+          내가 당연하다고 생각했던 고정관념을 깰 수 있는 
+          다양한 시선을 만날 수 있으니까요. 
+          지금까지 ‘성과’를 위해 했던 공부에서 벗어나, 
+          나만의 속도로 재미있게 새로운 것을 배워볼까요? 
+          나와는 다른 인생을 경험한 책 속 화자를 보며 
+          평소에는 마주하지 못했던 감정과 생각을 만나게 될 거예요.
+        {% elif category_subject == '미술 음악 영화' %}
+          내 안의 숨은 감각과 욕구를 찾는 시간
+          음악을 듣고 그림을 그리고 영화를 감상하는 일은
+          나의 있는 그대로의 감각을 느끼는 일이에요. 
+          비슷한 취미를 가진 사람들과 자신이 느낀점을 나누며 생각의 폭을
+          넓혀보는 시간을 가지보면 너무 즐겁지 않을까요? 
+        {% elif category_subject == '힐링' %}
+          바쁘고 지친 일상 속에서 휴식과 힐링을 원하는 사람들이 넘쳐나는 요즘
+          잠시나마 지친 일상에서 멀어져 '힐링'하는 시간을 가져보면 어떨까요?
+          힐링은 어렵지 않아요, 도심에서 벗어나 자연을 즐겨보거나,
+          편안한 곳에서 차를 마시거나 당신이 사랑하는 모든 것들이
+          당신을 회복시켜주는 힐링 그 자체에요.
+        {% elif category_subject == '요리' %}
+          요리를 좋아하시는 분,
+          새로운 분들과 함께 요리를 하며 친해지고 싶으신 분,
+          혼자라서 양이 많아 요리할 엄두가 안나셨던 분
+          요리를 좋아하고! 요리로 만나! 사람들과 함께 요리하며
+          다양한 경험을 나누며 즐겁게 요리해봐요!
+        {% elif category_subject == '문화 활동' %}
+          문화 활동을 좋아하고 예술과 문화에 대한 경험을 나눠봐요.
+          연극, 춤, 전통놀이 등 다양한 문화 활동을 통해 예술과 문화에 대한
+          지식을 늘려보거나, 문화 예술계에서 활발한 활동을 하는 사람들과의
+          네트워킹 기회를 얻으며 새로운 친구들과 함께 문화 활동을 즐기며
+          즐겁고 유익한 시간을 보내요!
+        {% endif %}
+      </h4>
+    </div>
+    <div class='d-flex justify-content-center col-12 col-sm-5 order-sm-2 mb-3'>
+      <div class="d-flex align-items-center justify-content-center overflow-hidden rounded-circle" style="height: 400px; width: 400px; min-width: 300px; ">
+        <img src="{% static image_path %}" alt="Category Image" style="aspect-ratio: 1 / 1; width:100%">
+      </div>    
+    </div>
+  </div>
+
+  <div class='cardbox mt-5'>
+    <ul class='list-unstyled'>
+      {% for post in posts %}
+      <li>
+        <div class='card' style="width: 18rem;">
+          <a href="{% url 'posts:post_detail' post.pk %}">
+            <div class='card-body HHcard_img'>
+              <form class='HHlike-form' data-post-id="{{ post.pk }}">
+                {% csrf_token %}
+                {% if request.user in post.like_users.all %}
+                <button class='HHlikebtn' type="submit">
+                  <i class="bi bi-heart-fill" id="post-heart-{{ post.pk }}"></i>
+                </button>
+                {% else %}
+                <button class='likebtn' type="submit">
+                  <i class="bi bi-heart" id="post-heart-{{ post.pk }}"></i>
+                </button>
+                {% endif %}
+              </form>
+              {% for image in post.postimage_set.all %}
+              {% if image.image.url %}
+              {% if forloop.first %}
+              <img src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              {% endif %}
+              {% else %}
+              <img src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+              {% endif %}
+              {% endfor %}
+            </div>
+            <div>
+              <div class='card-title'>
+                {{ post.title }}
+              </div>
+              <div class='card-text'>
+                <p class='text-secondary text-end'>{{ post.user }}</p>
+                <p class='text-secondary text-end'>{{ category_subject }}</p>
+                {% for tag in post.tags.all %}
+                <p>#{{ tag }}</p>
+                {% endfor %}
+              
+                {{ post.content|truncatechars:'20' | safe }}
+              
+                조회수: {{ post.hits }}
+              </div>
+            </div>
+          </a>
+        </div>
+      </li>
+      {% empty %}
+      <h2>해당 카테고리에 대한 취미가 없습니다.</h2>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@0.9.15/dist/js/bootstrap-multiselect.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/category.js' %}"></script>
+{% endblock script %}

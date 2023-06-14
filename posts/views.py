@@ -489,14 +489,26 @@ def category(request, subject):
     category_subject = category_choices.get(subject, '')
     posts = Post.objects.filter(category=subject)
 
-    for group in groups:
-        group.like_count = group.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+    for post in posts:
+        post.like_count = post.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
 
-    groups = sorted(groups, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+    posts = sorted(posts, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+
+    image_mapping = {
+        '운동 스포츠': 'img/20210918505437.jpg',
+        'DIY 공예': 'img/md_5b2115306e4f2.jpg',
+        '독서 공부': 'img/reading.jpeg',
+        '미술 음악 영화': 'img/art.jpeg',
+        '힐링': 'img/healing.jpg',
+        '요리': 'img/cook2.jpg',
+        '문화 활동': 'img/Cultural.jpg'
+    }
+
+    image_path = image_mapping.get(category_subject, '')
 
     context = {
         'posts': posts,
-        'groups': groups,
         'category_subject': category_subject,
+        'image_path': image_path,
     }
-    return render(request, 'posts/category copy.html', context)
+    return render(request, 'posts/category2.html', context)
