@@ -448,6 +448,7 @@ def group_likes(request, group_pk):
         is_liked = True
     context = {
         'is_liked': is_liked,
+        'like_count': group.like_users.count(),
     }
     return JsonResponse(context)
 
