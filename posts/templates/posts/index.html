@@ -57,8 +57,10 @@
     </div>
   </div>
 </div> 
-{% include "subdivision.html" %}
-<div class="container">
+
+
+  {% include "subdivision.html" %}
+  <div class="container">
 <div class="border">
 </div>
 <div class="container">
@@ -251,7 +253,7 @@
 {% block script %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="{% static 'js/index.js' %}"></script>
+  {% comment %} <script src="{% static 'js/carousel.js' %}"></script> {% endcomment %}
   <script src="{% static 'js/index_more_button.js' %}"></script>
-  <script src="{% static 'js/carousel.js' %}"></script>
   <script src="{% static 'js/navbar.js' %}"></script>
 {% endblock script %}

@@ -49,7 +49,7 @@ header {
 }
 
 /* 모바일 환경에서 사용될 스타일 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
   body {
     padding-bottom: 50px;
   }
@@ -82,7 +82,7 @@ header {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   #nav .container-lg nav {
     margin-right: 0px;
     margin-left: 0px;
@@ -107,7 +107,7 @@ header {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .navbar .left-nav-links div img{
     display: none;
   }
