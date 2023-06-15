@@ -41,5 +41,10 @@ hotfix : 버그 혹은 오류 수정용
 # 커밋 메세지 입력
 git add { 내가 수정하고 커밋할 내용만 }
 git commit
+```
 
+4. loaddata
+```
+# 더미 데이터 한번에 불러오기
+python manage.py posts/fixtures/*.json
 ```
