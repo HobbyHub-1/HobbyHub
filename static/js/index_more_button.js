@@ -1,6 +1,6 @@
 // 더보기 버튼 기능
 let visibleCount = 8; // 초기에 보여지는 게시물 수
-const incrementCount = 8; // 더보기 버튼을 클릭할 때마다 추가로 보여지는 게시물 수
+const incrementCount = 12; // 더보기 버튼을 클릭할 때마다 추가로 보여지는 게시물 수
 const morePostsDivs = document.querySelectorAll('.morePosts');
 const newPostsBtn = document.getElementById('newPostsBtn');
 
