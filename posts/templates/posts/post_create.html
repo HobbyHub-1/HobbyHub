@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% block link %}
-  <!-- include libraries(jQuery, bootstrap) -->
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
-  <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- include summernote css/js-->
-  <link href="summernote-bs5.css" rel="stylesheet">
-  <script src="summernote-bs5.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 {% endblock link %}
-{% block title %}post_create{% endblock title %}
+{% block title %}Creat Hobby{% endblock title %}
 {% block style %}
   <style>
     .body-container {
@@ -30,7 +25,7 @@
       <!-- 대표 이미지 -->
       {{ post_image_form.as_p }}
       <!-- 세부 내용 작성 -->
-      <div id="summernote">{{ post_form.content }}</div>
+      <textarea id="summernote" name="content"></textarea>
       <!-- 카테고리 -->
       <strong class="ms-2">카테고리</strong>
       <div>{{ post_form.category }}</div>
@@ -50,11 +45,13 @@
   </div>
 
   {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
   {% endif %}
 
   <!-- 게시글 작성 모달 -->
@@ -75,15 +72,35 @@
       </div>
     </div>
   </div>
-{% endblock content %}
-{% block script %}
 <script>
-  $(document).ready(function() {
+  $(function(){
     $('#summernote').summernote({
-      placeholder: 'Hello Bootstrap 4',
+      placeholder: '내용을 입력하세요.',
       tabsize: 2,
-      height: 100
+      height: 400,  
+      width:"100%",
+      lang : 'ko-KR',
+        //이미지 업로드 시 width 적용
+      callbacks: {
+        onImageUpload: function(image) {
+            console.log('in');
+            const file = image[0];
+            const reader = new FileReader();
+            reader.onloadend = function() {
+              const image = $('<img>').attr('src',  reader.result);
+              image.attr('width','25%');
+              $('#summernote').summernote("insertNode", image[0]);
+            }
+            reader.readAsDataURL(file);
+        }
+      }
     });
+
+    const markupStr = '{{form.content.value|safe|addslashes|default_if_none:''}}'
+    $('#summernote').summernote('code', markupStr);
   });
 </script>
+{% endblock content %}
+{% block script %}
+  <script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
 {% endblock script %}

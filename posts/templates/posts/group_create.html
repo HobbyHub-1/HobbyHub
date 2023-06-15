@@ -1,13 +1,8 @@
 {% extends 'base.html' %}
 {% block link %}
-  <!-- include libraries(jQuery, bootstrap) -->
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
-  <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- include summernote css/js-->
-  <link href="summernote-bs5.css" rel="stylesheet">
-  <script src="summernote-bs5.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 {% endblock link %}
 {% block title %}Group create{% endblock title %}
 {% block style %}
@@ -63,7 +58,7 @@
       <div>{{ group_form.title }}</div>
       <div>{{ group_form.subtitle }}</div>
       <!-- 세부 설명 입력 -->
-      <div>{{ group_form.content }}</div>
+      <textarea id="summernote" name="content"></textarea>
       <!-- 태그 입력 -->
       <div>{{ group_form.tags }}<span class="ms-1">※ 콤마(,)로 태그를 분리합니다.</span>
       </div>
@@ -75,31 +70,45 @@
   </div>
 
   {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
-<div class="modal fade" id="createConfirmationModal" tabindex="-1" aria-labelledby="createConfirmationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createConfirmationModalLabel">그룹 생성</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        그룹을 생성하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-primary" id="createGroupBtn">생성하기</button>
+  <!-- 모임 게시글 작성 모달 -->
+  <div class="modal fade" id="createConfirmationModal" tabindex="-1" aria-labelledby="createConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createConfirmationModalLabel">그룹 생성</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          그룹을 생성하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-primary" id="createGroupBtn">생성하기</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
+<script>
+  $('#summernote').summernote({
+    placeholder: '내용을 입력하세요.', 
+    tabsize: 2, 
+    height: 120
+  });
+  $(document).ready(function () {
+    $('#summernote').summernote({
+      lang: 'ko-KR' // default: 'en-US'
+    });
+  });
+</script>
 {% endblock content %}
 
 {% block script %}
@@ -170,28 +179,6 @@
     var addressSearchBtn = document.getElementById('addressSearchBtn');
     addressSearchBtn.addEventListener('click', sample5_execDaumPostcode);
   </script>
-  <script src="lang/summernote-ko-KR.js"></script>
-  <script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
-  <script>
-      $(document).ready(function() {
-      //여기 아래 부분
-      $('#summernote').summernote({
-          height: 300,                 // 에디터 높이
-          minHeight: null,             // 최소 높이
-          maxHeight: null,             // 최대 높이
-        });
-      });
-      focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-    </script>
-    <script> 
-      $('#summernote').summernote({
-        placeholder: '여기에 내용 입력하세요~',
-        tabsize: 2,
-        height: 100
-      });
-    $('.dropdown-toggle').dropdown()
-  </script> 
-  
   <script>
     var createGroupForm = document.getElementById('createGroupForm');
     var createGroupBtn = document.getElementById('createGroupBtn');
@@ -200,5 +187,5 @@
       createGroupForm.submit();
     });
   </script>
-
+  <script src="https://github.com/summernote/summernote/tree/master/lang/summernote-ko-KR.js"></script>
 {% endblock script %}

@@ -3,9 +3,6 @@ from .models import Post, PostImage, PostComment, Group, GroupImage, GroupCommen
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 
-class SomeForm(forms.Form):
-    content = forms.CharField(widget=SummernoteWidget()) 
-
 class PostForm(forms.ModelForm):
     title = forms.CharField(label='',
         widget = forms.TextInput(
@@ -28,10 +25,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ( 'title','subtitle', 'category', 'content',  'tags',)
-        widgets = {
-            'content': SummernoteWidget(),
-        }
-        labels =None
+        widgets = {'content': SummernoteWidget(),}
 
 class PostImageFrom(forms.ModelForm):
     image = forms.ImageField(
@@ -94,9 +88,7 @@ class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ('title', 'subtitle','category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
-        widgets = {
-            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '500px'}}),
-        }
+        widgets = {'content': SummernoteWidget(),}
 
 
 class GroupImageFrom(forms.ModelForm):
