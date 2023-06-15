@@ -2,7 +2,7 @@
 {% load static %}
 {% block link %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="{% static 'css/group_list.css' %}">
+  {% comment %} <link rel="stylesheet" href="{% static 'css/group_list.css' %}"> {% endcomment %}
   <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
   <link rel="stylesheet" href="{% static 'css/card.css' %}">
 {% endblock link %}
@@ -58,15 +58,19 @@
             {% endfor %}
           </div>
           <div class="card_desc">
-            <div class="card_title d-flex align-content-center my-1">
+            <div class="card_title d-flex align-content-center">
               {{ group.title }}
             </div>
             <div class="info text-muted">
-              {{ group.user }}
-              {{ group.category }}
+              작성자:
+              {{ group.user }}<br>
+              카테고리:
+              {{ group.category }}<br>
+              태그:
               {% for tag in group.tags.all %}
                 #{{ tag }}
-              {% endfor %}
+              {% endfor %}<br>
+              조회수:
               {{ group.hits }}
             </div>
             <div class="card_content">
