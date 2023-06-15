@@ -6,37 +6,27 @@
 }
 
 @media (max-width: 575px) {
-  .order-sm-1 {
+  .order-sm-1 { 
     order: 2;
   }
-  .order-sm-2 {
+  .order-sm-2 { 
     order: 1;
   }
 }
 
-* {
+body {
   box-sizing: border-box;
 }
 
-.HHlike-form {
+.custom-container {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.HHlike-form { 
   position: absolute;
   top: 1em;
   right: 1em;
-}
-
-.HHlikebtn {
-  background: none;
-  border: none;
-}
-
-.HHcard_img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 290px;
-  height: 220px;
-  overflow: clip;
-  border-bottom: 2px solid rgb(23, 23, 23);
 }
 
 .card_container {
@@ -49,59 +39,53 @@ a.card_single {
   text-decoration: none;
 }
 
-/* card 목록 제목 */
-.card_single {
+.Hcard_single { 
   position: relative;
-  width: 292px;
+  width: 270px;
   height: 400px;
   padding: 0;
-  margin-right: 20px;
   background-color: rgb(255, 242, 225);
   border: 2px solid gray;
   border-radius: 10px;
 }
 
-
-/* card 이미지 */
-.card_img {
+.Hcard_img { 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 288px;
+  width: 267px;
   height: 220px;
   overflow: clip;
   border-bottom: 2px solid gray;
   border-radius: 10px 10px 0 0;
 }
-.like-form {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-}
+
 .likebtn {
   background: none;
   border: none;
 }
-i {
+
+.i {
   color: red;
   background: none;
   font: 1.5em bold;
 }
 
-/* card 내용 정보 */
-.card_desc {
+.Hcard_desc {
   display: flex;
   flex-flow: column nowrap;
   font-family: "S-CoreDream";
   font-weight: 500;
   padding: 16px 20px;
 }
-.card_desc > .card_title {
+
+.Hcard_desc > .card_title {
   color: rgb(23, 23, 23);
   font-size: 1.125rem;
   word-break: keep-all;
 }
-.card_desc > .card-content {
+
+.Hcard_desc > .card-content { 
   color: rgb(55, 55, 55);
   font-size: 0.875rem;
   font-weight: 500;
