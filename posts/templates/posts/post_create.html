@@ -37,7 +37,7 @@
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-dark btn-sm me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#createModal">
-          게시글 작성
+          취미 생성
         </button>
         <a class="btn btn-dark btn-sm" href="{% url 'posts:index' %}">뒤로가기</a>
       </div>
@@ -54,7 +54,7 @@
     </ul>
   {% endif %}
 
-  <!-- 게시글 작성 모달 -->
+  <!-- 취미 게시글 작성 모달 -->
   <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -79,25 +79,26 @@
       tabsize: 2,
       height: 400,  
       width:"100%",
-      lang : 'ko-KR',
         //이미지 업로드 시 width 적용
-      callbacks: {
-        onImageUpload: function(image) {
-            console.log('in');
-            const file = image[0];
-            const reader = new FileReader();
-            reader.onloadend = function() {
-              const image = $('<img>').attr('src',  reader.result);
-              image.attr('width','25%');
-              $('#summernote').summernote("insertNode", image[0]);
-            }
-            reader.readAsDataURL(file);
+      callbacks: { onImageUpload: function(image) {
+        console.log('in');
+        const file = image[0];
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          const image = $('<img>').attr('src',  reader.result);
+          image.attr('width','25%');
+          $('#summernote').summernote("insertNode", image[0]);
         }
-      }
+        reader.readAsDataURL(file);
+      }}
+    })
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $('#summernote').summernote({
+      lang: 'ko-KR' // default: 'en-US'
     });
-
-    const markupStr = '{{form.content.value|safe|addslashes|default_if_none:''}}'
-    $('#summernote').summernote('code', markupStr);
   });
 </script>
 {% endblock content %}

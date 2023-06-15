@@ -60,10 +60,11 @@
       <!-- 세부 설명 입력 -->
       <textarea id="summernote" name="content"></textarea>
       <!-- 태그 입력 -->
-      <div>{{ group_form.tags }}<span class="ms-1">※ 콤마(,)로 태그를 분리합니다.</span>
+      <div>{{ group_form.tags }}
+        <span class="ms-1">※ 콤마(,)로 태그를 분리합니다.</span>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-dark btn-sm me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#createConfirmationModal">그룹 만들기</button>
+        <button class="btn btn-dark btn-sm me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#createConfirmationModal">모임 만들기</button>
         <a class="btn btn-dark btn-sm" href="{% url 'posts:group_list' %}">뒤로가기</a>
       </div>
     </form>
@@ -98,11 +99,28 @@
     </div>
   </div>
 <script>
-  $('#summernote').summernote({
-    placeholder: '내용을 입력하세요.', 
-    tabsize: 2, 
-    height: 120
+  $(function(){
+    $('#summernote').summernote({
+      placeholder: '내용을 입력하세요.',
+      tabsize: 2,
+      height: 400,  
+      width:"100%",
+        //이미지 업로드 시 width 적용
+      callbacks: { onImageUpload: function(image) {
+        console.log('in');
+        const file = image[0];
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          const image = $('<img>').attr('src',  reader.result);
+          image.attr('width','25%');
+          $('#summernote').summernote("insertNode", image[0]);
+        }
+        reader.readAsDataURL(file);
+      }}
+    })
   });
+</script>
+<script>
   $(document).ready(function () {
     $('#summernote').summernote({
       lang: 'ko-KR' // default: 'en-US'
