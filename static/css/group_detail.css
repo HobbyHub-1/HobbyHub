@@ -84,7 +84,7 @@ a {
   width: 15px;
   height: 15px;
   margin: 5px;
-  background-color: white;
+  background-color:black;
   opacity: 0.5;
   border-radius: 50%;
   cursor: pointer;
@@ -92,7 +92,7 @@ a {
 }
 .dot:hover,
 .dot:hover {
-  background: gray;
+  background: lightslategray;
 }
 .active {
   background: gray;
