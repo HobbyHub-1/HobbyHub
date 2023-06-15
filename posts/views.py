@@ -487,12 +487,11 @@ def category(request, subject):
         'cultural activities': '문화 활동',
     }
     category_subject = category_choices.get(subject, '')
-    posts = Post.objects.filter(category=subject)
+
+    posts = Post.objects.filter(Q(category=category_subject) | Q(category=subject))
 
     for post in posts:
         post.like_count = post.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
-
-    posts = sorted(posts, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
 
     image_mapping = {
         '운동 스포츠': 'img/20210918505437.jpg',
