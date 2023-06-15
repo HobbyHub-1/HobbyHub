@@ -100,20 +100,16 @@ class GroupForm(forms.ModelForm):
 
 
 class GroupImageFrom(forms.ModelForm):
-    image = forms.ImageField(label='', widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True,},), required=False,)
+    image = forms.ImageField(
+        label='',
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True}),
+        required=False
+    )
 
     class Meta:
         model = GroupImage
-        fields = ('image',)  
+        fields = ('image',)
 
-    def clean(self):
-            cleaned_data = super().clean()
-            files = cleaned_data.get('image')
-
-            if files and len(files) > 80000:
-                raise forms.ValidationError('이미지는 최대 3개까지 선택할 수 있습니다.')
-
-            return cleaned_data
 
 class GroupCommentForm(forms.ModelForm):
     content = forms.CharField(
