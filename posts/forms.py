@@ -50,6 +50,9 @@ class PostImageFrom(forms.ModelForm):
 
 
 class PostCommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': '댓글을 입력하세요', }))
     class Meta:
         model = PostComment
         fields = ( 'content',)
@@ -92,7 +95,7 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ('title', 'subtitle','category', 'day','gender', 'propensity',  'region', 'address', 'content','tags',)
         widgets = {
-            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '400px'}}),
+            'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '500px'}}),
         }
 
 
@@ -101,10 +104,22 @@ class GroupImageFrom(forms.ModelForm):
 
     class Meta:
         model = GroupImage
-        fields = ('image',)        
+        fields = ('image',)  
 
+    def clean(self):
+            cleaned_data = super().clean()
+            files = cleaned_data.get('image')
+
+            if files and len(files) > 80000:
+                raise forms.ValidationError('이미지는 최대 3개까지 선택할 수 있습니다.')
+
+            return cleaned_data
 
 class GroupCommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': '댓글을 입력하세요', }))
     class Meta:
         model = GroupComment
         fields = ( 'content',)
+        

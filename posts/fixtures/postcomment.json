@@ -3,132 +3,132 @@
     "model": "posts.postcomment",
     "pk": 1,
     "fields": {
-        "post": 1,
-        "user": 5,
-        "content": "너무 멋져요",
-        "created_at": "2023-06-12T06:11:27.567Z",
-        "updated_at": "2023-06-12T06:11:27.567Z"
+        "post": 17,
+        "user": 8,
+        "content": "멋진 취미네요 👍👍👍",
+        "created_at": "2023-06-15T02:25:25.285Z",
+        "updated_at": "2023-06-15T02:25:25.285Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 2,
     "fields": {
-        "post": 1,
-        "user": 7,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:19:29.020Z",
-        "updated_at": "2023-06-12T06:19:29.020Z"
+        "post": 64,
+        "user": 8,
+        "content": "멋진 취미네요 👍👍👍",
+        "created_at": "2023-06-15T02:48:38.615Z",
+        "updated_at": "2023-06-15T02:48:38.615Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 3,
     "fields": {
-        "post": 4,
-        "user": 7,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:19:34.573Z",
-        "updated_at": "2023-06-12T06:19:34.573Z"
+        "post": 63,
+        "user": 8,
+        "content": "저도 배워보고싶어요",
+        "created_at": "2023-06-15T02:48:54.414Z",
+        "updated_at": "2023-06-15T02:48:54.415Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 4,
     "fields": {
-        "post": 6,
-        "user": 7,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:19:41.423Z",
-        "updated_at": "2023-06-12T06:19:41.423Z"
+        "post": 62,
+        "user": 8,
+        "content": "태!권!",
+        "created_at": "2023-06-15T02:49:11.191Z",
+        "updated_at": "2023-06-15T02:49:11.191Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 5,
     "fields": {
-        "post": 1,
+        "post": 61,
         "user": 8,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:22:41.871Z",
-        "updated_at": "2023-06-12T06:22:41.871Z"
+        "content": "후덜덜한 취미네요",
+        "created_at": "2023-06-15T02:49:29.269Z",
+        "updated_at": "2023-06-15T02:49:29.269Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 6,
     "fields": {
-        "post": 2,
+        "post": 60,
         "user": 8,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:22:53.284Z",
-        "updated_at": "2023-06-12T06:22:53.284Z"
+        "content": "릴렉스한 취미네요",
+        "created_at": "2023-06-15T02:49:47.470Z",
+        "updated_at": "2023-06-15T02:49:47.470Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 7,
     "fields": {
-        "post": 3,
-        "user": 8,
-        "content": "하이",
-        "created_at": "2023-06-12T06:22:59.979Z",
-        "updated_at": "2023-06-12T06:22:59.979Z"
+        "post": 59,
+        "user": 13,
+        "content": "멋진 취미네요",
+        "created_at": "2023-06-15T02:50:29.858Z",
+        "updated_at": "2023-06-15T02:50:29.858Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 8,
     "fields": {
-        "post": 4,
-        "user": 8,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:23:06.041Z",
-        "updated_at": "2023-06-12T06:23:06.041Z"
+        "post": 58,
+        "user": 13,
+        "content": "예전에 춤을 췄었는데, 추억이 새록새록한 취미네요",
+        "created_at": "2023-06-15T02:51:02.001Z",
+        "updated_at": "2023-06-15T02:51:02.001Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 9,
     "fields": {
-        "post": 5,
-        "user": 8,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:23:11.598Z",
-        "updated_at": "2023-06-12T06:23:11.598Z"
+        "post": 57,
+        "user": 5,
+        "content": "재밌을 것 같아요",
+        "created_at": "2023-06-15T02:51:38.987Z",
+        "updated_at": "2023-06-15T02:51:38.987Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 10,
     "fields": {
-        "post": 6,
-        "user": 8,
-        "content": "하이",
-        "created_at": "2023-06-12T06:23:18.002Z",
-        "updated_at": "2023-06-12T06:23:18.002Z"
+        "post": 17,
+        "user": 5,
+        "content": "좋아요d",
+        "created_at": "2023-06-15T02:51:53.022Z",
+        "updated_at": "2023-06-15T02:51:53.022Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 11,
     "fields": {
-        "post": 7,
-        "user": 8,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:23:23.426Z",
-        "updated_at": "2023-06-12T06:23:23.426Z"
+        "post": 2,
+        "user": 5,
+        "content": "한번 저만의 가구를 만들어보고 싶네요",
+        "created_at": "2023-06-15T02:52:22.995Z",
+        "updated_at": "2023-06-15T02:52:22.995Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 12,
     "fields": {
-        "post": 8,
-        "user": 8,
-        "content": "멋져요",
-        "created_at": "2023-06-12T06:23:30.733Z",
-        "updated_at": "2023-06-12T06:23:30.733Z"
+        "post": 61,
+        "user": 5,
+        "content": "한번 해보고싶어요",
+        "created_at": "2023-06-15T02:52:38.488Z",
+        "updated_at": "2023-06-15T02:52:38.488Z"
     }
 },
 {
@@ -136,54 +136,219 @@
     "pk": 13,
     "fields": {
         "post": 9,
-        "user": 8,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:23:37.411Z",
-        "updated_at": "2023-06-12T06:23:37.411Z"
+        "user": 5,
+        "content": "아크릴판에 그림 그려보고싶어요~",
+        "created_at": "2023-06-15T02:53:06.949Z",
+        "updated_at": "2023-06-15T02:53:06.949Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 14,
     "fields": {
-        "post": 8,
+        "post": 6,
         "user": 5,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:26:09.422Z",
-        "updated_at": "2023-06-12T06:26:09.422Z"
+        "content": "공간 정리도 하나의 취미군요!!",
+        "created_at": "2023-06-15T02:53:29.645Z",
+        "updated_at": "2023-06-15T02:53:29.646Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 15,
     "fields": {
-        "post": 9,
-        "user": 5,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:26:15.349Z",
-        "updated_at": "2023-06-12T06:26:15.349Z"
+        "post": 7,
+        "user": 12,
+        "content": "예전에는 자주 감상했었는데, 다시 해보고싶네요",
+        "created_at": "2023-06-15T02:54:22.733Z",
+        "updated_at": "2023-06-15T02:54:22.733Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 16,
     "fields": {
-        "post": 10,
-        "user": 5,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:26:20.517Z",
-        "updated_at": "2023-06-12T06:26:20.517Z"
+        "post": 31,
+        "user": 12,
+        "content": "보드게임 재밌죠 ㅋㅋㅋ",
+        "created_at": "2023-06-15T02:54:38.101Z",
+        "updated_at": "2023-06-15T02:54:38.101Z"
     }
 },
 {
     "model": "posts.postcomment",
     "pk": 17,
     "fields": {
-        "post": 11,
-        "user": 5,
-        "content": "좋아요",
-        "created_at": "2023-06-12T06:26:27.494Z",
-        "updated_at": "2023-06-12T06:26:27.494Z"
+        "post": 33,
+        "user": 12,
+        "content": "보람찬 사이클링~~^^",
+        "created_at": "2023-06-15T02:54:56.919Z",
+        "updated_at": "2023-06-15T02:54:56.919Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 18,
+    "fields": {
+        "post": 17,
+        "user": 12,
+        "content": "멋져요",
+        "created_at": "2023-06-15T02:55:12.785Z",
+        "updated_at": "2023-06-15T02:55:12.785Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 19,
+    "fields": {
+        "post": 25,
+        "user": 12,
+        "content": "명상, 마음이 편안해질 것 같은 취미네요",
+        "created_at": "2023-06-15T02:55:35.678Z",
+        "updated_at": "2023-06-15T02:55:35.678Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 20,
+    "fields": {
+        "post": 5,
+        "user": 12,
+        "content": "요즘 친구들이 많이 하더라고요",
+        "created_at": "2023-06-15T02:56:15.604Z",
+        "updated_at": "2023-06-15T02:56:15.605Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 21,
+    "fields": {
+        "post": 13,
+        "user": 12,
+        "content": "노래하면 난데 ㅎㅎ",
+        "created_at": "2023-06-15T02:56:39.334Z",
+        "updated_at": "2023-06-15T02:56:39.334Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 22,
+    "fields": {
+        "post": 20,
+        "user": 12,
+        "content": "오랜만에 드라이브 가고싶네요~",
+        "created_at": "2023-06-15T02:57:07.488Z",
+        "updated_at": "2023-06-15T02:57:07.489Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 23,
+    "fields": {
+        "post": 12,
+        "user": 14,
+        "content": "낚시 좋죠~",
+        "created_at": "2023-06-15T02:57:55.229Z",
+        "updated_at": "2023-06-15T02:57:55.229Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 24,
+    "fields": {
+        "post": 21,
+        "user": 14,
+        "content": "등산이 최고~!!",
+        "created_at": "2023-06-15T02:58:25.967Z",
+        "updated_at": "2023-06-15T02:58:25.967Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 25,
+    "fields": {
+        "post": 16,
+        "user": 14,
+        "content": "덕질이 진리다",
+        "created_at": "2023-06-15T02:58:49.325Z",
+        "updated_at": "2023-06-15T02:58:49.325Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 26,
+    "fields": {
+        "post": 29,
+        "user": 14,
+        "content": "이번주말에 우리 초코랑 산책해야겠어요~",
+        "created_at": "2023-06-15T02:59:21.339Z",
+        "updated_at": "2023-06-15T02:59:21.339Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 27,
+    "fields": {
+        "post": 30,
+        "user": 14,
+        "content": "빵빠라 빵빵빵",
+        "created_at": "2023-06-15T02:59:45.249Z",
+        "updated_at": "2023-06-15T02:59:45.249Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 28,
+    "fields": {
+        "post": 45,
+        "user": 14,
+        "content": "연극해보면 재밌을 것 같아요",
+        "created_at": "2023-06-15T03:00:21.783Z",
+        "updated_at": "2023-06-15T03:00:21.783Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 29,
+    "fields": {
+        "post": 44,
+        "user": 14,
+        "content": "여행 가고싶다 ㅠㅠ",
+        "created_at": "2023-06-15T03:00:46.781Z",
+        "updated_at": "2023-06-15T03:00:46.781Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 30,
+    "fields": {
+        "post": 16,
+        "user": 9,
+        "content": "재밌겠다",
+        "created_at": "2023-06-15T03:01:47.855Z",
+        "updated_at": "2023-06-15T03:01:47.855Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 31,
+    "fields": {
+        "post": 36,
+        "user": 9,
+        "content": "재밌겠네요~",
+        "created_at": "2023-06-15T04:00:24.309Z",
+        "updated_at": "2023-06-15T04:00:24.309Z"
+    }
+},
+{
+    "model": "posts.postcomment",
+    "pk": 32,
+    "fields": {
+        "post": 13,
+        "user": 9,
+        "content": "저도노래 잘해여",
+        "created_at": "2023-06-15T04:00:43.295Z",
+        "updated_at": "2023-06-15T04:00:43.295Z"
     }
 }
 ]

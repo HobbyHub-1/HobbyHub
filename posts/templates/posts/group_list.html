@@ -1,47 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block link %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="{% static 'css/group_list.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  {% comment %} <link rel="stylesheet" href="{% static 'css/group_list.css' %}"> {% endcomment %}
   <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
   <link rel="stylesheet" href="{% static 'css/card.css' %}">
 {% endblock link %}
-
 {% block title %}Group list{% endblock title %}
-
 {% block content %}
-  <div class="container mt-4">
-
-    <!-- 필터 버튼 -->
-    <div class="mb-2">
-      <button class="btn btn-outline-dark filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewbox="0 0 16 16">
-          <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-        </svg>
-        필터
-      </button>
+  <div class="container-md">
+    <div class="header mt-3">
+      <h2 class="d-block m-4" style="color: rgb(255, 104, 41)">
+        <b>소모임</b>
+      </h2>
+      <h4 class="d-block mx-4 mb-5">
+        <b>
+          하비허브 멤버들과 함께하는 소모임입니다.<br>
+          하비허브 멤버라면 누구나 소모임을 열고 참여할 수 있어요!
+        </b>
+      </h4>
     </div>
-    <h2 class="d-block m-4">전체 목록입니다.</h2>
+    <hr>
+
+    <div class="">
+      {% include "subdivision.html" %}
+    </div>
+
+    <!-- 필터 버튼 > 모달 89~247 -->
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <div class="mb-3">
+          <a href="{% url 'posts:group_create' %}" class="btn btn-dark"> + 모임 만들기</a>
+          <button class="btn btn-outline-dark filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewbox="0 0 16 16">
+              <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            필터
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- card 목록 -->
-    <div class="d-flex flex-wrap m-4 px-1">
+    <div class="card_container ps-1">
+
       {% for group in filtered_groups %}
-        <a class="card_single mx-2" href="{% url 'posts:group_detail' group.pk %}" data-tags="{% for tag in group.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+        <a class="card_single mx-2 mb-4" href="{% url 'posts:group_detail' group.pk %}" data-tags="{% for tag in group.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
           <div class="card_img">
-            <!-- 좋아요 버튼 -->
-            {% comment %} {% if request.user.is_authenticated %}
-              <form id="likes-form" data-group-id="{{ group.pk }}" class="index--heart flex-grow-1">
-                {% if request.user in group.like_users.all %}
-                  <i class="bi bi-heart-fill" ></i>
-                {% else %}
-                  <i class="bi bi-heart" id="group-heart"></i>
-                {% endif %}
-              </form>
-            {% else %}
-              <i class="bi bi-heart" id="group-heart"></i>
-            {% endif %} {% endcomment %}
             {% for image in group.groupimage_set.all %}
               {% if image.image.url %}
                 {% if forloop.first %}
@@ -53,16 +58,21 @@
             {% endfor %}
           </div>
           <div class="card_desc">
+            <div style="color: rgb(255, 104, 42); opacity: 0.7;">
+              {{ group.category }}
+            </div>
             <div class="card_title d-flex align-content-center my-1">
               {{ group.title }}
             </div>
-            <div class="info text-muted">
-              {{ group.user }}
-              {{ group.category }}
-              {% for tag in group.tags.all %}
-                #{{ tag }}
-              {% endfor %}
-              {{ group.hits }}
+            <div class="info text-muted mb-2">
+              <div class="user justify-content-center align-content-center">
+                {% if group.user.profile_image %}
+                  <img class="rounded-circle me-2" src="{{ group.user.profile_image.url }}" width="15px" alt="Profile Image">
+                {% else %}
+                  <img class="rounded-circle me-2" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="15px" alt="Default Profile Image">
+                {% endif %}
+                {{ group.user }}
+              </div>
             </div>
             <div class="card_content">
               {{ group.subtitle }}
@@ -71,49 +81,50 @@
         </a>
         {% empty %}
         <h2>해당 조건의 모임이 없습니다.</h2>
+
       {% endfor %}
     </div>
   </div>
 
   <!-- 필터 모달 -->
   <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content px-2">
+        <div class="modal-header p-4">
           <h5 class="modal-title" id="filterModalLabel">필터</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body p-4">
           <form method="get" action="{% url 'posts:group_list' %}">
             <div class="mb-3">
               <label for="days" id="label-bold" class="form-label">요일</label>
               <div class="filter-options">
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="monday">
+                  <input type="checkbox" name="day" value="월요일">
                   월
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="tuesday">
+                  <input type="checkbox" name="day" value="화요일">
                   화
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="wednesday">
+                  <input type="checkbox" name="day" value="수요일">
                   수
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="thursday">
+                  <input type="checkbox" name="day" value="목요일">
                   목
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="friday">
+                  <input type="checkbox" name="day" value="금요일">
                   금
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="saturday">
+                  <input type="checkbox" name="day" value="토요일">
                   토
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="day" value="sunday">
+                  <input type="checkbox" name="day" value="일요일">
                   일
                 </label>
               </div>
@@ -122,43 +133,43 @@
               <label for="regions" id="label-bold" class="form-label">지역</label>
               <div class="filter-options">
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="seoul">
+                  <input type="checkbox" name="region" value="서울">
                   서울
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="incheon">
+                  <input type="checkbox" name="region" value="인천">
                   인천
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="gyeonggi-do">
+                  <input type="checkbox" name="region" value="경기도">
                   경기도
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="gangwon-do">
+                  <input type="checkbox" name="region" value="강원도">
                   강원도
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="gyeong-nam">
+                  <input type="checkbox" name="region" value="경남">
                   경남
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="gyeong-buk">
+                  <input type="checkbox" name="region" value="경북">
                   경북
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="jeon-nam">
+                  <input type="checkbox" name="region" value="전남">
                   전남
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="jeon-buk">
+                  <input type="checkbox" name="region" value="전북">
                   전북
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="chung-nam">
+                  <input type="checkbox" name="region" value="충남">
                   충남
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="region" value="chung-buk">
+                  <input type="checkbox" name="region" value="충북">
                   충북
                 </label>
               </div>
@@ -167,15 +178,15 @@
               <label for="genders" id="label-bold" class="form-label">성별</label>
               <div class="filter-options">
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="gender" value="unisex">
+                  <input type="checkbox" name="gender" value="남/여">
                   모두
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="gender" value="male">
+                  <input type="checkbox" name="gender" value="남">
                   남
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="gender" value="female">
+                  <input type="checkbox" name="gender" value="여">
                   여
                 </label>
               </div>
@@ -184,44 +195,44 @@
               <label for="propensities" id="label-bold" class="form-label">활동성</label>
               <div class="filter-options">
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="propensity" value="active">
+                  <input type="checkbox" name="propensity" value="활동적">
                   활동적
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="propensity" value="inactive">
+                  <input type="checkbox" name="propensity" value="비활동적">
                   비활동적
                 </label>
               </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="categories" id="label-bold" class="form-label">카테고리</label>
               <div class="filter-options">
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="sports">
+                  <input type="checkbox" name="category" value="운동 스포츠">
                   운동 스포츠
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="diy">
+                  <input type="checkbox" name="category" value="DIY 공예">
                   DIY 공예
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="reading study">
+                  <input type="checkbox" name="category" value="독서 공부">
                   독서 공부
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="art music movie">
+                  <input type="checkbox" name="category" value="미술 음악 영화">
                   미술 음악 영화
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="healing">
+                  <input type="checkbox" name="category" value="힐링">
                   힐링
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="cook">
+                  <input type="checkbox" name="category" value="요리">
                   요리
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input type="checkbox" name="category" value="cultural activities">
+                  <input type="checkbox" name="category" value="문화 활동">
                   문화 활동
                 </label>
               </div>

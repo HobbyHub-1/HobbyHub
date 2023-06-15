@@ -63,7 +63,7 @@
     "model": "accounts.user",
     "pk": 4,
     "fields": {
-        "last_login": "2023-06-12T05:45:00.386Z",
+        "last_login": "2023-06-15T01:08:00.146Z",
         "is_superuser": false,
         "username": "ksh",
         "first_name": "",
@@ -83,7 +83,7 @@
     "model": "accounts.user",
     "pk": 5,
     "fields": {
-        "last_login": "2023-06-12T06:28:41.088Z",
+        "last_login": "2023-06-15T04:06:06.376Z",
         "is_superuser": false,
         "username": "kjh",
         "first_name": "",
@@ -103,7 +103,7 @@
     "model": "accounts.user",
     "pk": 6,
     "fields": {
-        "last_login": "2023-06-12T06:14:49.544Z",
+        "last_login": "2023-06-15T02:20:01.447Z",
         "is_superuser": false,
         "username": "cch",
         "first_name": "",
@@ -123,7 +123,7 @@
     "model": "accounts.user",
     "pk": 7,
     "fields": {
-        "last_login": "2023-06-12T06:18:45.597Z",
+        "last_login": "2023-06-15T01:43:08.127Z",
         "is_superuser": false,
         "username": "cys",
         "first_name": "",
@@ -143,7 +143,7 @@
     "model": "accounts.user",
     "pk": 8,
     "fields": {
-        "last_login": "2023-06-12T06:27:15.132Z",
+        "last_login": "2023-06-15T04:09:25.823Z",
         "is_superuser": false,
         "username": "ljh",
         "first_name": "",
@@ -153,6 +153,146 @@
         "is_active": true,
         "date_joined": "2023-06-12T05:44:09.139Z",
         "password": "pbkdf2_sha256$260000$SdXHhM4IajoWG2jkNekJ6m$Uj6HkFg/Mt41FpfZdUXeKEYY+lb3y0R5cIIVAYkq/Jo=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 9,
+    "fields": {
+        "last_login": "2023-06-15T04:11:54.094Z",
+        "is_superuser": false,
+        "username": "zzgh06",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T00:59:43.014Z",
+        "password": "pbkdf2_sha256$260000$p39YIwuElAflXtJENPa1D2$skVTGWD65ecRdMmVp3SHum7vRr0JsMyzZtxKN2RALsU=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 10,
+    "fields": {
+        "last_login": "2023-06-15T01:20:57.888Z",
+        "is_superuser": false,
+        "username": "하비하비",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T01:20:37.947Z",
+        "password": "pbkdf2_sha256$260000$FOXSqwaTMP8dBo8lAaj7pw$VLO3mbxNOhxD0w7YxfV+IiqvTmpDvVLanLv+ox0692Q=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 11,
+    "fields": {
+        "last_login": "2023-06-15T01:24:25.960Z",
+        "is_superuser": false,
+        "username": "aaa",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T01:24:05.422Z",
+        "password": "pbkdf2_sha256$260000$doSXeMs37ADJHm2pkfb3y8$s208WTChUDPJmHvSCRJyf+K79FRfxEwHv/HpgZLTa7E=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 12,
+    "fields": {
+        "last_login": "2023-06-15T04:13:57.720Z",
+        "is_superuser": false,
+        "username": "뉴진스",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T01:27:26.154Z",
+        "password": "pbkdf2_sha256$260000$HKxRAskqNqEgRno9VdulWV$26p909xcrMnUzyGMNoLJtNY8gon6DNaF6Xu952tUHE8=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 13,
+    "fields": {
+        "last_login": "2023-06-15T04:15:36.622Z",
+        "is_superuser": false,
+        "username": "레벨",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T01:30:17.010Z",
+        "password": "pbkdf2_sha256$260000$HZN1ZK5tk1cySc2HCec6Cz$lyV6LUI57OtmRMVk9bwpV+wOZV3FAtdTzcWkGyIzv1U=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 14,
+    "fields": {
+        "last_login": "2023-06-15T04:02:31.874Z",
+        "is_superuser": false,
+        "username": "잇지",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T01:56:57.137Z",
+        "password": "pbkdf2_sha256$260000$M5Eq56EnJMgiGngvDOwxej$Xh/vvkbMRMa9KwCqd7fnGzZSKvvBH7LbXyLWg0X7+hc=",
+        "profile_image": "",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 15,
+    "fields": {
+        "last_login": "2023-06-15T04:16:39.016Z",
+        "is_superuser": false,
+        "username": "르세라핌",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-15T02:11:31.092Z",
+        "password": "pbkdf2_sha256$260000$tKc4WTvC2LevrZ4TZfFZVz$eNGX/nYLXfLjsg/vhzZ9Ncmhq2DBGa62m2zDewZ+/G4=",
         "profile_image": "",
         "groups": [],
         "user_permissions": [],

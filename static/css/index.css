@@ -12,34 +12,44 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
 /* 케로젤 */
-.carousel_container {
+/* .carousel_container {
   overflow: clip;
   background: #f8f7fa;
   height: 400px;
   width: 100%;
   margin-bottom: 16px;
   border-bottom: 2px solid rgb(23, 23, 23);
-}
+} */
 
 /* card 목록 제목 */
 .card_single {
   position: relative;
   width: 292px;
   height: 400px;
-  padding: 0%;
+  padding: 0;
+  margin-right: 20px;
   background-color: rgb(255, 242, 225);
-  border: 2px solid rgb(23, 23, 23);
+  border: 2px solid gray;
+  border-radius: 10px;
 }
-
 .theme_card_single {
   position: relative;
   width: 292px;
   height: 400px;
   padding: 0%;
   background-color: rgb(255, 242, 225);
-  border: 2px solid rgb(23, 23, 23);
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+.hit_card_single {
+  position: relative;
+  width: 292px;
+  height: 400px;
+  padding: 0%;
+  background-color: rgb(255, 242, 225);
+  border: 2px solid gray;
+  border-radius: 10px;
 }
 
 /* card 이미지 */
@@ -47,10 +57,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 290px;
+  width: 289.5px;
   height: 220px;
   overflow: clip;
-  border-bottom: 2px solid rgb(23, 23, 23);
+  border-bottom: 2px solid gray;
+  border-radius: 10px 10px 0 0;
 }
 .like-form {
   position: absolute;
@@ -62,7 +73,7 @@ a {
   border: none;
 }
 i {
-  color: white;
+  color: red;
   background: none;
   font: 1.5em bold;
 }
@@ -86,4 +97,11 @@ i {
   font-weight: 500;
   word-break: keep-all;
   overflow: hidden;
+}
+.category {
+  font-style: bold 20px;
+  color: rgb(255, 104, 42);
+  font-weight: 600;
+  font-size: 18px;
+  padding-left: 2px;
 }

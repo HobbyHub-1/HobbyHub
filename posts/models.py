@@ -17,7 +17,7 @@ class Post(models.Model):
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_posts')
     title = models.CharField(max_length=50)
     subtitle = models.CharField(max_length=100, default='')
-    content = models.CharField(max_length=2000)
+    content = models.CharField(max_length=100000)
     hits = models.PositiveIntegerField(default=0)
     category = models.CharField(max_length=20)
     tags = TaggableManager(blank=True)
@@ -72,20 +72,20 @@ class Group(models.Model):
     content = models.CharField(max_length=2000)
     hits = models.PositiveIntegerField(default=0)
 
-    day_choices = (('monday', '월'), ('tuesday', '화'), ('wednesday', '수'), ('thursday', '목'), ('friday', '금'), ('saturday', '토'), ('sunday', '일'))
+    day_choices = (('월요일', '월요일'), ('화요일', '화요일'), ('수요일', '수요일'), ('목요일', '목요일'), ('금요일', '금요일'), ('토요일', '토요일'), ('일요일', '일요일'))
     day = models.CharField(max_length=10, choices=day_choices)
     
-    region_choices = (('seoul', '서울'), ('incheon', '인천'), ('gyeonggi-do', '경기도'), ('gangwon-do', '강원도'), 
-                      ('gyeong-nam', '경남'), ('gyeong-buk', '경북'), ('jeon-nam', '전남'), ('jeon-buk', '전북'), ('chung-nam', '충남'), ('chung-buk', '충북'))
+    region_choices = (('서울', '서울'), ('인천', '인천'), ('경기도', '경기도'), ('강원도', '강원도'), 
+                      ('경남', '경남'), ('경북', '경북'), ('전남', '전남'), ('전북', '전북'), ('충남', '충남'), ('충북', '충북'))
     region = models.CharField(max_length=20, choices=region_choices)
 
-    gender_choices = (('unisex', '남/여'), ('male', '남'), ('female', '여'))
+    gender_choices = (('남/여', '남/여'), ('남', '남'), ('여', '여'))
     gender = models.CharField(max_length=10, choices=gender_choices)
     
-    propensity_choices = (('active', '활동적'), ('inactive', '비활동적'))
+    propensity_choices = (('활동적', '활동적'), ('비활동적', '비활동적'))
     propensity = models.CharField(max_length=10, choices=propensity_choices, null=True)
     
-    category_choices = (('sports', '운동 스포츠'), ('diy', 'DIY 공예'), ('reading study', '독서 공부'), ('art music movie','미술 음악 영화'), ('healing', '힐링'), ('cook', '요리'), ('cultural activities', '문화 활동'))
+    category_choices = (('운동 스포츠', '운동 스포츠'), ('DIY 공예', 'DIY 공예'), ('독서 공부', '독서 공부'), ('미술 음악 영화','미술 음악 영화'), ('힐링', '힐링'), ('요리', '요리'), ('문화 활동', '문화 활동'))
     category = models.CharField(max_length=20, choices=category_choices)
     
     tags = TaggableManager(blank=True)

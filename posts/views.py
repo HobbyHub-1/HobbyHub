@@ -1,4 +1,5 @@
 #posts/views.py
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -6,14 +7,16 @@ from .models import Post, PostImage, PostComment, Group, GroupImage, GroupCommen
 from .forms import PostForm, PostImageFrom, PostCommentForm, GroupForm, GroupImageFrom, GroupCommentForm
 from django.db.models import Q
 from taggit.models import Tag
+from django.contrib import messages
 from django.db.models import Count
+from django.conf import settings
 
 # Create your views here.
 # 1 index
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-created_at')
     like_posts = Post.objects.annotate(like_count=Count('like_users')).order_by('-like_count')[:4]
-    hit_posts = Post.objects.order_by('-hits')[:8]
+    hit_posts = Post.objects.order_by('-hits')
 
     categories = posts.values_list('category', flat=True).distinct()
     category_list = set(','.join(list(categories)).replace(', ', ',').split(','))
@@ -33,7 +36,8 @@ def index(request):
     if selected_slugs:
         selected_tags = selected_slugs.split(',')
         posts = posts.filter(tags__slug__in=selected_tags).distinct()
-
+    else:
+        posts = posts[:8]
     context ={
         'posts': posts,
         'like_posts': like_posts,
@@ -85,10 +89,14 @@ def post_create(request):
             for tag in tags:
                 post.tags.add(tag.strip())
 
-            for file in files:
-                PostImage.objects.create(post=post, image=file)
-
-            return redirect('posts:post_detail', post.pk)
+            # 이미지 파일 개수 제한
+            files = request.FILES.getlist('image')
+            if len(files) <= 3:
+                for file in files:
+                    PostImage.objects.create(post=post, image=file)
+                return redirect('posts:post_detail', post.pk)
+            else:
+                messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
     else:
         post_form = PostForm()
         post_image_form = PostImageFrom()
@@ -273,7 +281,6 @@ def group_list(request):
 
     filtered_groups = Group.objects.filter(filter_args).distinct()
     filtered_groups_count = filtered_groups.count()
-    print("필터링된 그룹 개수:", filtered_groups_count)
 
     group_images = []
     for group in filtered_groups: 
@@ -321,7 +328,6 @@ def group_create(request):
     if request.method == 'POST':
         group_form = GroupForm(request.POST)
         group_image_form = GroupImageFrom(request.POST, request.FILES)
-        files = request.FILES.getlist('image')
         tags = request.POST.get('tags', '').split(',')
 
         if group_form.is_valid() and group_image_form.is_valid():
@@ -333,10 +339,29 @@ def group_create(request):
             for tag in tags:
                 group.tags.add(tag.strip())
 
-            for file in files:
-                GroupImage.objects.create(group=group, image=file)
-            
-            return redirect('posts:group_detail', group.pk)
+            # 이미지 파일 개수 제한
+            files = request.FILES.getlist('image')
+            if len(files) == 3:
+                for file in files:
+                    GroupImage.objects.create(group=group, image=file)
+                return redirect('posts:group_detail', group.pk)
+            elif len(files) < 3:
+                # 이미지 파일이 3개 미만인 경우 대체 이미지 삽입
+                for file in files:
+                    GroupImage.objects.create(group=group, image=file)
+                
+                # 대체 이미지 추가
+                while len(files) < 3:
+                    # 대체 이미지 경로 (settings.py에 설정된 STATIC_URL과 연결)
+                    placeholder_image_url = settings.STATIC_URL + 'img/sample.jpg'
+                    
+                    # 대체 이미지를 사용하여 GroupImage 생성
+                    GroupImage.objects.create(group=group, image=placeholder_image_url)
+                    files.append(None)
+
+                return redirect('posts:group_detail', group.pk)            
+            else:
+                messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
     else:
         group_form = GroupForm()
         group_image_form = GroupImageFrom()
@@ -345,6 +370,8 @@ def group_create(request):
         'group_image_form': group_image_form,
     }
     return render(request, 'posts/group_create.html', context)
+
+
 
 
 # group_delete 삭제
@@ -360,12 +387,16 @@ def group_delete(request, group_pk):
 @login_required
 def group_update(request, group_pk):
     group = Group.objects.get(pk=group_pk)
+    group_image_form = GroupImageFrom(request.POST, request.FILES)
     group_images = GroupImage.objects.filter(group=group)
 
     if request.user == group.user:
         if request.method == 'POST':
             group_form = GroupForm(request.POST, instance=group)
             group_image_form = GroupImageFrom(request.POST, request.FILES)
+            if group_image_form.is_valid():
+            # 이미지 데이터 삭제
+                group_images.delete()
 
             if group_form.is_valid() and group_image_form.is_valid():
                 group = group_form.save(commit=False)
@@ -381,11 +412,27 @@ def group_update(request, group_pk):
                         group.tags.add(tag)
 
                 files = request.FILES.getlist('image')
-                GroupImage.objects.filter(group=group).delete()
-                for file in files:
-                    GroupImage.objects.create(group=group, image=file)
+                if len(files) == 3:
+                    for file in files:
+                        GroupImage.objects.create(group=group, image=file)
+                    return redirect('posts:group_detail', group.pk)
+                elif len(files) < 3:
+                    # 이미지 파일이 3개 미만인 경우 대체 이미지 삽입
+                    for file in files:
+                        GroupImage.objects.create(group=group, image=file)
+                    
+                    # 대체 이미지 추가
+                    while len(files) < 3:
+                        # 대체 이미지 경로 (settings.py에 설정된 STATIC_URL과 연결)
+                        placeholder_image_url = settings.STATIC_URL + 'img/sample.jpg'
+                        
+                        # 대체 이미지를 사용하여 GroupImage 생성
+                        GroupImage.objects.create(group=group, image=placeholder_image_url)
+                        files.append(None)
 
-                return redirect('posts:group_detail', group.pk)
+                    return redirect('posts:group_detail', group.pk)            
+                else:
+                    messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
         else:
             group_form = GroupForm(instance=group)
             group_image_form = GroupImageFrom()
@@ -436,6 +483,7 @@ def group_likes(request, group_pk):
         is_liked = True
     context = {
         'is_liked': is_liked,
+        'like_count': group.like_users.count(),
     }
     return JsonResponse(context)
 
@@ -475,17 +523,27 @@ def category(request, subject):
         'cultural activities': '문화 활동',
     }
     category_subject = category_choices.get(subject, '')
-    posts = Post.objects.filter(category=subject)
-    groups = Group.objects.filter(category=subject)
 
-    for group in groups:
-        group.like_count = group.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+    posts = Post.objects.filter(Q(category=category_subject) | Q(category=subject))
 
-    groups = sorted(groups, key=lambda x: x.like_count, reverse=True)[:10]  # 좋아요 수 기준으로 정렬하여 상위 10개 가져오기
+    for post in posts:
+        post.like_count = post.like_users.count()  # 좋아요 수 계산하여 동적으로 추가
+
+    image_mapping = {
+        '운동 스포츠': 'img/20210918505437.jpg',
+        'DIY 공예': 'img/md_5b2115306e4f2.jpg',
+        '독서 공부': 'img/reading.jpeg',
+        '미술 음악 영화': 'img/art.jpeg',
+        '힐링': 'img/healing.jpg',
+        '요리': 'img/cook2.jpg',
+        '문화 활동': 'img/Cultural.jpg'
+    }
+
+    image_path = image_mapping.get(category_subject, '')
 
     context = {
         'posts': posts,
-        'groups': groups,
         'category_subject': category_subject,
+        'image_path': image_path,
     }
-    return render(request, 'posts/category.html', context)
+    return render(request, 'posts/category2.html', context)

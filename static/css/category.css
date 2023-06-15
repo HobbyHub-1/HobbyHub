@@ -5,79 +5,59 @@
   font-style: normal;
 }
 
-* {
+@media (max-width: 575px) {
+  .order-sm-1 { 
+    order: 2;
+  }
+  .order-sm-2 { 
+    order: 1;
+  }
+}
+
+body {
   box-sizing: border-box;
 }
 
-a {
+.custom-container {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.HHlike-form { 
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+.card_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+a.card_single {
   color: inherit;
   text-decoration: none;
 }
 
-
-.category-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 50px;
-}
-
-.category-title {
-  margin-top: 30px;
-}
-
-.right-section {
-  margin-top: 30px;
-}
-
-.scroll-container {
-  display: flex;
-  overflow-x: auto;
-  justify-content: center;
-  flex-direction: column;
-  padding: 10px 0;
-  width: 80vw; 
-  margin: 0 auto; 
-}
-
-.scroll-content {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  padding: 0;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.card_single {
-  display: inline-block;
+.Hcard_single { 
   position: relative;
-  width: 292px;
+  width: 270px;
   height: 400px;
-  margin-right: 10px;
+  padding: 0;
   background-color: rgb(255, 242, 225);
-  border: 2px solid rgb(23, 23, 23);
+  border: 2px solid gray;
+  border-radius: 10px;
 }
 
-.card_img {
+.Hcard_img { 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 290px;
+  width: 267px;
   height: 220px;
   overflow: clip;
-  border-bottom: 2px solid rgb(23, 23, 23);
-}
-
-.card_img_tag {
-  width: 100%;
-  height: auto;
-}
-
-.like-form {
-  position: absolute;
-  top: 1em;
-  right: 1em;
+  border-bottom: 2px solid gray;
+  border-radius: 10px 10px 0 0;
 }
 
 .likebtn {
@@ -85,52 +65,30 @@ a {
   border: none;
 }
 
-i {
-  color: white;
+.i {
+  color: red;
   background: none;
   font: 1.5em bold;
 }
 
-.card_desc {
+.Hcard_desc {
   display: flex;
   flex-flow: column nowrap;
-  font-family: 'S-CoreDream';
+  font-family: "S-CoreDream";
   font-weight: 500;
-  padding: 5px 20px;
+  padding: 16px 20px;
 }
 
-.card_desc > .card_title {
+.Hcard_desc > .card_title {
   color: rgb(23, 23, 23);
   font-size: 1.125rem;
-  word-break: break-word;
-  margin-bottom: 8px;
+  word-break: keep-all;
 }
 
-.info {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-
-.info span {
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.card_content {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.hits {
-  font-size: 14px;
-  color: #777;
+.Hcard_desc > .card-content { 
+  color: rgb(55, 55, 55);
+  font-size: 0.875rem;
+  font-weight: 500;
+  word-break: keep-all;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* Custom Styles */
-h2 {
-  margin-top: 30px;
 }
