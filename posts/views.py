@@ -10,6 +10,7 @@ from taggit.models import Tag
 from django.contrib import messages
 from django.db.models import Count
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 # 1 index
@@ -330,17 +331,23 @@ def group_create(request):
         group_image_form = GroupImageFrom(request.POST, request.FILES)
         tags = request.POST.get('tags', '').split(',')
 
-        if group_form.is_valid() and group_image_form.is_valid():
+        if group_form.is_valid() and group_image_form.is_valid():            
             category = request.POST.get('category')
             group = group_form.save(commit=False)
             group.user = request.user
-            group.save()
+            
+            # 이미지 파일 개수 확인
+            files = request.FILES.getlist('image')
+            if len(files) > 3:
+                messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
+                return HttpResponseRedirect(request.path)  # Redirect back to the form
 
+            group.save()
             for tag in tags:
                 group.tags.add(tag.strip())
 
-            # 이미지 파일 개수 제한
-            files = request.FILES.getlist('image')
+            # 이미지 파일 처리 로직 추가 (이미지 파일 개수에 따라 분기)
+
             if len(files) == 3:
                 for file in files:
                     GroupImage.objects.create(group=group, image=file)
@@ -359,12 +366,12 @@ def group_create(request):
                     GroupImage.objects.create(group=group, image=placeholder_image_url)
                     files.append(None)
 
-                return redirect('posts:group_detail', group.pk)            
-            else:
-                messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
+                return redirect('posts:group_detail', group.pk)
+
     else:
         group_form = GroupForm()
         group_image_form = GroupImageFrom()
+        
     context = {
         'group_form': group_form,
         'group_image_form': group_image_form,
@@ -401,6 +408,11 @@ def group_update(request, group_pk):
             if group_form.is_valid() and group_image_form.is_valid():
                 group = group_form.save(commit=False)
                 group.user = request.user
+                files = request.FILES.getlist('image')
+                if len(files) > 3:
+                    messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
+                    return HttpResponseRedirect(request.path)  # Redirect back to the form
+
                 group.save()
 
                 tags = request.POST.get('tags', '').split(',')
@@ -411,7 +423,6 @@ def group_update(request, group_pk):
                     if tag:
                         group.tags.add(tag)
 
-                files = request.FILES.getlist('image')
                 if len(files) == 3:
                     for file in files:
                         GroupImage.objects.create(group=group, image=file)
