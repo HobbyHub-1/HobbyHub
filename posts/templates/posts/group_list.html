@@ -58,20 +58,21 @@
             {% endfor %}
           </div>
           <div class="card_desc">
-            <div class="card_title d-flex align-content-center">
+            <div style="color: rgb(255, 104, 42); opacity: 0.7;">
+              {{ group.category }}
+            </div>
+            <div class="card_title d-flex align-content-center my-1">
               {{ group.title }}
             </div>
-            <div class="info text-muted">
-              작성자:
-              {{ group.user }}<br>
-              카테고리:
-              {{ group.category }}<br>
-              태그:
-              {% for tag in group.tags.all %}
-                #{{ tag }}
-              {% endfor %}<br>
-              조회수:
-              {{ group.hits }}
+            <div class="info text-muted mb-2">
+              <div class="user justify-content-center align-content-center">
+                {% if group.user.profile_image %}
+                  <img class="rounded-circle me-2" src="{{ group.user.profile_image.url }}" width="15px" alt="Profile Image">
+                {% else %}
+                  <img class="rounded-circle me-2" src="https://i.postimg.cc/kXwSg0M2/image.jpg" width="15px" alt="Default Profile Image">
+                {% endif %}
+                {{ group.user }}
+              </div>
             </div>
             <div class="card_content">
               {{ group.subtitle }}
