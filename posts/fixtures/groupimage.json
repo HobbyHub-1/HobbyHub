@@ -1,290 +1,378 @@
 [
 {
     "model": "posts.groupimage",
+    "pk": 1,
+    "fields": {
+        "group": 1,
+        "image": "group/반려동물과_산책.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 2,
+    "fields": {
+        "group": 1,
+        "image": "group/반려동물과_산책2.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 3,
+    "fields": {
+        "group": 1,
+        "image": "group/반려동물과_산책3.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 4,
+    "fields": {
+        "group": 2,
+        "image": "group/낚시.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 5,
+    "fields": {
+        "group": 2,
+        "image": "group/낚시2.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 6,
+    "fields": {
+        "group": 2,
+        "image": "group/낚시3.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
     "pk": 7,
     "fields": {
-        "group": 25,
-        "image": "group/낚시.jpg"
+        "group": 3,
+        "image": "group/농구.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 8,
     "fields": {
-        "group": 25,
-        "image": "group/낚시2.jpg"
+        "group": 3,
+        "image": "group/농구_2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 9,
     "fields": {
-        "group": 25,
-        "image": "group/낚시3.jpg"
+        "group": 4,
+        "image": "group/드라이브.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 10,
     "fields": {
-        "group": 26,
-        "image": "group/농구_2.jpg"
+        "group": 4,
+        "image": "group/드라이브2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 11,
     "fields": {
-        "group": 26,
-        "image": "group/농구.jpg"
+        "group": 4,
+        "image": "group/드라이브3.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 12,
     "fields": {
-        "group": 26,
-        "image": "group/농구3.jpg"
+        "group": 5,
+        "image": "group/베이킹.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 13,
     "fields": {
-        "group": 27,
-        "image": "group/종이공예.jpg"
+        "group": 5,
+        "image": "group/베이킹2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 14,
     "fields": {
-        "group": 27,
-        "image": "group/종이공예2.jpg"
-    }
-},
-{
-    "model": "posts.groupimage",
-    "pk": 15,
-    "fields": {
-        "group": 27,
-        "image": "group/종이공예3.jpg"
-    }
-},
-{
-    "model": "posts.groupimage",
-    "pk": 16,
-    "fields": {
-        "group": 28,
-        "image": "group/소프트웨어_개발_게임을_만들어보기.jpg"
-    }
-},
-{
-    "model": "posts.groupimage",
-    "pk": 17,
-    "fields": {
-        "group": 28,
-        "image": "group/소프트웨어_개발_게임을_만들어보기2.jpg"
+        "group": 5,
+        "image": "group/베이킹3.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 18,
     "fields": {
-        "group": 28,
-        "image": "group/소프트웨어_개발_게임을_만들어보기3.jpg"
+        "group": 6,
+        "image": "group/사진찍기_oymwaCd.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 19,
     "fields": {
-        "group": 29,
-        "image": "group/영화_감상_제작.jpg"
+        "group": 6,
+        "image": "group/사진찍기2_sWBJhkm.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 20,
     "fields": {
-        "group": 29,
-        "image": "group/영화_감상_제작2.jpg"
+        "group": 6,
+        "image": "group/사진찍기3_p0i9IEl.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 21,
     "fields": {
-        "group": 29,
-        "image": "group/영화_감상_제작3.jpg"
+        "group": 7,
+        "image": "group/소프트웨어_개발_게임을_만들어보기.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 22,
+    "fields": {
+        "group": 7,
+        "image": "group/소프트웨어_개발_게임을_만들어보기2.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 23,
+    "fields": {
+        "group": 7,
+        "image": "group/소프트웨어_개발_게임을_만들어보기3.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 24,
+    "fields": {
+        "group": 8,
+        "image": "group/영화_감상_제작.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 25,
     "fields": {
-        "group": 31,
-        "image": "group/베이킹.jpg"
+        "group": 8,
+        "image": "group/영화_감상_제작2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 26,
     "fields": {
-        "group": 31,
-        "image": "group/베이킹2.jpg"
+        "group": 8,
+        "image": "group/영화_감상_제작3.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 27,
     "fields": {
-        "group": 31,
-        "image": "group/베이킹3.jpg"
+        "group": 9,
+        "image": "group/음악_감상.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 28,
     "fields": {
-        "group": 30,
-        "image": "group/사진찍기_1b8qhh2.jpg"
+        "group": 9,
+        "image": "group/음악_감상2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 29,
     "fields": {
-        "group": 30,
-        "image": "group/사진찍기2_QM33vkh.jpg"
+        "group": 9,
+        "image": "group/음악_감상3.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 30,
     "fields": {
-        "group": 30,
-        "image": "group/사진찍기3_8Ah6xHm.jpg"
+        "group": 10,
+        "image": "group/캔들만들기.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 31,
     "fields": {
-        "group": 32,
-        "image": "group/드라이브.jpg"
+        "group": 10,
+        "image": "group/캔들만들기2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 32,
     "fields": {
-        "group": 32,
-        "image": "group/드라이브2.jpg"
+        "group": 10,
+        "image": "group/캔들만들기3.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 33,
     "fields": {
-        "group": 32,
-        "image": "group/드라이브3.jpg"
+        "group": 11,
+        "image": "group/클라이밍.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 34,
     "fields": {
-        "group": 33,
-        "image": "group/클라이밍.jpg"
+        "group": 11,
+        "image": "group/클라이밍2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 35,
     "fields": {
-        "group": 33,
-        "image": "group/클라이밍2.jpg"
-    }
-},
-{
-    "model": "posts.groupimage",
-    "pk": 36,
-    "fields": {
-        "group": 33,
+        "group": 11,
         "image": "group/클라이밍3.jpg"
-    }
-},
-{
-    "model": "posts.groupimage",
-    "pk": 37,
-    "fields": {
-        "group": 34,
-        "image": "group/반려동물과_산책.jpg"
-    }
-},
-{
-    "model": "posts.groupimage",
-    "pk": 38,
-    "fields": {
-        "group": 34,
-        "image": "group/반려동물과_산책2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 39,
     "fields": {
-        "group": 34,
-        "image": "group/반려동물과_산책3.jpg"
+        "group": 12,
+        "image": "group/종이공예_PgZ3yfQ.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 40,
     "fields": {
-        "group": 35,
-        "image": "group/캔들만들기.jpg"
+        "group": 12,
+        "image": "group/종이공예2_m1F94Yo.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 41,
     "fields": {
-        "group": 35,
-        "image": "group/캔들만들기2.jpg"
+        "group": 12,
+        "image": "group/종이공예3_SgjEicv.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 42,
     "fields": {
-        "group": 35,
-        "image": "group/캔들만들기3.jpg"
+        "group": 13,
+        "image": "group/축구.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 43,
     "fields": {
-        "group": 36,
-        "image": "group/음악_감상.jpg"
+        "group": 13,
+        "image": "group/축구2.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 44,
     "fields": {
-        "group": 36,
-        "image": "group/음악_감상2.jpg"
+        "group": 13,
+        "image": "group/축구3.jpg"
     }
 },
 {
     "model": "posts.groupimage",
     "pk": 45,
     "fields": {
-        "group": 36,
-        "image": "group/음악_감상3.jpg"
+        "group": 14,
+        "image": "group/춤.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 46,
+    "fields": {
+        "group": 14,
+        "image": "group/춤2.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 47,
+    "fields": {
+        "group": 14,
+        "image": "group/춤3.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 54,
+    "fields": {
+        "group": 15,
+        "image": "group/등산_BfkCfcd.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 55,
+    "fields": {
+        "group": 15,
+        "image": "group/등산2_5FzKDPt.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 56,
+    "fields": {
+        "group": 15,
+        "image": "group/등산3_B4SmMKP.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 57,
+    "fields": {
+        "group": 16,
+        "image": "group/요가.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 58,
+    "fields": {
+        "group": 16,
+        "image": "group/요가2.jpg"
+    }
+},
+{
+    "model": "posts.groupimage",
+    "pk": 59,
+    "fields": {
+        "group": 16,
+        "image": "group/요가3.jpg"
     }
 }
 ]

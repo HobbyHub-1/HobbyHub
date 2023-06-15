@@ -72,7 +72,7 @@ class Group(models.Model):
     content = models.CharField(max_length=2000)
     hits = models.PositiveIntegerField(default=0)
 
-    day_choices = (('월요일', '월요일'), ('화요일', '화요일'), ('수요일', '수요일'), ('목요일', '목요일'), ('금요일', '금요일'), ('토요일', '토요일'), ('링요일', '일요일'))
+    day_choices = (('월요일', '월요일'), ('화요일', '화요일'), ('수요일', '수요일'), ('목요일', '목요일'), ('금요일', '금요일'), ('토요일', '토요일'), ('일요일', '일요일'))
     day = models.CharField(max_length=10, choices=day_choices)
     
     region_choices = (('서울', '서울'), ('인천', '인천'), ('경기도', '경기도'), ('강원도', '강원도'), 
