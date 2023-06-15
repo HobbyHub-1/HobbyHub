@@ -67,3 +67,7 @@ i {
   word-break: keep-all;
   overflow: hidden;
 }
+.card_content {
+  font-size: 15px;
+  font-style: gray;
+}

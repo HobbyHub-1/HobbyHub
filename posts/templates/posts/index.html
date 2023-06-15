@@ -58,15 +58,19 @@
   </div>
 </div> 
 
+<!-- 카테고리 메뉴바 -->
 {% include "subdivision.html" %}
 
-<div class="container">
+<!-- main -->
+<div class="container-md border">
+
   <h2 class="like-posts d-block m-4">지금 가장 인기있는 취미</h2>
   <!-- card 목록 -->
-  <div class="d-flex flex-wrap m-4 px-1 justify-content-center">
+  <div class="d-flex flex-wrap justify-content-center">
     {% for post in like_posts %}
       <a class="card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
         <div class="card_img">
+          <!-- 좋아요 버튼 -->
           <form class="like-form" data-post-id="{{ post.pk }}">
             {% csrf_token %}
             {% if request.user in post.like_users.all %}
@@ -90,19 +94,16 @@
           {% endfor %}
         </div>
         <div class="card_desc">
+          <span class="category">{{ post.category }}</span>
           <div class="card_title d-flex align-content-center my-1">
             {{ post.title }}
           </div>
-          <div class="card_tags text-muted">
-            <div class="info">
-              조회수:
-              {{ post.hits }}<br>
-              카테고리:
-              {{ post.category }}<br>
+          <div class="info">
+            <div class="card_tags text-muted">
               {% for tag in post.tags.all %}
-                태그: #{{ tag.name }}
-                {% if not forloop.last %},
-                {% endif %}
+                #{{ tag.name }}
+                  {% empty %}
+                #{{ post.category }}
               {% endfor %}
             </div>
           </div>
@@ -113,84 +114,16 @@
       </a>
     {% endfor %}
   </div>
-    <hr>
-    <h2 class="d-block m-4">새롭게 등록된 취미</h2>
-    <!-- card 목록 -->
-    <div class="d-flex flex-wrap m-4 px-1 justify-content-center">
-      {% comment %} 최신순으로 출력 {% endcomment %}
-      {% for post in posts %} 
-        <a class="theme_card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
-          <div class="card_img">
-            <form class="like-form" data-post-id="{{ post.pk }}">
-              {% csrf_token %}
-              {% if request.user in post.like_users.all %}
-                <button class="likebtn" type="submit">
-                  <i class="bi bi-heart-fill" id="post-heart-{{ post.pk }}"></i>
-                </button>
-              {% else %}
-                <button class="likebtn" type="submit">
-                  <i class="bi bi-heart" id="post-heart-{{ post.pk }}"></i>
-                </button>
-              {% endif %}
-            </form>
-            {% for image in post.postimage_set.all %}
-              {% if image.image.url %}
-                {% if forloop.first %}
-                  <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: auto;">
-                {% endif %}
-              {% else %}
-                <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
-              {% endif %}
-            {% endfor %}
-          </div>
-          <div class="card_desc">
-            <div class="card_title d-flex align-content-center my-1">
-              {{ post.title }}
-            </div>
-            <div class="card_tags text-muted">
-              <div class="info">
-                조회수:
-                {{ post.hits }}<br>
-                카테고리:
-                {{ post.category }}<br>
-                {% for tag in post.tags.all %}
-                  태그: #{{ tag.name }}
-                  {% if not forloop.last %},
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-            <div class="card_content">
-              {{ post.subtitle }}
-            </div>
-          </div>
-        </a>
-      {% endfor %}
-    </div>
-    <hr>
+
+  <hr style="color: rgb(238, 128, 65);">
 
 
-<!-- 태그 필터링 버튼 -->
-<div class="p-2">
-  <h6 class="text-muted ms-2"></h6>
-  <button class="btn btn-outline-secondary btn-sm hobby-tags-btn" data-slug="all">전체</button>
-  {% for tag in tags %}
-    {% if request.GET.tags == tag.slug %}
-      <button class="btn btn-outline-secondary btn-sm hobby-tags-btn hobby-tags-btn-active" data-slug="{{ tag.slug }}">{{ tag }}</button>
-    {% else %}
-      <button class="btn btn-outline-secondary btn-sm hobby-tags-btn" data-slug="{{ tag.slug }}">{{ tag }}</button>
-    {% endif %}
-  {% endfor %}
-</div>
-<hr>
-
-<h2 class="d-block m-4">전체 취미목록</h2>
-<!-- card 목록 -->
-<div class="hit-posts d-flex flex-wrap m-4 px-1 justify-content-center">
-  {% for post in hit_posts %}
-  <div class="morePosts mx-2 mb-4" id="morePosts{{ forloop.counter }}">
-    <a class="tag-button" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
-      <div class="hit_card_single">
+  <h2 class="d-block m-4">새롭게 등록된 취미</h2>
+  <!-- card 목록 -->
+  <div class="d-flex flex-wrap justify-content-center">
+    {% comment %} 최신순으로 출력 {% endcomment %}
+    {% for post in posts %} 
+      <a class="theme_card_single mx-2 mb-4" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
         <div class="card_img">
           <form class="like-form" data-post-id="{{ post.pk }}">
             {% csrf_token %}
@@ -215,19 +148,16 @@
           {% endfor %}
         </div>
         <div class="card_desc">
+          <span class="category">{{ post.category }}</span>
           <div class="card_title d-flex align-content-center my-1">
             {{ post.title }}
           </div>
-          <div class="card_tags text-muted">
-            <div class="info">
-              조회수:
-              {{ post.hits }}<br>
-              카테고리:
-              {{ post.category }}<br>
+          <div class="info">
+            <div class="card_tags text-muted">
               {% for tag in post.tags.all %}
-                태그: #{{ tag.name }}
-                {% if not forloop.last %},
-                {% endif %}
+                #{{ tag.name }}
+                {% empty %}
+                #{{ post.category }}
               {% endfor %}
             </div>
           </div>
@@ -235,15 +165,88 @@
             {{ post.subtitle }}
           </div>
         </div>
-      </div>
-    </a>
+      </a>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
-<div class="d-flex mb-2">
-  <button id="newPostsBtn" class="mx-auto btn btn-secondary">더보기</button>
-</div>
-<hr>
+
+  <hr style="color: rgb(238, 128, 65);">
+
+  <!-- 태그 필터링 버튼 -->
+  <div class="p-2">
+    <h6 class="text-muted ms-2"></h6>
+    <button class="btn btn-outline-secondary btn-lg hobby-tags-btn mx-1" data-slug="all">전체</button>
+    {% for tag in tags %}
+      {% if request.GET.tags == tag.slug %}
+        <button class="btn btn-outline-secondary btn-lg hobby-tags-btn hobby-tags-btn-active mx-1" data-slug="{{ tag.slug }}">{{ tag }}</button>
+      {% else %}
+        <button class="btn btn-outline-secondary btn-lg hobby-tags-btn mx-1" data-slug="{{ tag.slug }}">{{ tag }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <hr style="color: rgb(238, 128, 65);">
+
+  <h2 class="d-block m-4">전체 취미목록</h2>
+  <!-- card 목록 -->
+  <div class="hit-posts d-flex flex-wrap justify-content-center">
+    {% for post in hit_posts %}
+      <div class="morePosts mx-2 mb-4" id="morePosts{{ forloop.counter }}">
+        <a class="tag-button" href="{% url 'posts:post_detail' post.pk %}" data-tags="{% for tag in post.tags.all %}{{ tag.slug }}{% if not forloop.last %},{% endif %}{% endfor %}">
+          <div class="hit_card_single">
+            <div class="card_img">
+              <form class="like-form" data-post-id="{{ post.pk }}">
+                {% csrf_token %}
+                {% if request.user in post.like_users.all %}
+                  <button class="likebtn" type="submit">
+                    <i class="bi bi-heart-fill" id="post-heart-{{ post.pk }}"></i>
+                  </button>
+                {% else %}
+                  <button class="likebtn" type="submit">
+                    <i class="bi bi-heart" id="post-heart-{{ post.pk }}"></i>
+                  </button>
+                {% endif %}
+              </form>
+              {% for image in post.postimage_set.all %}
+                {% if image.image.url %}
+                  {% if forloop.first %}
+                    <img class="card_img" src="{{ image.image.url }}" alt="card_sample_img1" style="aspect-ratio: auto;">
+                  {% endif %}
+                {% else %}
+                  <img class="card_img" src="https://i.pinimg.com/564x/41/ac/a0/41aca05abfad64a3e32935f5cc8d41d5.jpg" alt="card_sample_img1" style="aspect-ratio: 4 / 3;">
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="card_desc">
+              <span class="category">{{ post.category }}</span>
+              <div class="card_title d-flex align-content-center my-1">
+                {{ post.title }}
+              </div>
+              <div class="info">
+                <div class="card_tags text-muted">
+                  {% for tag in post.tags.all %}
+                    #{{ tag.name }}
+                    {% empty %}
+                    #{{ post.category }}
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="card_content">
+                {{ post.subtitle }}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- 더보기 버튼 -->
+  <div class="d-flex mb-2">
+    <button id="newPostsBtn" class="mx-auto btn btn-secondary">더보기</button>
+  </div>
+
+  <hr style="color: rgb(238, 128, 65);">
+
 </div>
 
 {% include 'banner.html' %}
