@@ -9,6 +9,7 @@ from django.db.models import Q
 from taggit.models import Tag
 from django.contrib import messages
 from django.db.models import Count
+from django.conf import settings
 
 # Create your views here.
 # 1 index
@@ -340,10 +341,25 @@ def group_create(request):
 
             # 이미지 파일 개수 제한
             files = request.FILES.getlist('image')
-            if len(files) <= 3:
+            if len(files) == 3:
                 for file in files:
                     GroupImage.objects.create(group=group, image=file)
                 return redirect('posts:group_detail', group.pk)
+            elif len(files) < 3:
+                # 이미지 파일이 3개 미만인 경우 대체 이미지 삽입
+                for file in files:
+                    GroupImage.objects.create(group=group, image=file)
+                
+                # 대체 이미지 추가
+                while len(files) < 3:
+                    # 대체 이미지 경로 (settings.py에 설정된 STATIC_URL과 연결)
+                    placeholder_image_url = settings.STATIC_URL + 'img/sample.jpg'
+                    
+                    # 대체 이미지를 사용하여 GroupImage 생성
+                    GroupImage.objects.create(group=group, image=placeholder_image_url)
+                    files.append(None)
+
+                return redirect('posts:group_detail', group.pk)            
             else:
                 messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
     else:
@@ -371,12 +387,16 @@ def group_delete(request, group_pk):
 @login_required
 def group_update(request, group_pk):
     group = Group.objects.get(pk=group_pk)
+    group_image_form = GroupImageFrom(request.POST, request.FILES)
     group_images = GroupImage.objects.filter(group=group)
 
     if request.user == group.user:
         if request.method == 'POST':
             group_form = GroupForm(request.POST, instance=group)
             group_image_form = GroupImageFrom(request.POST, request.FILES)
+            if group_image_form.is_valid():
+            # 이미지 데이터 삭제
+                group_images.delete()
 
             if group_form.is_valid() and group_image_form.is_valid():
                 group = group_form.save(commit=False)
@@ -392,11 +412,27 @@ def group_update(request, group_pk):
                         group.tags.add(tag)
 
                 files = request.FILES.getlist('image')
-                GroupImage.objects.filter(group=group).delete()
-                for file in files:
-                    GroupImage.objects.create(group=group, image=file)
+                if len(files) == 3:
+                    for file in files:
+                        GroupImage.objects.create(group=group, image=file)
+                    return redirect('posts:group_detail', group.pk)
+                elif len(files) < 3:
+                    # 이미지 파일이 3개 미만인 경우 대체 이미지 삽입
+                    for file in files:
+                        GroupImage.objects.create(group=group, image=file)
+                    
+                    # 대체 이미지 추가
+                    while len(files) < 3:
+                        # 대체 이미지 경로 (settings.py에 설정된 STATIC_URL과 연결)
+                        placeholder_image_url = settings.STATIC_URL + 'img/sample.jpg'
+                        
+                        # 대체 이미지를 사용하여 GroupImage 생성
+                        GroupImage.objects.create(group=group, image=placeholder_image_url)
+                        files.append(None)
 
-                return redirect('posts:group_detail', group.pk)
+                    return redirect('posts:group_detail', group.pk)            
+                else:
+                    messages.error(request, '이미지는 최대 3개까지 선택할 수 있습니다.')
         else:
             group_form = GroupForm(instance=group)
             group_image_form = GroupImageFrom()

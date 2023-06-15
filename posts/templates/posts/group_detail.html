@@ -17,7 +17,7 @@
         <div class="slides">
             <!-- 그룹 이미지 표시 -->
           {% for group_image in group_images %}
-            <img class="slide" src="{{ group_image.image.url }}" alt="Slide 1"   srcset="{{ group_image.image.url }} 320w, {{ group_image.image.url }} 480w, {{ group_image.image.url }} 800w" sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px">
+            <img class="slide" src="{{ group_image.image.url }}" srcset="{{ group_image.image.url }} 320w, {{ group_image.image.url }} 480w, {{ group_image.image.url }} 800w" sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px">
           {% endfor %}
         </div>
         <button class="prev-button">&lt;</button>
