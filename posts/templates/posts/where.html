@@ -39,59 +39,59 @@
     <label for="day-filter">요일: </label>
     <select id="day-filter" class="filter-select" data-filter-type="day">
       <option value="">-</option>
-      <option value="monday">월요일</option>
-      <option value="tuesday">화요일</option>
-      <option value="wednesday">수요일</option>
-      <option value="thursday">목요일</option>
-      <option value="friday">금요일</option>
-      <option value="saturday">토요일</option>
-      <option value="sunday">일요일</option>
+      <option value="월요일">월요일</option>
+      <option value="화요일">화요일</option>
+      <option value="수요일">수요일</option>
+      <option value="목요일">목요일</option>
+      <option value="금요일">금요일</option>
+      <option value="토요일">토요일</option>
+      <option value="일요일">일요일</option>
     </select>
   </div>
   <div class="filter-container">
     <label for="region-filter">지역: </label>
     <select id="region-filter" class="filter-select" data-filter-type="region">
       <option value="">-</option>
-      <option value="seoul">서울</option>
-      <option value="incheon">인천</option>
-      <option value="gyeonggi-do">경기도</option>
-      <option value="gangwon-do">강원도</option>
-      <option value="gyeong-nam">경상남도</option>
-      <option value="gyeong-buk">경상북도</option>
-      <option value="jeon-nam">전라남도</option>
-      <option value="jeon-buk">전라북도</option>
-      <option value="chung-nam">충청남도</option>
-      <option value="chung-buk">충청북도</option>
+      <option value="서울">서울</option>
+      <option value="인천">인천</option>
+      <option value="경기도">경기도</option>
+      <option value="강원도">강원도</option>
+      <option value="경남">경상남도</option>
+      <option value="경북">경상북도</option>
+      <option value="전남">전라남도</option>
+      <option value="전북">전라북도</option>
+      <option value="충남">충청남도</option>
+      <option value="충북">충청북도</option>
     </select>
   </div>
   <div class="filter-container">
     <label for="gender-filter">성별: </label>
     <select id="gender-filter" class="filter-select" data-filter-type="gender">
       <option value="">-</option>
-      <option value="unisex">남녀 혼합</option>
-      <option value="male">남자</option>
-      <option value="female">여자</option>
+      <option value="남/여">남녀 혼합</option>
+      <option value="남">남자</option>
+      <option value="여">여자</option>
     </select>
   </div>
   <div class="filter-container">
     <label for="propensity-filter">활동성: </label>
     <select id="propensity-filter" class="filter-select" data-filter-type="propensity">
       <option value="">-</option>
-      <option value="active">활동적 모임</option>
-      <option value="inactive">비활동적 모임</option>
+      <option value="활동적">활동적 모임</option>
+      <option value="비활동적">비활동적 모임</option>
     </select>
   </div>
   <div class="filter-container">
     <label for="category-filter">카테고리: </label>
     <select id="category-filter" class="filter-select" data-filter-type="category">
       <option value="">-</option>
-      <option value="sports">운동, 스포츠</option>
-      <option value="diy">DIY 공예</option>
-      <option value="reading study">독서, 공부</option>
-      <option value="art music movie">미술, 음악, 영화감상</option>
-      <option value="healing">힐링</option>
-      <option value="cook">요리</option>
-      <option value="cultural activities">문화활동</option>
+      <option value="운동 스포츠">운동, 스포츠</option>
+      <option value="DIY 공예">DIY 공예</option>
+      <option value="독서 공부">독서, 공부</option>
+      <option value="미술 음악 영화">미술, 음악, 영화감상</option>
+      <option value="힐링">힐링</option>
+      <option value="요리">요리</option>
+      <option value="문화 활동">문화활동</option>
     </select>
   </div>
   <a class="btn btn-dark" href="{% url 'posts:where' %}">초기화</a>
