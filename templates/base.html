@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
     {% block link %}{% endblock link %}
     <title>{% block title %}{% endblock title %}</title>
     {% block style %}{% endblock style %}
@@ -26,11 +27,9 @@
   <main class="flex-shrink-0">
         {% block content %}{% endblock content %}
   </main>
-  <footer class="footer mt-auto py-3">
-    <div class="container">
-      {% include "footer.html" %}
-    </div>
-  </footer>
+
+    {% include "footer.html" %}
+      
   </body>
   {% block script %}{% endblock script %}
   <script
