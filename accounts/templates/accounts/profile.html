@@ -2,6 +2,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/level.css' %}">
+{% endblock link %}
+
 {% block content %}
   <div class="container d-flex justify-content-between p-0 mt-5">
     
@@ -29,6 +33,39 @@
               </a>
 
             {% endif %}
+          </div>
+          <div>
+            {% if person.level == 1 %}
+              <div class="d-flex flex-row">
+                <img class="levelname--img" src="{% static '' %}" alt=""><p class="levelname">뉴비</p>
+              </div>
+            {% elif person.level == 2 %}
+              <div class="d-flex flex-row">
+                <img class="levelname--img" src="{% static '' %}" alt=""><p class="levelname">초보</p>
+              </div>
+            {% elif person.level == 3 %}
+            <div class="d-flex flex-row">
+              <img class="levelname--img" src="{% static '' %}" alt=""><p class="levelname">중수</p>
+            </div>
+            {% elif person.level == 4 %}
+            <div class="d-flex flex-row">
+              <img class="levelname--img" src="{% static '' %}" alt=""><p class="levelname">고수</p>
+            </div>
+            {% elif person.level == 5 %}
+            <div class="d-flex flex-row">
+              <img class="levelname--img" src="{% static '' %}" alt=""><p class="level5name">마스터</p>
+            </div>
+            {% endif %}
+          </div>
+          <div class="progress profile__user--expbar" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" title="다음 레벨까지 {{ restexp }}점 남았습니다.">
+            <div class="progress-bar bg-success" style="width: {{ expbar }}%"></div>
+            <p class="profile__user--expcount">
+              {% if max_score == 'MAX' %}
+                {{ max_score }}
+              {% else %}
+                {{ score }}/{{ max_score }}
+              {% endif %}
+            </p>
           </div>
           <div class="follow_box">
             <div class="d-flex justify-content-center align-items-center">

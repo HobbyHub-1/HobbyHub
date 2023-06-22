@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, get_user_model, update_session_auth_hash
 from django.http import JsonResponse
 from .forms import CustomAuthenticationForm, CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm
-
+from posts.models import Group, GroupComment, PostComment
+# from django.db.models import Count
 
 def login(request):
     if request.method == 'POST':
@@ -44,12 +45,65 @@ def logout(request):
 def profile(request, username):
     User = get_user_model()
     person = User.objects.get(username=username)
+    post_comments = person.postcomment_set.count()
+    groups = person.group_set.all().order_by('-created_at')
+    group_comments = person.groupcomment_set.count()
+
     liked_groups = person.liked_groups()
     liked_posts = person.like_posts.all()
+
+    score = groups.count() * 50 + post_comments * 5 + group_comments * 5
+
+    if score < 200:
+        level = 1
+        min_score = 0
+        max_score = 200
+        need_score = 200
+    elif score < 400:
+        level = 2
+        min_score = 200
+        max_score = 400
+        need_score = 200
+    elif score < 600:
+        level = 3
+        min_score = 400
+        max_score = 600
+        need_score = 200
+    elif score < 800:
+        level = 4
+        min_score = 600
+        max_score = 800
+        need_score = 200
+    elif score >= 1000:
+        level = 5
+        min_score = 800
+        max_score = 'MAX'
+        need_score = 200
+
+    if max_score == 'MAX':
+        expbar = 100
+        restexp = 0
+    else:
+        now_score = score - min_score
+        expbar = (now_score / need_score) * 100
+        restexp = need_score - now_score
+
+    if person.level != level:
+        person.level = level
+        person.save()
+
+    level_dict = {1: '뉴비', 2: '초보', 3: '중수', 4: '고수', 5: '마스터'}
+
     context = {
         'person': person,
+        'groups': groups, 
+        'level_name': level_dict[level],
+        'max_score': max_score,
         'liked_posts': liked_posts,
-        'liked_groups' : liked_groups
+        'liked_groups' : liked_groups,
+        'score': score,
+        'expbar': expbar,
+        'restexp': restexp,
     }
     return render(request, 'accounts/profile.html', context)
 
