@@ -36,13 +36,18 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'port-0-hobbyhub-koh2xlimjxmaz.sel4.c
 # Application definition
 
 INSTALLED_APPS = [
+    # 앱
     'posts',
     'accounts',
+    'chats',
+
+    # 모듈
     'django_extensions',
     'imagekit',
     'crispy_forms',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +57,7 @@ INSTALLED_APPS = [
 
     'django.contrib.sites',
 
+    # 소셜로그인 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -98,6 +104,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
