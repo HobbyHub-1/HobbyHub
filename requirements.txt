@@ -7,6 +7,7 @@ bleach==6.0.0
 cachetools==5.3.1
 certifi==2022.6.15
 cffi==1.15.1
+channels==4.0.0
 chardet==5.1.0
 charset-normalizer==2.1.0
 colorama==0.4.6

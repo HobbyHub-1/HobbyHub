@@ -10,5 +10,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', include('posts.urls')),
     path('accounts/', include('allauth.urls')),
+    path('chat/', include('chat.urls')),
     path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
